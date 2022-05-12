@@ -1,22 +1,24 @@
-import React from 'react'
+import AsideNavBar from 'components/common/AsideNavBar/AsideNavBar';
+import Navbar from 'components/common/Navbar/Navbar';
+import React from 'react';
+import { Outlet } from 'react-router';
 
 const Main = () => {
   return (
     <>
     <div className='main-container'>    
-        {/* <Navbar />
+        <Navbar />
         <div className='main-body'>
-            <AsideNavbar />
+            <AsideNavBar />
             <span  className='outlet-body'>
                 <Outlet />
             </span>
-                {loginShow ?
+                {/* {loginShow ?
                     <LoginPage props={setLoginShow} />
                     : <SignUpPage  props={setLoginShow} />
              }
-            <ToastContainer style={{ fontSize: "1.5em" }} />
+            <ToastContainer style={{ fontSize: "1.5em" }} /> */}
         </div>
-        <Footer /> */}
     </div>
 </>
   )
