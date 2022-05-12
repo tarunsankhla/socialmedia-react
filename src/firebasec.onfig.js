@@ -20,7 +20,14 @@ import {
     doc,
     deleteDoc
 } from "firebase/firestore";
-import { getStorage,ref } from 'firebase/storage'
+import {
+    getStorage,
+    ref,
+    uploadBytesResumable,
+    getDownloadURL
+} from 'firebase/storage'
+
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -63,5 +70,7 @@ export {
     updateDoc,
     doc,
     deleteDoc,
-    ref
+    ref,
+    getDownloadURL,
+    uploadBytesResumable    
 }
