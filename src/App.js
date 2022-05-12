@@ -2,8 +2,6 @@ import "./App.css";
 import logo from "./logo.png";
 import { app } from "firebasec.onfig";
 import { Route, Routes } from "react-router";
-import { ROUTES } from "src/utils/route.js";
-import { Suspense } from "react/cjs/react.production.min";
 import HomePage from "pages/HomePage/HomePage";
 import Main from "Main";
 import ExplorePage from "pages/ExplorePage/ExplorePage";
@@ -14,6 +12,8 @@ import BookmarkPage from "pages/BookmarkPage/BookmarkPage";
 import RequiredAuth from "components/common/PrivatedRoutes/RequiredRoutes";
 import Mockman from 'mockman-js';
 import NotFoundPage from "pages/NotFoundPage/NotFoundPage";
+import { ROUTES } from "utils/routes";
+import { Suspense } from "react";
 
 console.log(app);
 function App() {
@@ -55,7 +55,7 @@ function App() {
             </RequiredAuth>}
           />
         </Route>
-        <Route path={ROUTES.ROUTE_PATH_MOCKMAN} element={<div className='MockAPI'><Mockman /></div>} />
+        {/* <Route path={ROUTES.ROUTE_PATH_MOCKMAN} element={<div className='MockAPI'><Mockman /></div>} /> */}
         <Route path="/404" element={<NotFoundPage />} />
 				<Route path="*" element={<NotFoundPage />} />
       </Routes>

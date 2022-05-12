@@ -3,7 +3,9 @@ import "./Navbar.css";
 
 const Navbar = () => {
   return (
-    <div>Navbar</div>
+    <div className='Navbar'>
+      {/* <img src={LogoWEBP1} loading="lazy" alt='logo' className='logo-navbar' /> */}
+      Buzz</div>
   )
 }
 
