@@ -26,25 +26,52 @@ function IconsProfile(props) {
 }
 
 
- function IconImageInput(props) {
+function IconImageInput(props) {
     return (
-      <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" {...props}><g fill="currentColor"><path d="M6.002 5.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0z"></path><path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71l-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"></path></g></svg>
+        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" {...props}><g fill="currentColor"><path d="M6.002 5.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0z"></path><path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71l-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"></path></g></svg>
     )
 }
-  
+
 
 function IconEmojiInput(props) {
     return (
-      <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" {...props}><g fill="currentColor"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path><path d="M12.331 9.5a1 1 0 0 1 0 1A4.998 4.998 0 0 1 8 13a4.998 4.998 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5zM7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z"></path></g></svg>
+        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" {...props}><g fill="currentColor"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path><path d="M12.331 9.5a1 1 0 0 1 0 1A4.998 4.998 0 0 1 8 13a4.998 4.998 0 0 1-4.33-2.5A1 1 0 0 1 4.535 9h6.93a1 1 0 0 1 .866.5zM7 6.5c0 .828-.448 0-1 0s-1 .828-1 0S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 0-1 0s-1 .828-1 0S9.448 5 10 5s1 .672 1 1.5z"></path></g></svg>
     )
 }
-  
+
 
 function IconGifInput(props) {
     return (
-      <svg width="1.5em" height="1.5em" viewBox="0 0 32 32" {...props}><path fill="currentColor" d="M2 12v8a3 3 0 0 0 3 3h5v-8H6v2h2v4H5a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h5V9H5a3 3 0 0 0-3 3zm28-1V9h-8v14h2v-6h5v-2h-5v-4h6zM12 9v2h3v10h-3v2h8v-2h-3V11h3V9h-8z"></path></svg>
+        <svg width="1.5em" height="1.5em" viewBox="0 0 32 32" {...props}><path fill="currentColor" d="M2 12v8a3 3 0 0 0 3 3h5v-8H6v2h2v4H5a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h5V9H5a3 3 0 0 0-3 3zm28-1V9h-8v14h2v-6h5v-2h-5v-4h6zM12 9v2h3v10h-3v2h8v-2h-3V11h3V9h-8z"></path></svg>
+    )
+}
+
+
+function IconHeart(props) {
+    return (
+        <svg width="1.1em" height="1.1em" viewBox="0 0 16 16" {...props}><path fill="currentColor" d="m8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385c.92 1.815 2.834 3.989 6.286 6.357c3.452-2.368 5.365-4.542 6.286-6.357c.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"></path></svg>
+    )
+}
+
+
+function IconComment(props) {
+    return (
+        <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M12 23a1 1 0 0 1-1-1v-3H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-4.1l-3.7 3.71c-.2.19-.45.29-.7.29H12m1-6v3.08L16.08 17H21V7H7v10h6M3 15H1V3a2 2 0 0 1 2-2h16v2H3v12Z"></path></svg>
+    )
+}
+
+function IconShare(props) {
+    return (
+      <svg width="1.3em" height="1.3em" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81c1.66 0 3-1.34 3-3s-1.34-3-3-3s-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65c0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92zM18 4c.55 0 1 .45 1 1s-.45 1-1 1s-1-.45-1-1s.45-1 1-1zM6 13c-.55 0-1-.45-1-1s.45-1 1-1s1 .45 1 1s-.45 1-1 1zm12 7.02c-.55 0-1-.45-1-1s.45-1 1-1s1 .45 1 1s-.45 1-1 1z"></path></svg>
+    )
+}
+  
+function IconsBookmarkFiller(props) {
+    return (
+      <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" {...props}><path fill="currentColor" d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path></svg>
     )
   }
+
 export {
     IconsHomeNavbar,
     IconsExploreNavbar,
@@ -52,5 +79,9 @@ export {
     IconsProfile,
     IconImageInput,
     IconEmojiInput,
-    IconGifInput
+    IconGifInput,
+    IconHeart,
+    IconComment,
+    IconShare,
+    IconsBookmarkFiller
 }

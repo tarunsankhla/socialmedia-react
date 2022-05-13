@@ -11,6 +11,7 @@
 	--primary-shade-color: #ddd2f0;
 	--secondary-color: #dedede;
 	--note-date-color: #751414;
+	--hover-color :#539987;
 
 	--black-hl-p5: rgba(0, 0, 0, 0.05);
 	--white-hl-p3: rgba(255, 255, 255, 0.3);
@@ -117,9 +118,7 @@ span {
 	font-size: 1em;
 }
 
-span:hover {
-	color: #539987;
-}
+
 
 .stretch {
 	width: 100%;

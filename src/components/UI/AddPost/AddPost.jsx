@@ -15,26 +15,10 @@ const initialPostObject = {
     content: "",
     date: new Date(),
     createdTime: new Date().getTime(),
-    // expiryTime: 5,
-    // maxVotes: 5,
-    // column1: {
-    // name: "Good features",
-    // feedbacks: [],
-    // },
-    // column2: {
-    // name: "Improvements",
-    // feedbacks: [],
-    // },
-    // column3: {
-    // name: "Add Features",
-    // feedbacks: [],
-    // },
-    // _id :localStorage.getItem(VAR_ENCODE_TOKEN).user.userId,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    bio: "",
+    createdAt: new Date().toDateString(),
+    updatedAt: new Date().toDateString(),
     comments: [],
-    userId: localStorage.getItem(ROUTES.VAR_ENCODE_TOKEN)?.user?.userId ?? ""
+    user: localStorage.getItem(ROUTES.VAR_ENCODE_TOKEN) ?? ""
 };
 
 
@@ -46,7 +30,11 @@ const AddPost = () => {
     const AddPostHandler = async () => {
         let postId = uuid();
         console.log(postId);
-        Post.userId = userState.user.userId ?? "";
+        Post.user = userState.user ?? "";
+        Post.date = new Date();
+        Post.createdTime = new Date().getTime();
+        Post.createdAt = new Date().toDateString();
+        Post.updatedAt = new Date().toDateString();
         console.log(Post);
         const userRef = doc(firestore, `posts/${postId}`);
         console.log(Post)
