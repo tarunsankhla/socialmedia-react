@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div className='Navbar'>
       {/* <img src={LogoWEBP1} loading="lazy" alt='logo' className='logo-navbar' /> */}
-      Buzz</div>
+      SpaceVerse</div>
   )
 }
 

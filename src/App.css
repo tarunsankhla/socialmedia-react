@@ -12,9 +12,8 @@
 	--secondary-color: #dedede;
 	--note-date-color: #751414;
 
-
-	--black-hl-p5:rgba(0, 0, 0, 0.05);
-	--white-hl-p3:rgba(255, 255, 255, 0.3);
+	--black-hl-p5: rgba(0, 0, 0, 0.05);
+	--white-hl-p3: rgba(255, 255, 255, 0.3);
 }
 .App {
 	text-align: center;
@@ -30,8 +29,6 @@
 		animation: App-logo-spin infinite 20s linear;
 	}
 }
-
-
 
 .App-header {
 	background-color: #22201c;
@@ -73,14 +70,12 @@
 /* MAin */
 .main-container {
 	display: flex;
-	/* background-color: var(--nav-color); */
 	flex-direction: column;
 	position: relative;
 }
 
 .main-body {
 	display: flex;
-	/* background-color: rgba(0, 0, 0, 0.1); */
 	width: 100%;
 	min-height: 100vh;
 }
@@ -143,13 +138,12 @@ span:hover {
 .nocontent {
 	display: flex;
 	flex-wrap: wrap;
-	padding: 1em;
 	flex-direction: column;
+	padding: 1em;
 	width: 100%;
 }
 
-
-.outlet-body{
+.outlet-body {
 	width: 100%;
-	background-color: var(--black-hl-p5)
+	background-color: var(--black-hl-p5);
 }

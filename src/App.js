@@ -15,7 +15,7 @@ import NotFoundPage from "pages/NotFoundPage/NotFoundPage";
 import { ROUTES } from "utils/routes";
 import { Suspense } from "react";
 
-console.log(app);
+
 function App() {
   return (
     <div className="App">

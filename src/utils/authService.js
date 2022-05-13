@@ -47,8 +47,8 @@ const LoginWIthGoogleAuth = async (userDispatch, navigate) => {
   try {
     console.log(firebaseAuth, googleAuthProvider)
     const response = await signInWithPopup(firebaseAuth, googleAuthProvider);
-      // .then(resp => console.log(resp))
-      // .catch(err => console.log(err));
+    // .then(resp => console.log(resp))
+    // .catch(err => console.log(err));
     console.log(response);
     userDispatch({
       type: "userauth",
@@ -68,16 +68,17 @@ const LoginWIthGoogleAuth = async (userDispatch, navigate) => {
 
 const SignupWithEmail = async (userDispatch, data, navigate) => {
   try {
-    console.log( firebaseAuth);
+    console.log(firebaseAuth);
     const response = await createUserWithEmailAndPassword(
       firebaseAuth,
       data.email,
       data.password
     );
     console.log(response);
-    let obj ={  name: response?.user?.displayName ?? "",
-    emailId: response?.user?.email ?? "",
-    userId: response?.user?.uid ?? "",
+    let obj = {
+      name: response?.user?.displayName ?? "",
+      emailId: response?.user?.email ?? "",
+      userId: response?.user?.uid ?? "",
       photo: response.user.photoURL ?? "",
     }
     CreateUser(obj);
@@ -100,9 +101,9 @@ const SignupWithEmail = async (userDispatch, data, navigate) => {
 const CreateUser = async (obj) => {
   let userObject = {
     userId: obj.userId,
-    name:  obj.name,
-    emailId: obj.emailId ,
-    photo:  obj.photo,
+    name: obj.name,
+    emailId: obj.emailId,
+    photo: obj.photo,
     createdAt: new Date(),
     updatedAt: new Date(),
     followers: [],
