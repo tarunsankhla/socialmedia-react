@@ -21,6 +21,7 @@ const UserAuthReducer = (state, action) => {
       userId: action.userId,
       photo: action.photo,
     };
+    localStorage.setItem(ROUTES.VAR_ENCODE_TOKEN, JSON.stringify({ token: action.token, user: user }))
     return { token: action.token, user: user };
   } else if (action.type === "reset") {
     localStorage.removeItem(ROUTES.VAR_ENCODE_TOKEN);
