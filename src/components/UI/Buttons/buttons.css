@@ -1,0 +1,10 @@
+
+.normal-btn{
+    border: none;
+    outline: none;
+    color: white;
+    font-weight: 600;
+    padding: 5px;
+    min-width: 20%;
+    cursor: pointer;
+}

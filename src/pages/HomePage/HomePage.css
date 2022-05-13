@@ -1,0 +1,41 @@
+.user-img{
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.create-buzz-input{
+    height: 8em;
+    padding: 10px;
+    background-color: var(--black-hl-p5);
+    width: 100%;
+    resize: none;
+    border: none;
+    outline: none;
+}
+
+.create-buzz-container{
+    margin: 10px 5px;
+    background-color: white;
+    display: flex;
+    padding: 10px;
+    gap: 1em;
+}
+
+.create-buzz-input-container{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.create-buzz-action-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.create-buzz-action-icon-container{
+    display: flex;
+    gap: 1em;
+}
