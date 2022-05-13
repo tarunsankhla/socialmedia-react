@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import "./LoginPage.css";
 import { useAuth } from 'context/AuthContext';
 import { LoginInWithEmail, LoginWIthGoogleAuth } from 'utils/authService';
+import { NormalButton } from 'components/UI/Buttons/buttons';
 
 const LoginPage = () => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -73,25 +74,27 @@ const LoginPage = () => {
               </div>
 
               <div className="login-cta-buttons">
-                <button
+                <span
                   className="btn primary-btn-md"
                   onClick={loginClickHandler}
                 >
-                  Login
-                </button>
+                  <NormalButton name="Login"/>
+                  {/* Login */}
+                </span>
               </div>
             </form>
             <div className="google-login-container">
-              <button
+              <span
                 className="btn secondary-outline-btn-md google-login"
                 onClick={(e) => {
                   e.preventDefault();
                   LoginWIthGoogleAuth(userDispatch, navigate);
                 }}
               >
-                <i className="fab fa-google"></i>
+                {/* <i className="fab fa-google"></i> */}
                 login with Google
-              </button>
+                <NormalButton name="login with Google"/>
+              </span>
             </div>
             <Link className="btn primary-text-btn-md mg-1-top" to="/signup">
               Create New Account

@@ -1,0 +1,135 @@
+.login-body-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem auto;
+    border: 1px solid rgb(186, 186, 186);
+    border-radius: 15px;
+    width: fit-content;
+    min-width: 50% ;
+    background-color: white;
+  }
+  
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 30rem;
+    height: fit-content;
+    border-radius: var(--border-radius);
+    font-size: 1.5rem;
+    gap: 1em;
+    border-radius: 20px;
+  }
+  
+  .login-credential-container > input {
+    width: 100%;
+    padding: 0.6rem;
+    margin: 1rem 0;
+    border-radius: 6px;
+    border: 1px solid gray !important;
+    outline: none;
+    background-color: white !important;
+  }
+  
+  .login-credential-container > label {
+    font-weight: 500;
+  }
+  
+  .login-rem-forgetpass-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .login-action-btn {
+    display: block;
+    font-size: 1.5rem;
+    border: 0;
+    padding: 5px 1rem;
+    border-radius: 5px;
+    background-color: #a0d3ef;
+  }
+  
+  .forget-password {
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    width: 10.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .forget-password:hover {
+    color: var(--primary-color);
+  }
+  
+  .login-btn-container {
+    padding: 1em;
+  }
+  
+  .title-header {
+    font-weight: 700;
+    width: 90%;
+    padding: 2rem;
+  }
+  
+  .login-footer {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    justify-content: center;
+  }
+  
+  .login-footer {
+    cursor: pointer;
+  }
+  
+  .animation-login-1 {
+    border: none;
+  }
+  
+  .google-login i {
+    margin-right: 5px;
+  }
+  
+  .error {
+    color: red;
+    font-weight: 500;
+  }
+  
+  .btn-link {
+    margin: auto;
+    border: 1px solid transparent;
+  }
+  
+  button:disabled {
+    cursor: not-allowed;
+  }
+  
+  .login-cta-buttons {
+    margin-top: 1rem;
+  }
+  
+  .login-cta-buttons,
+  .google-login-container {
+    display: grid;
+    margin: 5px 0;
+    width: 100%;
+  }
+  
+  .login-cta-buttons button,
+  .google-login-container button {
+    margin: 10px 0;
+  }
+  
+  .login-cta-buttons > div button {
+    width: 49%;
+  }
+  
+  @media screen and (max-width: 480px) {
+    .login-container {
+      width: 25rem;
+    }
+  }

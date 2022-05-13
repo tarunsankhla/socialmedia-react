@@ -1,4 +1,5 @@
 import { IconsBookmark, IconsExploreNavbar, IconsHomeNavbar, IconsProfile } from 'components/UI/Icons/Icons';
+import { useAuth } from 'context/AuthContext';
 import React from 'react';
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
@@ -18,10 +19,14 @@ const getActiveStyle = ({ isActive }) => ({
     alignItems: "center"
 })
 const AsideNavBar = () => {
-    // let auth = useAuth();
+    const { userState, userDispatch } = useAuth();
     let navigate = useNavigate();
     // const { modalToggle, setmodalToggle } = useModal();
-
+    const LogoutHandler = () => {
+        userDispatch({ type: "reset" });
+        navigate("/", { replace: true });
+      };
+    
 
     return (
         <div className='AsideNav'>
@@ -55,11 +60,21 @@ const AsideNavBar = () => {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink style={getActiveStyle}
+                        
+                        {!userState.token ? (
+                            <NavLink style={getActiveStyle}
                             to={ROUTES.ROUTE_PATH_LoginPage}>
                             <IconsProfile height="1.5em" width="1.5em" />
                             <p className="title-hide-responsive">Login</p>
                         </NavLink>
+                            ) : (
+                            <button
+                                className="btn primary-outline-btn-md"
+                                onClick={LogoutHandler}
+                            >
+                                Logout
+                            </button>
+                            )}
                     </li>
                     {/* {
                         !auth.user ?

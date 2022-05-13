@@ -6,6 +6,16 @@
 	text-decoration: none;
 }
 
+:root {
+	--primary-color: #9675b4;
+	--primary-shade-color: #ddd2f0;
+	--secondary-color: #dedede;
+	--note-date-color: #751414;
+
+
+	--black-hl-p5:rgba(0, 0, 0, 0.05);
+	--white-hl-p3:rgba(255, 255, 255, 0.3);
+}
 .App {
 	text-align: center;
 }
@@ -20,6 +30,8 @@
 		animation: App-logo-spin infinite 20s linear;
 	}
 }
+
+
 
 .App-header {
 	background-color: #22201c;
@@ -139,4 +151,5 @@ span:hover {
 
 .outlet-body{
 	width: 100%;
+	background-color: var(--black-hl-p5)
 }
