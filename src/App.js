@@ -1,6 +1,6 @@
 import "./App.css";
 import logo from "./logo.png";
-import { app } from "firebasec.onfig";
+import { app } from "firebase.config";
 import { Route, Routes } from "react-router";
 import HomePage from "pages/HomePage/HomePage";
 import Main from "Main";
@@ -40,14 +40,22 @@ function App() {
               </Suspense>
             </RequiredAuth>}
           />
-          <Route path={ROUTES.ROUTE_PATH_LoginPage} element={
+          <Route
+            path={ROUTES.ROUTE_PATH_LoginPage} element={
             <RequiredAuth>
               <Suspense fallback={"..loading"}>
                 <LoginPage />
               </Suspense>
             </RequiredAuth>}
           />
-         <Route path={ROUTES.ROUTE_PATH_ProfilePage} element={
+           <Route path={ROUTES.ROUTE_PATH_SignupPage} element={
+            <RequiredAuth>
+              <Suspense fallback={"..loading"}>
+                <SignUpPage />
+              </Suspense>
+            </RequiredAuth>}
+          />
+          <Route path={ROUTES.ROUTE_PATH_ProfilePage} element={
             <RequiredAuth>
               <Suspense fallback="Loading">
                 <ProfilePage />

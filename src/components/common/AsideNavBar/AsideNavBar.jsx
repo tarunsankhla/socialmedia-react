@@ -54,6 +54,13 @@ const AsideNavBar = () => {
                             <p className="title-hide-responsive">Profile</p>
                         </NavLink>
                     </li>
+                    <li>
+                        <NavLink style={getActiveStyle}
+                            to={ROUTES.ROUTE_PATH_LoginPage}>
+                            <IconsProfile height="1.5em" width="1.5em" />
+                            <p className="title-hide-responsive">Login</p>
+                        </NavLink>
+                    </li>
                     {/* {
                         !auth.user ?
 
