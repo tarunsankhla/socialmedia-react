@@ -19,6 +19,7 @@ const Main = () => {
                     : <SignUpPage  props={setLoginShow} />
              }
             <ToastContainer style={{ fontSize: "1.5em" }} /> */} </div>
+
             </div>
         </>
     )
