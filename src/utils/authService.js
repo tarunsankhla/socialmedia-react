@@ -130,9 +130,10 @@ const CreateUser = async (obj) => {
   const userRef = doc(firestore, `users/${obj.userId}`);
         console.log(userObject)
         try {
-            await setDoc(userRef, { // ...dashboard,
+            var response =await setDoc(userRef, { // ...dashboard,
                 [obj.userId]: userObject
             });
+          console.log(response);
             // Alert("success", "Nkew Project Added!!");
         } catch (err) {
             console.log(err.message)

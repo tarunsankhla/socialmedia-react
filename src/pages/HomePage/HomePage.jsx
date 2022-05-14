@@ -1,12 +1,10 @@
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import AddPost from 'components/UI/AddPost/AddPost';
-import React from 'react';
-import "./HomePage.css";
 import {getAllPost} from '../../utils/postService';
 import {collection, doc, onSnapshot} from 'firebase/firestore';
 import {firestore} from '../../firebase.config';
 import Post from '../../components/common/Posts/Post';
-
+import "./HomePage.css";
 
 const HomePage = () => {
     const [allDataArray, setAllDataArray] = useState([]);
