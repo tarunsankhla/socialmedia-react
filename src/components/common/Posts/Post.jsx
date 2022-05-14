@@ -89,6 +89,8 @@ const Post = ({props}) => {
             console.log("error");
         }
     }
+
+    
     return (
         <div className='post--data-container'>
             <div> {
@@ -105,8 +107,8 @@ const Post = ({props}) => {
                     <span className='fn-wg-700'>{props.user.name || "dummy name"}</span>
                         {props.user.userId !== userData.userId &&
                             (userData.followers.some(USERID => USERID === userData.userId ) ?
-                                <span>following  </span>
-                                : <span>follow <IconPlus /></span>)}
+                                <span className='post-data-follow-container hover gray-txt lg-txt'>following  </span>
+                                : <span className=' post-data-follow-container hover gray-txt lg-txt'>follow <IconPlus /></span>)}
                         
                     </p>
                     <span className='gray-txt lg-txt'>

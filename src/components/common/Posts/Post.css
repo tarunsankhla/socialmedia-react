@@ -46,3 +46,11 @@
     gap: 1em;
     width: 100%;
 }
+
+.post-data-follow-container{
+    display: inline-flex;
+    padding: 0 10px;
+    border: 2px solid;
+    border-radius: 5px;
+    margin-left: 5px;
+}
