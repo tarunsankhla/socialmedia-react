@@ -5,10 +5,12 @@ import "./LoginPage.css";
 import { useAuth } from 'context/AuthContext';
 import { LoginInWithEmail, LoginWIthGoogleAuth } from 'utils/authService';
 import { NormalButton } from 'components/UI/Buttons/buttons';
+import { useUserData } from 'context/UserContext';
 
 const LoginPage = () => {
   const [data, setData] = useState({ email: "", password: "" });
   const [showResetPassword, setShowResetPassword] = useState(false);
+  const { userData, setUserDate } = useUserData();
 
   const navigate = Navigate();
   const { userState, userDispatch } = useAuth();
@@ -18,7 +20,7 @@ const LoginPage = () => {
     if (data.email.trim() === "" || data.password.trim() === "") {
       // Alert("error", "Input cannot be blank");
     } else {
-      LoginInWithEmail(data, userDispatch, navigate);
+      LoginInWithEmail(data, userDispatch, setUserDate, navigate);
     }
   };
 

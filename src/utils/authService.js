@@ -15,9 +15,9 @@ import {
   deleteField,
   setDoc,
 } from "firebase/firestore";
-// import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
-const LoginInWithEmail = async (data, userDispatch, navigate) => {
+
+const LoginInWithEmail = async (data, userDispatch, setUserDate, navigate) => {
   try {
     console.log(firebaseAuth, data)
     const response = await signInWithEmailAndPassword(
@@ -33,6 +33,7 @@ const LoginInWithEmail = async (data, userDispatch, navigate) => {
       photo: response.user.photoURL ?? "",
     }
     CreateUser(obj);
+    
     userDispatch({
       type: "userauth",
       token: response?.user?.accessToken ?? "",
@@ -41,6 +42,10 @@ const LoginInWithEmail = async (data, userDispatch, navigate) => {
       userId: response?.user?.uid ?? "",
       photo: response.user.photoURL ?? "",
     });
+    
+    console.log(response.user.uid)
+    GetIndividualUserData(response.user.uid,setUserDate);
+
     navigate("/", { replace: true });
     // Alert("success", "SignIn Successfully!!");
   } catch (err) {
@@ -124,25 +129,40 @@ const CreateUser = async (obj) => {
     following: [],
     bookmarks: [],
     bio: "",
-    headerImg : ""
+    headerImg: ""
   }
   console.log("create user", obj);
   const userRef = doc(firestore, `users/${obj.userId}`);
-        console.log(userObject)
-        try {
-            var response =await setDoc(userRef, { // ...dashboard,
-                [obj.userId]: userObject
-            });
-          console.log(response);
-            // Alert("success", "Nkew Project Added!!");
-        } catch (err) {
-            console.log(err.message)
-            // Alert("info", err.message);
-        }
+  console.log(userObject)
+  try {
+    var response = await setDoc(userRef, { // ...dashboard,
+      [obj.userId]: userObject
+    });
+    console.log(response);
+    // Alert("success", "Nkew Project Added!!");
+  } catch (err) {
+    console.log(err.message)
+    // Alert("info", err.message);
+  }
+}
+
+
+/// method for getting user data who has logged in
+const GetIndividualUserData = async (userID,setUserData) => {
+  const userRef = doc(firestore, `users/${userID}`);
+  try {
+    const response = await getDoc(userRef);
+    console.log(response.data(),setUserData,userID);
+    // setData(res1.data() ?? {});
+  } catch (err) {
+    console.log(err.message)
+    // alert("error", err.message);
+  }
 }
 
 export {
   LoginInWithEmail,
   LoginWIthGoogleAuth,
-  SignupWithEmail
+  SignupWithEmail,
+  GetIndividualUserData
 }
