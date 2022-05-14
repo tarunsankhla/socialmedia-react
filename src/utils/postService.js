@@ -49,4 +49,22 @@ const getpost = async (setData, userId) => {
   };
   
 
-export { getAllPost }
+  /// method for getting user data who has logged in
+const GetIndividualPostData = async (postId,setPostData) => {
+    const userRef = doc(firestore, `posts/${postId}`);
+    try {
+      const response = await getDoc(userRef);
+      console.log(response.data(), response.id, setPostData, postId);
+      console.log(response.data()[postId]);
+      setPostData(response.data()[postId]);
+      // setData(res1.data() ?? {});
+    } catch (err) {
+      console.log(err.message)
+      // alert("error", err.message);
+    }
+  }
+
+export {
+    getAllPost,
+    GetIndividualPostData
+}

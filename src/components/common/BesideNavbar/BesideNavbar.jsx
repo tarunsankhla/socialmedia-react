@@ -19,6 +19,7 @@ const BesideNavbar = () => {
                     <span className='fn-wg-700'>Who to Follow?</span>
                     <span className='fn-wg-700 red-txt'>Show More</span>
                 </div>
+                <hr/>
                 <div className='beside-user-data-container'>
                     {
                     userFollowArray.map(user => (
