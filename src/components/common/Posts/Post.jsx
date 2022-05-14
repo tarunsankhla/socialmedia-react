@@ -11,9 +11,11 @@ import {useAuth} from "context/AuthContext";
 import "./Post.css";
 import {firestore} from 'firebase.config';
 import {doc, updateDoc} from 'firebase/firestore';
+import { useUserData } from 'context/UserContext';
 
 const Post = ({props}) => {
-    const {userState, userDispatch} = useAuth();
+    const { userState, userDispatch } = useAuth();
+    const { userData, setUserData } = useUserData();
     console.log(props)
 
     const AddLikeOnPost = () => {
@@ -78,9 +80,12 @@ const Post = ({props}) => {
                         {props.likes.likedBy.length}
                     </span>
                     <span className='hover'><IconComment/></span>
-                    <span className='hover'><IconShare/></span>
-                    <span className='hover'><IconsBookmark /></span>
-                    <span className='hover'><IconsBookmarkFill/></span>
+                    <span className='hover'><IconShare /></span>
+                    {userData.bookmarks.some(post => post.postid === props.postid)
+                    
+                        ? <span className='hover'><IconsBookmarkFill /></span>
+                        : <span className='hover'><IconsBookmark /></span>
+                    }
                 </div>
             </div>
         </div>
