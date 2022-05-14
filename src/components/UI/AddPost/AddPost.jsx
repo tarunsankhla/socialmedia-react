@@ -18,7 +18,12 @@ const initialPostObject = {
     createdAt: new Date().toDateString(),
     updatedAt: new Date().toDateString(),
     comments: [],
-    user: localStorage.getItem(ROUTES.VAR_ENCODE_TOKEN) ?? ""
+    user: localStorage.getItem(ROUTES.VAR_ENCODE_TOKEN) ?? "",
+    likes: {
+        likeCount: 0,
+        likedBy: [],
+        dislikedBy: []
+    }
 };
 
 
@@ -71,9 +76,9 @@ const AddPost = () => {
                     }/>
                 <div className='create-buzz-action-container'>
                     <div className='create-buzz-action-icon-container'>
-                        <IconImageInput/>
-                        <IconEmojiInput/>
-                        <IconGifInput/>
+                        <span className='hover'><IconImageInput/></span>
+                        <span className='hover'><IconEmojiInput/></span>
+                        <span className='hover'><IconGifInput/></span>
                     </div>
                     <span onClick={AddPostHandler}><NormalButton name="Post"/></span>
 

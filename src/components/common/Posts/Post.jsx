@@ -18,11 +18,11 @@ const Post = ({props}) => {
                 }
             </div>
             <div className='post-data-show-container'>
-                <div>
-                    <span>{
+                <div className='flex post-data-content-header'>
+                    <span className='fn-wg-700'>{
                     props.user.name || "dummy name"
                     }</span>
-                    <span>{props.createdAt }</span>
+                    <span className='gray-txt lg-txt'>{props.createdAt }</span>
                 </div>
                 <div>
                     {
@@ -30,10 +30,10 @@ const Post = ({props}) => {
                     }
                 </div>
                 <div className='post-data-action-container'>
-                    <IconHeart />
-                    <IconComment />
-                    <IconShare />
-                    <IconsBookmark />
+                    <span className='hover'><IconHeart /></span>
+                    <span className='hover'><IconComment /></span>
+                    <span className='hover'><IconShare /></span>
+                    <span className='hover'><IconsBookmark /></span>
                 </div>
             </div>
         </div>
