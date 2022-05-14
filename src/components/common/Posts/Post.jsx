@@ -3,6 +3,7 @@ import {
     IconComment,
     IconHeart,
     IconHeartFill,
+    IconPlus,
     IconsBookmark,
     IconsBookmarkFill,
     IconShare
@@ -100,10 +101,14 @@ const Post = ({props}) => {
             </div>
             <div className='post-data-show-container'>
                 <div className='flex post-data-content-header'>
-                    <span className='fn-wg-700'>
-                        {
-                        props.user.name || "dummy name"
-                    }</span>
+                    <p>
+                    <span className='fn-wg-700'>{props.user.name || "dummy name"}</span>
+                        {props.user.userId !== userData.userId &&
+                            (userData.followers.some(USERID => USERID === userData.userId ) ?
+                                <span>following  </span>
+                                : <span>follow <IconPlus /></span>)}
+                        
+                    </p>
                     <span className='gray-txt lg-txt'>
                         {
                         props.createdAt
