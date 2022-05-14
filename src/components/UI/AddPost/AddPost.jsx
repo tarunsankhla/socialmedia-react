@@ -63,9 +63,14 @@ const AddPost = () => {
     return (
         <div className='create-buzz-container'>
             <div className='buzz-img-create'>
-                <img src={img}
-                    className='user-img'
-                    alt='user-img'/>
+                {/* <img src={userState.user.photo}
+                    className=''
+                    alt='user-img' /> */}
+                {  userState.user?.photo.length ?
+                    <img src={userState.user.photo} className='handle-img-np user-img' />
+                    : <span className='handle-img-np handle-img-ph'>
+                        {  userState.user.name ? userState.user.name[0].toUpperCase() : "D"   }
+                    </span>}
             </div>
             <div className='create-buzz-input-container'>
                 <textarea placeholder='Write something interesting' className='create-buzz-input'

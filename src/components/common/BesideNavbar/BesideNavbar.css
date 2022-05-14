@@ -1,0 +1,10 @@
+.BesideNavbar{
+    width:27vw;
+    display: flex;
+}
+
+@media screen and (max-width:880px) {
+    .BesideNavbar{
+        display: none;
+    }
+}

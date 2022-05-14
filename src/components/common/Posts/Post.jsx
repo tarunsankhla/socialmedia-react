@@ -11,14 +11,14 @@ import {
 import {useAuth} from "context/AuthContext";
 import "./Post.css";
 import {firestore} from 'firebase.config';
-import {doc, updateDoc} from 'firebase/firestore';
+import {doc, getDoc, updateDoc} from 'firebase/firestore';
 import { useUserData } from 'context/UserContext';
 import { GetIndividualUserData } from 'utils/authService';
 
 const Post = ({props}) => {
     const { userState, userDispatch } = useAuth();
     const { userData, setUserData } = useUserData();
-    console.log(props)
+    // console.log(props)
 
     const AddLikeOnPost = () => {
         try{
@@ -90,12 +90,12 @@ const Post = ({props}) => {
         }
     }
 
-    const AddUserAsFollowersHandler = () => { 
+    const AddUserAsFollowersHandler = async () => { 
  
         try {
             const userToUpdate = doc(firestore, `users/${userState.user.userId}`);
-            console.log(userToUpdate,userData);
-            let response = updateDoc(userToUpdate, {
+            console.log(userToUpdate,userData,userState.user.userId);
+            let response = await updateDoc(userToUpdate, {
                 [userState.user.userId]: {
                     ...userData,
                     ["followers"]: [ ...userData.followers,{...props.user} ]}
@@ -103,30 +103,64 @@ const Post = ({props}) => {
             console.log(response);
 
             const followingUserToUpdate = doc(firestore, `users/${props.user.userId}`);
-            console.log(followingUserToUpdate,userData);
-            let response2 = updateDoc(userToUpdate, {
-                [userState.user.userId]: {
-                    ...userData,
-                    ["following"]: [...userData.following, {
-                        ...{
+            console.log(followingUserToUpdate, userData, props.user.userId);
+
+            let response1 = await getDoc(followingUserToUpdate);
+            console.log(response1.data(), response1.id);
+            console.log(response1.data()[props.user.userId]);
+
+            var otherUserData = response1.data()[props.user.userId];
+            let response2 = updateDoc(followingUserToUpdate, {
+                [props.user.userId]: {
+                    ...otherUserData,
+                    ["following"]: [...otherUserData.following, {
                             name: userData.name,
                             userId: userData.userId,
                             photo: userData.photo,
                             emailId : userData.emailId,
-                        }
-                    }]
+                        }]
                 }
             });
             console.log(response2);
-            GetIndividualUserData(userState.user.userId, setUserData);
+            await GetIndividualUserData(userState.user.userId, setUserData);
         }
         catch(error) { 
             console.log("error");
         }
     }
 
-    const RemoveUserFromFollowersHandler = () => { 
+    const RemoveUserFromFollowersHandler = async() => { 
 
+        try {
+            const userToUpdate = doc(firestore, `users/${userState.user.userId}`);
+            console.log(userToUpdate,userData,userState.user.userId);
+            let response = await updateDoc(userToUpdate, {
+                [userState.user.userId]: {
+                    ...userData,
+                    ["followers"]: [ ...userData.followers.filter(user=> user.userId !==props.user.userId) ]}
+            });
+            console.log(response);
+
+            const followingUserToUpdate = doc(firestore, `users/${props.user.userId}`);
+            console.log(followingUserToUpdate, userData, props.user.userId);
+
+            let response1 = await getDoc(followingUserToUpdate);
+            console.log(response1.data(), response1.id);
+            console.log(response1.data()[props.user.userId]);
+
+            var otherUserData = response1.data()[props.user.userId];
+            let response2 = updateDoc(followingUserToUpdate, {
+                [props.user.userId]: {
+                    ...otherUserData,
+                    ["following"]: [...otherUserData.following.filter(user=> user.userId !== userState.user.userId)]
+                }
+            });
+            console.log(response2);
+            await GetIndividualUserData(userState.user.userId, setUserData);
+        }
+        catch(error) { 
+            console.log("error");
+        }
     }
     return (
         <div className='post--data-container'>
@@ -143,9 +177,14 @@ const Post = ({props}) => {
                     <p>
                     <span className='fn-wg-700'>{props.user.name || "dummy name"}</span>
                         {props.user.userId !== userData.userId &&
-                            (userData.followers.some(user => user.userId === userData.userId ) ?
-                                <span className='post-data-follow-container hover gray-txt lg-txt'>following  </span>
-                                : <span className=' post-data-follow-container hover gray-txt lg-txt'>follow <IconPlus /></span>)}
+                            (userData.followers.some(user => user.userId === props.user.userId ) ?
+                            <span className='post-data-follow-container hover gray-txt lg-txt' onClick={RemoveUserFromFollowersHandler}>
+                                following
+                            </span>
+                            : <span className=' post-data-follow-container hover gray-txt lg-txt'
+                                onClick={AddUserAsFollowersHandler}>
+                                follow <IconPlus />
+                                </span>)}
                         
                     </p>
                     <span className='gray-txt lg-txt'>
@@ -153,7 +192,7 @@ const Post = ({props}) => {
                         props.createdAt
                     }</span>
                 </div>
-                <div> {
+                <div className='post-data-content-container'> {
                     props.content
                 } </div>
                 <div className='post-data-action-container'>
