@@ -1,9 +1,66 @@
 .BesideNavbar{
-    width:27vw;
+    width:35vw;
     display: flex;
+    background-color: var(--black-hl-p5);
+    display: flex;
+    padding: 10px;
 }
 
-@media screen and (max-width:880px) {
+
+.beside-navbar-container{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    background-color: white;
+    padding: 5px;
+    width: 100%;
+    gap: 1em;
+}
+
+.beside-user-data-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+}
+
+.profile-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.8em 1em;
+    aspect-ratio: 1;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.user-data-beside-section{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.user-data-beside-section > .handle-img-np{
+    width: 1.7em;
+    height: 1.7em;
+}
+
+.beside-container-header{
+    display: flex;
+    justify-content: space-around;
+    gap: 1em;
+    padding: 1em 0;
+}
+.user-data-beside-section-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
+
+@media screen and (max-width:920px) {
     .BesideNavbar{
         display: none;
     }

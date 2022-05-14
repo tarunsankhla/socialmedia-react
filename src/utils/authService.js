@@ -189,9 +189,25 @@ const GetIndividualUserData = async (userID,setUserData) => {
   }
 }
 
+
+const getAllUser = async (setData) => { 
+  const collectionRef = collection(firestore, "users")
+  try {
+    var result = await getDocs(collectionRef);
+    console.log(result);
+    setData(result.docs.map(i => {
+        return { ...(i.data()[i.id]) }
+      }).slice(0,5));
+  } catch (err) { 
+    console.log(err);
+    return false;
+  }
+}
+
 export {
   LoginInWithEmail,
   LoginWIthGoogleAuth,
   SignupWithEmail,
-  GetIndividualUserData
+  GetIndividualUserData,
+  getAllUser
 }

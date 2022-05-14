@@ -14,11 +14,14 @@ import {firestore} from 'firebase.config';
 import {doc, getDoc, updateDoc} from 'firebase/firestore';
 import { useUserData } from 'context/UserContext';
 import { GetIndividualUserData } from 'utils/authService';
+import { Link, NavLink } from 'react-router-dom';
 
 const Post = ({props}) => {
     const { userState, userDispatch } = useAuth();
     const { userData, setUserData } = useUserData();
     // console.log(props)
+    let postPath = `post\ ${props.user.userId}\ ${props.postid}`
+    console.log(postPath);
 
     const AddLikeOnPost = () => {
         try{
@@ -206,7 +209,8 @@ const Post = ({props}) => {
                             </span>}
                         {props.likes.likedBy.length}
                     </span>
-                    <span className='hover'><IconComment/></span>
+                    <span className='hover'>
+                        <Link to={ `/post/${props.user.userId}/${props.postid}`}><IconComment /></Link></span>
                     <span className='hover'><IconShare /></span>
                     {
                         userData.bookmarks.some(post => post.postid === props.postid)

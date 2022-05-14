@@ -2,7 +2,7 @@ export const ROUTES = {
     ROUTE_PATH_HOMEPAGE: "/",
     ROUTE_PATH_EXPLOREPAGE: "/explore",
     ROUTE_PATH_BOOKMARKPAGE: "/bookmark",
-    ROUTE_PATH_BUZZPAGE: "/post/:userID/:postID",
+    ROUTE_PATH_POSTPAGE: "/post/:userID/:postID",
     ROUTE_PATH_Unknown: "*",
     ROUTE_PATH_LoginPage: "/login",
     ROUTE_PATH_SignupPage: "/signup",

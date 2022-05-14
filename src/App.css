@@ -150,13 +150,17 @@ span {
 }
 
 .outlet-body {
-	width: 100%;
+	width: 80%;
 	background-color: var(--black-hl-p5);
 }
 
 
 .gray-txt{
 	color: gray;
+}
+
+.red-txt{
+	color: red;
 }
 
 .fn-wg-800{
