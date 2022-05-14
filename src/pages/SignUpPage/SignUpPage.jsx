@@ -7,7 +7,7 @@ import { LoginWIthGoogleAuth, SignupWithEmail } from 'utils/authService';
 import "./SignUpPage.css";
 
 const SignUpPage = () => {
-  const [data, setData] = useState({ email: "", password: "" });
+  const [data, setData] = useState({ email: "", password: "", name:"" });
   const { userDispatch } = useAuth();
   const { userData, setUserData } = useUserData();
   const navigate = Navigate();
@@ -43,6 +43,14 @@ const SignUpPage = () => {
           name="password"
           value={data.password}
           placeholder="Password"
+          id=""
+          />
+        <input
+          type="text"
+          onChange={inputHandler}
+          name="name"
+          value={data.name}
+          placeholder="Name"
           id=""
         />
         <div className="login-cta-buttons">

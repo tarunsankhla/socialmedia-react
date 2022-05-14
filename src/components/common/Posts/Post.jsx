@@ -141,7 +141,7 @@ const Post = ({props}) => {
             <div className='post-data-show-container'>
                 <div className='flex post-data-content-header'>
                     <p>
-                    <span className='fn-wg-700'>{props.user.name.length || "dummy name"}</span>
+                    <span className='fn-wg-700'>{props.user.name || "dummy name"}</span>
                         {props.user.userId !== userData.userId &&
                             (userData.followers.some(user => user.userId === userData.userId ) ?
                                 <span className='post-data-follow-container hover gray-txt lg-txt'>following  </span>

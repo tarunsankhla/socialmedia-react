@@ -14,6 +14,8 @@ import {
   updateDoc,
   deleteField,
   setDoc,
+  collection,
+  getDocs,
 } from "firebase/firestore";
 
 
@@ -26,13 +28,13 @@ const LoginInWithEmail = async (data, userDispatch, setUserData, navigate) => {
       data.password
     );
     console.log(response);
-    let obj = {
-      name: response?.user?.displayName ?? "",
-      emailId: response?.user?.email ?? "",
-      userId: response?.user?.uid ?? "",
-      photo: response.user.photoURL ?? "",
-    }
-    CreateUser(obj);
+    // let obj = {
+    //   name: response?.user?.displayName ?? "",
+    //   emailId: response?.user?.email ?? "",
+    //   userId: response?.user?.uid ?? "",
+    //   photo: response.user.photoURL ?? "",
+    // }
+    // CreateUser(obj);
     
     userDispatch({
       type: "userauth",
@@ -68,7 +70,10 @@ const LoginWIthGoogleAuth = async (userDispatch, setUserData, navigate) => {
       userId: response?.user?.uid ?? "",
       photo: response.user.photoURL ?? "",
     }
-    CreateUser(obj);
+    let doesUserAlreadyExist = await checkIfUserExist(response.user.uid);
+    if (!doesUserAlreadyExist) { 
+      await CreateUser(obj);
+    }
     userDispatch({
       type: "userauth",
       token: response?.user?.accessToken ?? "",
@@ -149,6 +154,22 @@ const CreateUser = async (obj) => {
   } catch (err) {
     console.log(err.message)
     // Alert("info", err.message);
+  }
+}
+
+const checkIfUserExist = async (userId) => { 
+  const collectionRef = collection(firestore, "users")
+  try {
+    var result = await getDocs(collectionRef);
+    console.log(result);
+    let check = result.docs.map(i => {
+        return { ...(i.data()[i.id]) }
+      }).some(user => user.userId === userId);
+    console.log(result, check);
+    return check;
+  } catch (err) { 
+    console.log(err);
+    return false;
   }
 }
 
