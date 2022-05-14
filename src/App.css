@@ -9,8 +9,10 @@
 :root {
 	--primary-color: #9675b4;
 	--primary-shade-color: #ddd2f0;
+	--primary-dark-shade-color :#220a38;
 	--secondary-color: #dedede;
 	--note-date-color: #751414;
+	--hover-color :#539987;
 
 	--black-hl-p5: rgba(0, 0, 0, 0.05);
 	--white-hl-p3: rgba(255, 255, 255, 0.3);
@@ -57,7 +59,7 @@
 	font-size: 1.4rem;
 }
 
-.links {
+.flex {
 	display: flex;
 }
 
@@ -117,8 +119,12 @@ span {
 	font-size: 1em;
 }
 
-span:hover {
-	color: #539987;
+.hover{
+	color: var(--primary-dark-shade-color) ;
+}
+.hover:hover {
+	color: var(--hover-color);
+	cursor: pointer;
 }
 
 .stretch {
@@ -146,4 +152,21 @@ span:hover {
 .outlet-body {
 	width: 100%;
 	background-color: var(--black-hl-p5);
+}
+
+
+.gray-txt{
+	color: gray;
+}
+
+.fn-wg-800{
+	font-weight: 800;
+}
+
+.fn-wg-700{
+	font-weight: 700;
+}
+
+.fn-wg-600{
+	font-weight: 600;
 }

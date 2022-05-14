@@ -26,6 +26,13 @@ const LoginInWithEmail = async (data, userDispatch, navigate) => {
       data.password
     );
     console.log(response);
+    let obj = {
+      name: response?.user?.displayName ?? "",
+      emailId: response?.user?.email ?? "",
+      userId: response?.user?.uid ?? "",
+      photo: response.user.photoURL ?? "",
+    }
+    CreateUser(obj);
     userDispatch({
       type: "userauth",
       token: response?.user?.accessToken ?? "",
@@ -50,6 +57,13 @@ const LoginWIthGoogleAuth = async (userDispatch, navigate) => {
     // .then(resp => console.log(resp))
     // .catch(err => console.log(err));
     console.log(response);
+    let obj = {
+      name: response?.user?.displayName ?? "",
+      emailId: response?.user?.email ?? "",
+      userId: response?.user?.uid ?? "",
+      photo: response.user.photoURL ?? "",
+    }
+    CreateUser(obj);
     userDispatch({
       type: "userauth",
       token: response?.user?.accessToken ?? "",
@@ -109,18 +123,22 @@ const CreateUser = async (obj) => {
     followers: [],
     following: [],
     bookmarks: [],
+    bio: "",
+    headerImg : ""
   }
+  console.log("create user", obj);
+  const userRef = doc(firestore, `users/${obj.userId}`);
+        console.log(userObject)
+        try {
+            await setDoc(userRef, { // ...dashboard,
+                [obj.userId]: userObject
+            });
+            // Alert("success", "Nkew Project Added!!");
+        } catch (err) {
+            console.log(err.message)
+            // Alert("info", err.message);
+        }
 }
-// get data
-const getpost = async (setData, userId) => {
-  const userRef = doc(firestore, `posts`);
-  try {
-    const res1 = await getDoc(userRef);
-    setData(res1.data() ?? {});
-  } catch (err) {
-    alert("error", err.message);
-  }
-};
 
 export {
   LoginInWithEmail,
