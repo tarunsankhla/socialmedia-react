@@ -91,11 +91,11 @@ const LoginPage = () => {
                 className="btn secondary-outline-btn-md google-login"
                 onClick={(e) => {
                   e.preventDefault();
-                  LoginWIthGoogleAuth(userDispatch, navigate);
+                  LoginWIthGoogleAuth(userDispatch,setUserData, navigate);
                 }}
               >
                 {/* <i className="fab fa-google"></i> */}
-                login with Google
+                {/* login with Google */}
                 <NormalButton name="login with Google"/>
               </span>
             </div>

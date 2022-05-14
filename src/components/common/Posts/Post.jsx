@@ -90,7 +90,44 @@ const Post = ({props}) => {
         }
     }
 
-    
+    const AddUserAsFollowersHandler = () => { 
+ 
+        try {
+            const userToUpdate = doc(firestore, `users/${userState.user.userId}`);
+            console.log(userToUpdate,userData);
+            let response = updateDoc(userToUpdate, {
+                [userState.user.userId]: {
+                    ...userData,
+                    ["followers"]: [ ...userData.followers,{...props.user} ]}
+            });
+            console.log(response);
+
+            const followingUserToUpdate = doc(firestore, `users/${props.user.userId}`);
+            console.log(followingUserToUpdate,userData);
+            let response2 = updateDoc(userToUpdate, {
+                [userState.user.userId]: {
+                    ...userData,
+                    ["following"]: [...userData.following, {
+                        ...{
+                            name: userData.name,
+                            userId: userData.userId,
+                            photo: userData.photo,
+                            emailId : userData.emailId,
+                        }
+                    }]
+                }
+            });
+            console.log(response2);
+            GetIndividualUserData(userState.user.userId, setUserData);
+        }
+        catch(error) { 
+            console.log("error");
+        }
+    }
+
+    const RemoveUserFromFollowersHandler = () => { 
+
+    }
     return (
         <div className='post--data-container'>
             <div> {
@@ -104,9 +141,9 @@ const Post = ({props}) => {
             <div className='post-data-show-container'>
                 <div className='flex post-data-content-header'>
                     <p>
-                    <span className='fn-wg-700'>{props.user.name || "dummy name"}</span>
+                    <span className='fn-wg-700'>{props.user.name.length || "dummy name"}</span>
                         {props.user.userId !== userData.userId &&
-                            (userData.followers.some(USERID => USERID === userData.userId ) ?
+                            (userData.followers.some(user => user.userId === userData.userId ) ?
                                 <span className='post-data-follow-container hover gray-txt lg-txt'>following  </span>
                                 : <span className=' post-data-follow-container hover gray-txt lg-txt'>follow <IconPlus /></span>)}
                         

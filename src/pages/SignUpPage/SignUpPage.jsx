@@ -1,4 +1,5 @@
 import { useAuth } from 'context/AuthContext';
+import { useUserData } from 'context/UserContext';
 import React, { useState } from 'react';
 import { useNavigate as Navigate } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -8,6 +9,7 @@ import "./SignUpPage.css";
 const SignUpPage = () => {
   const [data, setData] = useState({ email: "", password: "" });
   const { userDispatch } = useAuth();
+  const { userData, setUserData } = useUserData();
   const navigate = Navigate();
 
   const inputHandler = (e) => {
@@ -18,11 +20,11 @@ const SignUpPage = () => {
   };
 
   const signupSubmitHandler = () => {
-    SignupWithEmail(userDispatch, data, navigate);
+    SignupWithEmail(userDispatch, data, setUserData, navigate);
   };
 
   const signupWithGoogleHandler = () => {
-    LoginWIthGoogleAuth(userDispatch, navigate);
+    LoginWIthGoogleAuth(userDispatch, setUserData, navigate);
   };
   return (
     <div className="signup-body-container">

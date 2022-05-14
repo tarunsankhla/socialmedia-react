@@ -55,7 +55,7 @@ const LoginInWithEmail = async (data, userDispatch, setUserData, navigate) => {
 }
 
 
-const LoginWIthGoogleAuth = async (userDispatch, navigate) => {
+const LoginWIthGoogleAuth = async (userDispatch, setUserData, navigate) => {
   try {
     console.log(firebaseAuth, googleAuthProvider)
     const response = await signInWithPopup(firebaseAuth, googleAuthProvider);
@@ -77,6 +77,9 @@ const LoginWIthGoogleAuth = async (userDispatch, navigate) => {
       userId: response?.user?.uid ?? "",
       photo: response.user.photoURL ?? "",
     });
+
+    console.log(response.user.uid,setUserData)
+    GetIndividualUserData(response.user.uid,setUserData);
     navigate("/", { replace: true });
     // Alert("success", "Logged In Successfully!");
   } catch (err) {
@@ -85,7 +88,7 @@ const LoginWIthGoogleAuth = async (userDispatch, navigate) => {
   }
 }
 
-const SignupWithEmail = async (userDispatch, data, navigate) => {
+const SignupWithEmail = async (userDispatch, data,setUserData, navigate) => {
   try {
     console.log(firebaseAuth);
     const response = await createUserWithEmailAndPassword(
@@ -109,6 +112,9 @@ const SignupWithEmail = async (userDispatch, data, navigate) => {
       userId: response?.user?.uid ?? "",
       photo: response.user.photoURL ?? "",
     });
+
+    console.log(response.user.uid,setUserData)
+    GetIndividualUserData(response.user.uid,setUserData);
     navigate("/", { replace: true });
     // Alert("success", "SignUp Successfully!!");
   } catch (err) {
