@@ -19,7 +19,7 @@ import {
 } from "firebase/firestore";
 
 
-// get data
+// get all data
 const getAllPost = async () => {
     // const userRef = doc(firestore, `users/${userId}`);
     const collectionRef = collection(firestore, "posts")
@@ -37,5 +37,16 @@ const getAllPost = async () => {
 };
 
 
+// get data
+const getpost = async (setData, userId) => {
+    const userRef = doc(firestore, `posts`);
+    try {
+      const res1 = await getDoc(userRef);
+      setData(res1.data() ?? {});
+    } catch (err) {
+      alert("error", err.message);
+    }
+  };
+  
 
 export { getAllPost }
