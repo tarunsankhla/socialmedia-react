@@ -12,6 +12,7 @@ import "./Post.css";
 import {firestore} from 'firebase.config';
 import {doc, updateDoc} from 'firebase/firestore';
 import { useUserData } from 'context/UserContext';
+import { GetIndividualUserData } from 'utils/authService';
 
 const Post = ({props}) => {
     const { userState, userDispatch } = useAuth();
@@ -19,30 +20,73 @@ const Post = ({props}) => {
     console.log(props)
 
     const AddLikeOnPost = () => {
-        const postToUpdate = doc(firestore, `posts/${props.postid
-            }`);
-        console.log(postToUpdate);
-        let response = updateDoc(postToUpdate, { [props.postid] : {
-            ...props,
-            ["likes"]: {...props.likes,likedBy: [...props.likes.likedBy, userState.user.userId],
-                likeCount: props.likes.likeCount + 1
-            }
-        }});
-        console.log(response);
+        try{
+            const postToUpdate = doc(firestore, `posts/${props.postid}`);
+            console.log(postToUpdate);
+            let response = updateDoc(postToUpdate, { [props.postid] : {
+                ...props,
+                ["likes"]: {...props.likes,likedBy: [...props.likes.likedBy, userState.user.userId],
+                    likeCount: props.likes.likeCount + 1
+                }
+            }});
+            console.log(response);
+        }
+        catch(error) { 
+            console.log("error");
+        }
     }
 
     const RemoveLikeOnPost = () => { 
-        const postToUpdate = doc(firestore, `posts/${props.postid
-        }`);
-    console.log(postToUpdate);
-    let response = updateDoc(postToUpdate, { [props.postid] : {
-        ...props,
-        ["likes"]: {...props.likes,
-            likedBy: [...props.likes.likedBy.filter(userID=> userID !== userState.user.userId)],
-            likeCount: props.likes.likeCount - 1
+        try{
+            const postToUpdate = doc(firestore, `posts/${props.postid}`);
+            console.log(postToUpdate);
+            let response = updateDoc(postToUpdate, { [props.postid] : {...props,
+                ["likes"]: {...props.likes,
+                    likedBy: [...props.likes.likedBy.filter(userID=> userID !== userState.user.userId)],
+                    likeCount: props.likes.likeCount - 1
+                }}
+            });
+            console.log(response);
+            
         }
-    }});
-    console.log(response);
+        catch(error) { 
+            console.log("error");
+        }
+    }
+
+    const AddPostInBookmarkHandler = () => { 
+        
+        try {
+            const userToUpdate = doc(firestore, `users/${userState.user.userId}`);
+            console.log(userToUpdate,userData);
+            let response = updateDoc(userToUpdate, {
+                [userState.user.userId]: {
+                    ...userData,
+                    ["bookmarks"]: [ ...userData.bookmarks,{...props} ]}
+            });
+            console.log(response);
+            GetIndividualUserData(userState.user.userId, setUserData);
+        }
+        catch(error) { 
+            console.log("error");
+        }
+    }
+
+    const RemovePostFromBookmarkHandler = () => { 
+        try {
+            const userToUpdate = doc(firestore, `users/${userState.user.userId}`);
+            console.log(userToUpdate,userData);
+            let response = updateDoc(userToUpdate, {
+                [userState.user.userId]: {
+                    ...userData,
+                    ["bookmarks"]: [...userData.bookmarks.filter(post => post.postid !== props.postid ) ]}
+            });
+            console.log(response);
+            GetIndividualUserData(userState.user.userId, setUserData);
+        }
+        catch(error) { 
+            console.log("error");
+        }
     }
     return (
         <div className='post--data-container'>
@@ -81,10 +125,10 @@ const Post = ({props}) => {
                     </span>
                     <span className='hover'><IconComment/></span>
                     <span className='hover'><IconShare /></span>
-                    {userData.bookmarks.some(post => post.postid === props.postid)
-                    
-                        ? <span className='hover'><IconsBookmarkFill /></span>
-                        : <span className='hover'><IconsBookmark /></span>
+                    {
+                        userData.bookmarks.some(post => post.postid === props.postid)
+                            ? <span className='hover' onClick={RemovePostFromBookmarkHandler}><IconsBookmarkFill /></span>
+                            : <span className='hover'  onClick={ AddPostInBookmarkHandler}><IconsBookmark /></span>
                     }
                 </div>
             </div>
