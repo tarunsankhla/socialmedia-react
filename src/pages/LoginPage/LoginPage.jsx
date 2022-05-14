@@ -10,7 +10,7 @@ import { useUserData } from 'context/UserContext';
 const LoginPage = () => {
   const [data, setData] = useState({ email: "", password: "" });
   const [showResetPassword, setShowResetPassword] = useState(false);
-  const { userData, setUserDate } = useUserData();
+  const { userData, setUserData } = useUserData();
 
   const navigate = Navigate();
   const { userState, userDispatch } = useAuth();
@@ -20,7 +20,8 @@ const LoginPage = () => {
     if (data.email.trim() === "" || data.password.trim() === "") {
       // Alert("error", "Input cannot be blank");
     } else {
-      LoginInWithEmail(data, userDispatch, setUserDate, navigate);
+      console.log(setUserData,userData);
+      LoginInWithEmail(data, userDispatch, setUserData, navigate);
     }
   };
 

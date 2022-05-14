@@ -17,7 +17,7 @@ import {
 } from "firebase/firestore";
 
 
-const LoginInWithEmail = async (data, userDispatch, setUserDate, navigate) => {
+const LoginInWithEmail = async (data, userDispatch, setUserData, navigate) => {
   try {
     console.log(firebaseAuth, data)
     const response = await signInWithEmailAndPassword(
@@ -43,8 +43,8 @@ const LoginInWithEmail = async (data, userDispatch, setUserDate, navigate) => {
       photo: response.user.photoURL ?? "",
     });
     
-    console.log(response.user.uid)
-    GetIndividualUserData(response.user.uid,setUserDate);
+    console.log(response.user.uid,setUserData)
+    GetIndividualUserData(response.user.uid,setUserData);
 
     navigate("/", { replace: true });
     // Alert("success", "SignIn Successfully!!");
@@ -152,7 +152,9 @@ const GetIndividualUserData = async (userID,setUserData) => {
   const userRef = doc(firestore, `users/${userID}`);
   try {
     const response = await getDoc(userRef);
-    console.log(response.data(),setUserData,userID);
+    console.log(response.data(), response.id, setUserData, userID);
+    console.log(response.data()[userID]);
+    setUserData({ type: "getuserdata", payload: response.data()[userID] });
     // setData(res1.data() ?? {});
   } catch (err) {
     console.log(err.message)
