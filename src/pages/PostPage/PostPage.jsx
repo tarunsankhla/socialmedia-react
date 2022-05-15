@@ -5,7 +5,7 @@ import { firestore } from 'firebase.config';
 import { doc, updateDoc } from 'firebase/firestore';
 import React, { useState,useEffect } from 'react';
 import {useNavigate, useParams} from 'react-router';
-import { AddLikeOnPost, AddPostInBookmarkHandler, GetIndividualPostData, RemoveLikeOnPost, RemovePostFromBookmarkHandler } from 'utils/postService';
+import { AddLikeOnPost, AddPostInBookmarkHandler, deletePost, GetIndividualPostData, RemoveLikeOnPost, RemovePostFromBookmarkHandler } from 'utils/postService';
 import {v4 as uuid} from "uuid";
 import "./PostPage.css";
 
@@ -104,7 +104,11 @@ const PostPage = () => {
                                 settoggleEdit(prev => !prev);
                                 setPostContent(postData.content);
                             }}>Edit</button>
-                            <button className='btn'>Delete</button>
+                            <button className='btn' onClick={() => {
+                                navigate(-1);
+                                deletePost(postID);
+                                
+                            }}>Delete</button>
                     </span>}
                 </span>
                

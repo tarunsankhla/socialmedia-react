@@ -47,11 +47,16 @@ const AddPost = () => {
             await setDoc(userRef, { // ...dashboard,
                 [postId]: Post
             });
+           
             // Alert("success", "Nkew Project Added!!");
         } catch (err) {
             console.log(err.message)
             // Alert("info", err.message);
         }
+        setPost((boardObj) => ({
+            ...boardObj,
+            "content": ""
+        }));
     }
 
     const changeHandler = (e) => {

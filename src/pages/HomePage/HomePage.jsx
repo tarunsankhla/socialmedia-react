@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import AddPost from 'components/UI/AddPost/AddPost';
 import {getAllPost} from '../../utils/postService';
-import {collection, doc, onSnapshot} from 'firebase/firestore';
+import {collection, doc, limit, onSnapshot, orderBy, query} from 'firebase/firestore';
 import {firestore} from '../../firebase.config';
 import Post from '../../components/common/Posts/Post';
 import "./HomePage.css";
@@ -12,7 +12,8 @@ const HomePage = () => {
         getAllPost();
     }, [])
 
-    useEffect(() => onSnapshot(collection(firestore, "posts"), (doc) => {
+    useEffect(() => onSnapshot(
+        query(collection(firestore, "posts"), orderBy("createdAt")), (doc) => {
         // console.log(doc.docs)
         // console.log(doc.docs.map(i => {
         //     return {

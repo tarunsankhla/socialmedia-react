@@ -16,6 +16,9 @@ import {
     deleteField,
     collection,
     setDoc,
+    query,
+    orderBy,
+    limit,
 } from "firebase/firestore";
 import { GetIndividualUserData } from "./authService";
 
@@ -23,7 +26,8 @@ import { GetIndividualUserData } from "./authService";
 // get all data
 const getAllPost = async () => {
     // const userRef = doc(firestore, `users/${userId}`);
-    const collectionRef = collection(firestore, "posts")
+    const collectionRef = query(collection(firestore, "posts"), orderBy("createdTime"), limit(25));
+    // const collectionRef = collection(firestore, "posts")
     try {
         const response = await getDocs(collectionRef);
         console.log(response.docs)
@@ -139,6 +143,18 @@ const RemovePostFromBookmarkHandler = (userData,setUserData,postID,userID) => {
 
 
 
+const deletePost = async (postID) => {
+    const doctoupdate = doc(firestore, `posts/${postID}`);
+    try {
+      await updateDoc(doctoupdate, {
+        [postID]: deleteField(),
+      });
+    //   Alert("info", "Project Deleted!!");
+    } catch (err) {
+        console.log(err);
+    //   Alert("error", err.message);
+    }
+  };
 
 
 export {
@@ -147,5 +163,6 @@ export {
     AddLikeOnPost,
     RemoveLikeOnPost,
     AddPostInBookmarkHandler,
-    RemovePostFromBookmarkHandler
+    RemovePostFromBookmarkHandler,
+    deletePost
 }
