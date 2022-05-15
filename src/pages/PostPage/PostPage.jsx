@@ -1,11 +1,11 @@
 import { NormalButton } from 'components/UI/Buttons/buttons';
-import { IconArrowBack, IconComment, IconHeart, IconsBookmark, IconThreeDots } from 'components/UI/Icons/Icons';
+import { IconArrowBack, IconComment, IconHeart, IconHeartFill, IconsBookmark, IconsBookmarkFill, IconThreeDots } from 'components/UI/Icons/Icons';
 import { useUserData } from 'context/UserContext';
 import { firestore } from 'firebase.config';
 import { doc, updateDoc } from 'firebase/firestore';
 import React, { useState,useEffect } from 'react';
 import {useNavigate, useParams} from 'react-router';
-import { GetIndividualPostData } from 'utils/postService';
+import { AddLikeOnPost, AddPostInBookmarkHandler, GetIndividualPostData, RemoveLikeOnPost, RemovePostFromBookmarkHandler } from 'utils/postService';
 import {v4 as uuid} from "uuid";
 import "./PostPage.css";
 
@@ -90,9 +90,35 @@ const PostPage = () => {
             </span>
             <hr />
             <div className="post-page-action-container">
-                <IconHeart />
+                
+                <span>
+                        {postData?.likes?.likedBy?.includes(userID) ?
+                        <span className='hover' onClick={() => {
+                            RemoveLikeOnPost(postData, userID);
+                            GetIndividualPostData(postID, setPostData);
+                        }}>
+                                <IconHeartFill />
+                            </span>
+                        : <span className='hover' onClick={() => {
+                            AddLikeOnPost(postData, userID);
+                            GetIndividualPostData(postID, setPostData);
+                        }}>
+                                <IconHeart />
+                            </span>}
+                    </span>
                 <span onClick={()=>setToggleComment(prev=>!prev)}><IconComment /></span>
-                <IconsBookmark />
+                {
+                        userData.bookmarks.some(post => post.postid === postID)
+                        ? <span className='hover' onClick={() => {
+                            RemovePostFromBookmarkHandler(userData, setUserData, postID, userID);
+                            GetIndividualPostData(postID, setPostData);
+                        }
+                        }><IconsBookmarkFill /></span>
+                        : <span className='hover' onClick={() => {
+                            AddPostInBookmarkHandler(userData, postData, setUserData, userID);
+                            GetIndividualPostData(postID, setPostData);
+                        }}><IconsBookmark /></span>
+                    }
             </div>
             <hr />
             {toggleComment &&

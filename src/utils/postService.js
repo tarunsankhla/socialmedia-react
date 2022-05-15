@@ -102,7 +102,7 @@ const RemoveLikeOnPost = (postData, userId) => {
   }
 }
 
-const AddPostInBookmarkHandler = (userData,postUserData,setUserData,userID) => { 
+const AddPostInBookmarkHandler = (userData,postData,setUserData,userID) => { 
   
   try {
       const userToUpdate = doc(firestore, `users/${userID}`);
@@ -110,7 +110,7 @@ const AddPostInBookmarkHandler = (userData,postUserData,setUserData,userID) => {
       let response = updateDoc(userToUpdate, {
           [userID]: {
               ...userData,
-              ["bookmarks"]: [ ...userData.bookmarks,{...postUserData} ]}
+              ["bookmarks"]: [ ...userData.bookmarks,{...postData} ]}
       });
       console.log(response);
       GetIndividualUserData(userID, setUserData);
@@ -143,5 +143,9 @@ const RemovePostFromBookmarkHandler = (userData,setUserData,postID,userID) => {
 
 export {
     getAllPost,
-    GetIndividualPostData
+    GetIndividualPostData,
+    AddLikeOnPost,
+    RemoveLikeOnPost,
+    AddPostInBookmarkHandler,
+    RemovePostFromBookmarkHandler
 }
