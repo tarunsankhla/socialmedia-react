@@ -129,13 +129,13 @@ const PostPage = () => {
                 <span>
                         {postData?.likes?.likedBy?.includes(userID) ?
                         <span className='hover' onClick={() => {
-                            RemoveLikeOnPost(postData, userID);
+                            RemoveLikeOnPost(postData, userID,postID);
                             GetIndividualPostData(postID, setPostData);
                         }}>
                                 <IconHeartFill />
                             </span>
                         : <span className='hover' onClick={() => {
-                            AddLikeOnPost(postData, userID);
+                            AddLikeOnPost(postData, userID,postID);
                             GetIndividualPostData(postID, setPostData);
                         }}>
                                 <IconHeart />
@@ -150,7 +150,7 @@ const PostPage = () => {
                         }
                         }><IconsBookmarkFill /></span>
                         : <span className='hover' onClick={() => {
-                            AddPostInBookmarkHandler(userData, postData, setUserData, userID);
+                            AddPostInBookmarkHandler(userData, postData, setUserData,postID, userID);
                             GetIndividualPostData(postID, setPostData);
                         }}><IconsBookmark /></span>
                     }

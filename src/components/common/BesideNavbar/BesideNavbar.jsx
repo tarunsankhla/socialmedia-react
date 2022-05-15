@@ -31,7 +31,7 @@ const BesideNavbar = () => {
                                         {user.name ? user.name[0].toUpperCase() : "D"}
                                         </span>
                                     }
-                                <span className='fn-wg-700 lg-txt'>{user.name}</span>
+                                <span className='fn-wg-700 lg-txt'>{user.name}{ user.emailId}</span>
                             </div>
                             <span>  {userData.followers.some(i => i.userId === user.userId) ?
                                 <span className='user-data-beside-section-name beside-action fn-wg-700 hover gray-txt lg-txt' >

@@ -13,7 +13,7 @@ const HomePage = () => {
     }, [])
 
     useEffect(() => onSnapshot(
-        query(collection(firestore, "posts"), orderBy("createdAt")), (doc) => {
+        collection(firestore, "posts"), (doc) => {
         // console.log(doc.docs)
         // console.log(doc.docs.map(i => {
         //     return {
@@ -34,9 +34,7 @@ const HomePage = () => {
             <div> {
                 allDataArray.map(i => (
                     <Post props={i}
-                        key={
-                            i.postid
-                        }/>
+                        key={i.postid + i.createdTime}/>
                 ))
             } </div>
         </div>

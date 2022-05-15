@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import {
     firestore,
     firebaseAuth,
@@ -26,8 +27,8 @@ import { GetIndividualUserData } from "./authService";
 // get all data
 const getAllPost = async () => {
     // const userRef = doc(firestore, `users/${userId}`);
-    const collectionRef = query(collection(firestore, "posts"), orderBy("createdTime"), limit(25));
-    // const collectionRef = collection(firestore, "posts")
+    // const collectionRef = query(collection(firestore, "posts"), orderBy("createdTime"));
+    const collectionRef = collection(firestore, "posts")
     try {
         const response = await getDocs(collectionRef);
         console.log(response.docs)
@@ -71,11 +72,13 @@ const GetIndividualPostData = async (postId,setPostData) => {
 
 
 //post action
-const AddLikeOnPost = (postData,userID) => {
+const AddLikeOnPost = (postData, userID,postID) => {
+     console.log(postData, userID);
   try{
-      const postToUpdate = doc(firestore, `posts/${postData.postid}`);
-      console.log(postToUpdate);
-      let response = updateDoc(postToUpdate, { [postData.postid] : {
+      const postToUpdate = doc(firestore, `posts/${postID}`);
+    console.log(postToUpdate);
+    console.log(postData, userID);
+      let response = updateDoc(postToUpdate, { [postID] : {
           ...postData,
           ["likes"]: {...postData.likes,likedBy: [...postData.likes.likedBy, userID],
               likeCount: postData.likes.likeCount + 1
@@ -88,11 +91,11 @@ const AddLikeOnPost = (postData,userID) => {
   }
 }
 
-const RemoveLikeOnPost = (postData, userId) => { 
+const RemoveLikeOnPost = (postData, userId,postID) => { 
   try{
-      const postToUpdate = doc(firestore, `posts/${postData.postid}`);
+      const postToUpdate = doc(firestore, `posts/${postID}`);
       console.log(postToUpdate);
-      let response = updateDoc(postToUpdate, { [postData.postid] : {...postData,
+      let response = updateDoc(postToUpdate, { [postID] : {...postData,
           ["likes"]: {...postData.likes,
               likedBy: [...postData.likes.likedBy.filter(userID=> userID !== userId)],
               likeCount: postData.likes.likeCount - 1
@@ -106,15 +109,15 @@ const RemoveLikeOnPost = (postData, userId) => {
   }
 }
 
-const AddPostInBookmarkHandler = (userData,postData,setUserData,userID) => { 
-  
+const AddPostInBookmarkHandler = async (userData,postData,setUserData,postID,userID) => { 
+  console.log("add book",userData,postData,setUserData,postID,userID)
   try {
-      const userToUpdate = doc(firestore, `users/${userID}`);
+      const userToUpdate = doc(firestore, `users/${userData.userId}`);
       console.log(userToUpdate,userData);
-      let response = updateDoc(userToUpdate, {
-          [userID]: {
+      let response = await updateDoc(userToUpdate, {
+          [userData.userId]: {
               ...userData,
-              ["bookmarks"]: [ ...userData.bookmarks,{...postData} ]}
+              ["bookmarks"]: [ ...userData.bookmarks,{...postData,postid:postID} ]}
       });
       console.log(response);
       GetIndividualUserData(userID, setUserData);

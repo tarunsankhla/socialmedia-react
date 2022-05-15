@@ -58,17 +58,17 @@ const Post = ({props}) => {
         }
     }
 
-    const AddPostInBookmarkHandler = () => { 
+    const AddPostInBookmarkHandler = async () => { 
         
         try {
             const userToUpdate = doc(firestore, `users/${userState.user.userId}`);
             console.log(userToUpdate,userData);
-            let response = updateDoc(userToUpdate, {
+            let response = await updateDoc(userToUpdate, {
                 [userState.user.userId]: {
                     ...userData,
                     ["bookmarks"]: [ ...userData.bookmarks,{...props} ]}
             });
-            console.log(response);
+            console.log(response,props);
             GetIndividualUserData(userState.user.userId, setUserData);
         }
         catch(error) { 

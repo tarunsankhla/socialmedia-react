@@ -194,10 +194,10 @@ const getAllUser = async (setData) => {
   const collectionRef = collection(firestore, "users")
   try {
     var result = await getDocs(collectionRef);
-    console.log(result);
+    console.log(result.docs);
     setData(result.docs.map(i => {
         return { ...(i.data()[i.id]) }
-      }).slice(0,5));
+      }));
   } catch (err) { 
     console.log(err);
     return false;
