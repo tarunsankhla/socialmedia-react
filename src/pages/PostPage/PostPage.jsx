@@ -56,6 +56,27 @@ const PostPage = () => {
             console.log("error");
         }
     }
+
+    const UpdatePost = () => { 
+        try{
+            const postToUpdate = doc(firestore, `posts/${postData.postid}`);
+            console.log(postToUpdate);
+            
+            let response = updateDoc(postToUpdate, { [postData.postid] : {
+                ...postData,
+                ["content"]: postContent
+            }});
+            console.log(response);
+            GetIndividualPostData(postID, setPostData);
+            settoggleAction(false);
+            settoggleEdit(false);
+        }
+        catch(error) { 
+            
+            console.log("error");
+        }
+
+    }
     console.log("post data", postData);
     return (
         <div className='post-page-main-container'>
@@ -207,7 +228,7 @@ const PostPage = () => {
                         <textarea value={postContent} className="post-page-edit-input pd-5 bg-gray"
                             onChange={(e)=>setPostContent(e.target.value)}/>
                        
-                        <span className=''><NormalButton name="Save Post"/></span>
+                        <span onClick={UpdatePost}><NormalButton name="Save Post"/></span>
                     </div>
                 </div>
             }
