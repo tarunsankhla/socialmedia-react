@@ -75,7 +75,6 @@ function App() {
           />
         </Route>
         
-        {/* <Route path={ROUTES.ROUTE_PATH_MOCKMAN} element={<div className='MockAPI'><Mockman /></div>} /> */}
         <Route path="/404" element={<NotFoundPage />} />
 				<Route path="*" element={<NotFoundPage />} />
       </Routes>

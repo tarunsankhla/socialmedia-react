@@ -94,7 +94,7 @@ const PostPage = () => {
                     <span className='fn-wg-700'>{postData?.user?.name || "dummy name"}</span>
                 </span>
                 <span className="relative">
-                   <span onClick={()=> settoggleAction(prev=>!prev)}><IconThreeDots  /></span> 
+                    {userData.userId === userID && <span onClick={() => settoggleAction(prev => !prev)}><IconThreeDots /></span>}
                     {toggleAction &&
                         <span className="absolute post-page-edit-container">
                             <span className='fn-wg-700 flex align-center full-width space-btwn'>

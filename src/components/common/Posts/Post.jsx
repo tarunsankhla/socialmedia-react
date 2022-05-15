@@ -19,9 +19,6 @@ import { Link, NavLink } from 'react-router-dom';
 const Post = ({props}) => {
     const { userState, userDispatch } = useAuth();
     const { userData, setUserData } = useUserData();
-    // console.log(props)
-    let postPath = `post\ ${props.user.userId}\ ${props.postid}`
-    console.log(postPath);
 
     const AddLikeOnPost = () => {
         try{

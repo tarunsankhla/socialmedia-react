@@ -28,13 +28,6 @@ const LoginInWithEmail = async (data, userDispatch, setUserData, navigate) => {
       data.password
     );
     console.log(response);
-    // let obj = {
-    //   name: response?.user?.displayName ?? "",
-    //   emailId: response?.user?.email ?? "",
-    //   userId: response?.user?.uid ?? "",
-    //   photo: response.user.photoURL ?? "",
-    // }
-    // CreateUser(obj);
     
     userDispatch({
       type: "userauth",
@@ -61,8 +54,6 @@ const LoginWIthGoogleAuth = async (userDispatch, setUserData, navigate) => {
   try {
     console.log(firebaseAuth, googleAuthProvider)
     const response = await signInWithPopup(firebaseAuth, googleAuthProvider);
-    // .then(resp => console.log(resp))
-    // .catch(err => console.log(err));
     console.log(response);
     let obj = {
       name: response?.user?.displayName ?? "",
