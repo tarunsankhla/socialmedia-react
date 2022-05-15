@@ -54,7 +54,7 @@ const AsideNavBar = () => {
                     </li>
                     <li>
                         <NavLink style={getActiveStyle}
-                            to={ROUTES.ROUTE_PATH_ProfilePage}>
+                            to={`/profile/${userState.user.userId}`}>
                             <IconsProfile height="1.5em" width="1.5em" />
                             <p className="title-hide-responsive">Profile</p>
                         </NavLink>
