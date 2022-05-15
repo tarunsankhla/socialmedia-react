@@ -1,0 +1,76 @@
+.BesideNavbar{
+    width:35vw;
+    display: flex;
+    background-color: var(--black-hl-p5);
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+
+.beside-navbar-container{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 5px 5px 1em;
+    width: 100%;
+    gap: 1em;
+    height: fit-content;
+}
+
+.beside-user-data-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+}
+
+.profile-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.8em 1em;
+    aspect-ratio: 1;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.user-data-beside-section{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.user-data-beside-section > .handle-img-np{
+    width: 1.7em;
+    height: 1.7em;
+}
+
+.beside-container-header{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1em;
+    padding: 1em 0 0;
+}
+.user-data-beside-section-name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+}
+
+.beside-action{
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 2px;
+}
+
+@media screen and (max-width:920px) {
+    .BesideNavbar{
+        display: none;
+    }
+}

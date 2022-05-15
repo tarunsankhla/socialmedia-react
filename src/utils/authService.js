@@ -14,10 +14,12 @@ import {
   updateDoc,
   deleteField,
   setDoc,
+  collection,
+  getDocs,
 } from "firebase/firestore";
-// import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
-const LoginInWithEmail = async (data, userDispatch, navigate) => {
+
+const LoginInWithEmail = async (data, userDispatch, setUserData, navigate) => {
   try {
     console.log(firebaseAuth, data)
     const response = await signInWithEmailAndPassword(
@@ -26,13 +28,7 @@ const LoginInWithEmail = async (data, userDispatch, navigate) => {
       data.password
     );
     console.log(response);
-    let obj = {
-      name: response?.user?.displayName ?? "",
-      emailId: response?.user?.email ?? "",
-      userId: response?.user?.uid ?? "",
-      photo: response.user.photoURL ?? "",
-    }
-    CreateUser(obj);
+    
     userDispatch({
       type: "userauth",
       token: response?.user?.accessToken ?? "",
@@ -41,6 +37,10 @@ const LoginInWithEmail = async (data, userDispatch, navigate) => {
       userId: response?.user?.uid ?? "",
       photo: response.user.photoURL ?? "",
     });
+    
+    console.log(response.user.uid,setUserData)
+    GetIndividualUserData(response.user.uid,setUserData);
+
     navigate("/", { replace: true });
     // Alert("success", "SignIn Successfully!!");
   } catch (err) {
@@ -50,12 +50,10 @@ const LoginInWithEmail = async (data, userDispatch, navigate) => {
 }
 
 
-const LoginWIthGoogleAuth = async (userDispatch, navigate) => {
+const LoginWIthGoogleAuth = async (userDispatch, setUserData, navigate) => {
   try {
     console.log(firebaseAuth, googleAuthProvider)
     const response = await signInWithPopup(firebaseAuth, googleAuthProvider);
-    // .then(resp => console.log(resp))
-    // .catch(err => console.log(err));
     console.log(response);
     let obj = {
       name: response?.user?.displayName ?? "",
@@ -63,7 +61,10 @@ const LoginWIthGoogleAuth = async (userDispatch, navigate) => {
       userId: response?.user?.uid ?? "",
       photo: response.user.photoURL ?? "",
     }
-    CreateUser(obj);
+    let doesUserAlreadyExist = await checkIfUserExist(response.user.uid);
+    if (!doesUserAlreadyExist) { 
+      await CreateUser(obj);
+    }
     userDispatch({
       type: "userauth",
       token: response?.user?.accessToken ?? "",
@@ -72,6 +73,9 @@ const LoginWIthGoogleAuth = async (userDispatch, navigate) => {
       userId: response?.user?.uid ?? "",
       photo: response.user.photoURL ?? "",
     });
+
+    console.log(response.user.uid,setUserData)
+    GetIndividualUserData(response.user.uid,setUserData);
     navigate("/", { replace: true });
     // Alert("success", "Logged In Successfully!");
   } catch (err) {
@@ -80,7 +84,7 @@ const LoginWIthGoogleAuth = async (userDispatch, navigate) => {
   }
 }
 
-const SignupWithEmail = async (userDispatch, data, navigate) => {
+const SignupWithEmail = async (userDispatch, data,setUserData, navigate) => {
   try {
     console.log(firebaseAuth);
     const response = await createUserWithEmailAndPassword(
@@ -104,6 +108,9 @@ const SignupWithEmail = async (userDispatch, data, navigate) => {
       userId: response?.user?.uid ?? "",
       photo: response.user.photoURL ?? "",
     });
+
+    console.log(response.user.uid,setUserData)
+    GetIndividualUserData(response.user.uid,setUserData);
     navigate("/", { replace: true });
     // Alert("success", "SignUp Successfully!!");
   } catch (err) {
@@ -124,25 +131,74 @@ const CreateUser = async (obj) => {
     following: [],
     bookmarks: [],
     bio: "",
-    headerImg : ""
+    headerImg: ""
   }
   console.log("create user", obj);
   const userRef = doc(firestore, `users/${obj.userId}`);
-        console.log(userObject)
-        try {
-            var response =await setDoc(userRef, { // ...dashboard,
-                [obj.userId]: userObject
-            });
-          console.log(response);
-            // Alert("success", "Nkew Project Added!!");
-        } catch (err) {
-            console.log(err.message)
-            // Alert("info", err.message);
-        }
+  console.log(userObject)
+  try {
+    var response = await setDoc(userRef, { // ...dashboard,
+      [obj.userId]: userObject
+    });
+    console.log(response);
+    // Alert("success", "Nkew Project Added!!");
+  } catch (err) {
+    console.log(err.message)
+    // Alert("info", err.message);
+  }
+}
+
+const checkIfUserExist = async (userId) => { 
+  const collectionRef = collection(firestore, "users")
+  try {
+    var result = await getDocs(collectionRef);
+    console.log(result);
+    let check = result.docs.map(i => {
+        return { ...(i.data()[i.id]) }
+      }).some(user => user.userId === userId);
+    console.log(result, check);
+    return check;
+  } catch (err) { 
+    console.log(err);
+    return false;
+  }
+}
+
+
+/// method for getting user data who has logged in
+const GetIndividualUserData = async (userID,setUserData) => {
+  const userRef = doc(firestore, `users/${userID}`);
+  try {
+    const response = await getDoc(userRef);
+    console.log(response.data(), response.id, setUserData, userID);
+    console.log(response.data()[userID]);
+    setUserData({ type: "getuserdata", payload: response.data()[userID] });
+    // setData(res1.data() ?? {});
+  } catch (err) {
+    console.log(err.message)
+    // alert("error", err.message);
+  }
+}
+
+
+const getAllUser = async (setData) => { 
+  const collectionRef = collection(firestore, "users")
+  try {
+    var result = await getDocs(collectionRef);
+    console.log(result.docs);
+    setData(result.docs.map(i => {
+        return { ...(i.data()[i.id]) }
+      }));
+  } catch (err) { 
+    console.log(err);
+    return false;
+  }
 }
 
 export {
   LoginInWithEmail,
   LoginWIthGoogleAuth,
-  SignupWithEmail
+  SignupWithEmail,
+  GetIndividualUserData,
+  getAllUser
 }

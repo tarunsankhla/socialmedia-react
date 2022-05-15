@@ -5,10 +5,12 @@ import "./LoginPage.css";
 import { useAuth } from 'context/AuthContext';
 import { LoginInWithEmail, LoginWIthGoogleAuth } from 'utils/authService';
 import { NormalButton } from 'components/UI/Buttons/buttons';
+import { useUserData } from 'context/UserContext';
 
 const LoginPage = () => {
   const [data, setData] = useState({ email: "", password: "" });
   const [showResetPassword, setShowResetPassword] = useState(false);
+  const { userData, setUserData } = useUserData();
 
   const navigate = Navigate();
   const { userState, userDispatch } = useAuth();
@@ -18,7 +20,8 @@ const LoginPage = () => {
     if (data.email.trim() === "" || data.password.trim() === "") {
       // Alert("error", "Input cannot be blank");
     } else {
-      LoginInWithEmail(data, userDispatch, navigate);
+      console.log(setUserData,userData);
+      LoginInWithEmail(data, userDispatch, setUserData, navigate);
     }
   };
 
@@ -88,11 +91,11 @@ const LoginPage = () => {
                 className="btn secondary-outline-btn-md google-login"
                 onClick={(e) => {
                   e.preventDefault();
-                  LoginWIthGoogleAuth(userDispatch, navigate);
+                  LoginWIthGoogleAuth(userDispatch,setUserData, navigate);
                 }}
               >
                 {/* <i className="fab fa-google"></i> */}
-                login with Google
+                {/* login with Google */}
                 <NormalButton name="login with Google"/>
               </span>
             </div>
