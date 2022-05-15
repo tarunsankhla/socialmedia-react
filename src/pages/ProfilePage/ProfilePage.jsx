@@ -65,7 +65,7 @@ const ProfilePage = () => {
           <p className='fn-wg-800'>{ userData?.followers?.length}</p>
           <p>Followers</p></div>
       </div>
-      <div>
+      <div className='profile-your-post-container'>
         <p className='fn-wg-800'>Your Posts</p>
         <div>
         {
