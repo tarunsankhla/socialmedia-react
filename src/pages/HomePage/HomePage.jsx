@@ -33,13 +33,9 @@ const HomePage = () => {
             <AddPost/>
             <div> {
                 allDataArray.map(i => (
-                    // <>{  console.log(Object.keys(i).length)}
-                    // {
-                    //     Object.keys(i).length > 0 &&
-                            <Post props={i}
-                                key={i.postid + i.createdTime} />
-                    //     }
-                    // </>
+                    <Post props={i}
+                        key={i.postid + i.createdTime} />
+                   
                 ))
             } </div>
         </div>

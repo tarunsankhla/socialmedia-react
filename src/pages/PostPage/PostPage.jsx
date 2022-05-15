@@ -232,7 +232,7 @@ const PostPage = () => {
                         <textarea value={postContent} className="post-page-edit-input pd-5 bg-gray"
                             onChange={(e)=>setPostContent(e.target.value)}/>
                        
-                        <span onClick={UpdatePost}><NormalButton name="Save Post"/></span>
+                        <span onClick={UpdatePost}><NormalButton name="Save Post"  color="red"/></span>
                     </div>
                 </div>
             }

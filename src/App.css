@@ -146,7 +146,7 @@ span {
 }
 
 .outlet-body {
-	width: 80%;
+	width: 100%;
 	background-color: var(--black-hl-p5);
 }
 
