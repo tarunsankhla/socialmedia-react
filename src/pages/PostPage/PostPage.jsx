@@ -1,5 +1,5 @@
 import { NormalButton } from 'components/UI/Buttons/buttons';
-import { IconArrowBack, IconComment, IconHeart, IconHeartFill, IconsBookmark, IconsBookmarkFill, IconThreeDots } from 'components/UI/Icons/Icons';
+import { IconArrowBack, IconClose, IconComment, IconHeart, IconHeartFill, IconsBookmark, IconsBookmarkFill, IconThreeDots } from 'components/UI/Icons/Icons';
 import { useUserData } from 'context/UserContext';
 import { firestore } from 'firebase.config';
 import { doc, updateDoc } from 'firebase/firestore';
@@ -14,8 +14,10 @@ const PostPage = () => {
     const [postData, setPostData] = useState({});
     const { userData, setUserData } = useUserData();
     const [comment, setComment] = useState("");
+    const [postContent, setPostContent] = useState(postData?.content ?? "");
     const [toggleComment, setToggleComment] = useState(true);
-    const [toggleEdit, setToggleEdit] = useState(false);
+    const [toggleAction, settoggleAction] = useState(false);
+    const [toggleEdit, settoggleEdit] = useState(false);
     const navigate = useNavigate();
     console.log(userID, postID, useParams());
     
@@ -58,7 +60,8 @@ const PostPage = () => {
     return (
         <div className='post-page-main-container'>
             <div className='post-page-back-container fn-wg-700'>
-                <span onClick={()=>navigate(-1)}><IconArrowBack /></span> Post</div>
+                <span onClick={() => navigate(-1)}><IconArrowBack /></span> Post
+            </div>
             <div className='post-page-header flex'>
                 <span className='flex align-center'>
                     {postData?.user?.photo.length ?
@@ -70,10 +73,17 @@ const PostPage = () => {
                     <span className='fn-wg-700'>{postData?.user?.name || "dummy name"}</span>
                 </span>
                 <span className="relative">
-                   <span onClick={()=> setToggleEdit(prev=>!prev)}><IconThreeDots  /></span> 
-                   {toggleEdit && <span className="absolute post-page-edit-container">
-                        <button className='btn'>Edit</button>
-                        <button className='btn'>Delete</button>
+                   <span onClick={()=> settoggleAction(prev=>!prev)}><IconThreeDots  /></span> 
+                    {toggleAction &&
+                        <span className="absolute post-page-edit-container">
+                            <span className='fn-wg-700 flex align-center full-width space-btwn'>
+                                Action <span onClick={() => settoggleAction(prev => !prev)}><IconClose /></span>
+                            </span>
+                            <button className='btn' onClick={() => {
+                                settoggleEdit(prev => !prev);
+                                setPostContent(postData.content);
+                            }}>Edit</button>
+                            <button className='btn'>Delete</button>
                     </span>}
                 </span>
                
@@ -188,6 +198,19 @@ const PostPage = () => {
 
                 ))}
             </div>
+            { toggleEdit &&
+                <div className='fixed post-page-edit-modal'>
+                    <span className='edit-post-header fn-wg-700 flex align-center full-width space-btwn pd-5'>
+                        <h1>Edit Post</h1> <span onClick={() => settoggleEdit(prev => !prev)}><IconClose /></span>
+                    </span>
+                    <div className='post-page-edit-modal-container pd-5'>
+                        <textarea value={postContent} className="post-page-edit-input pd-5 bg-gray"
+                            onChange={(e)=>setPostContent(e.target.value)}/>
+                       
+                        <span className=''><NormalButton name="Save Post"/></span>
+                    </div>
+                </div>
+            }
         </div>
     )
 }

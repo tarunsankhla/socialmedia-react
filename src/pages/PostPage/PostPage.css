@@ -44,7 +44,8 @@
     margin: 1em;
     border-radius: 10px;
     gap: 5px;
-    min-width: 8em;
+    min-width: 15em;
+    border: 2px solid #97bdde
 }
 
 .post-page-add-comment-contatiner {
@@ -52,4 +53,35 @@
 	justify-content: space-evenly;
 	align-items: center;
 	padding: 1em;
+}
+
+
+.post-page-edit-modal{
+	background-color: white;
+    top: 45%;
+    /* left: 25%; */
+    z-index: 99;
+    min-width: 60%;
+
+}
+
+.post-page-edit-input{
+	resize: none;
+	outline: none;
+	border: none;
+	width: 100%;
+	height: 5em;
+}
+
+.post-page-edit-modal-container{
+	border: 2px solid #97bdde;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 1em 10px 10px;
+}
+
+.edit-post-header{
+	background-color: #999fd6 !important;
+	color: white;
 }
