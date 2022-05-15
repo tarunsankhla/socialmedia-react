@@ -2,7 +2,7 @@ import Post from 'components/common/Posts/Post';
 import {NormalButton} from 'components/UI/Buttons/buttons';
 import {IconClose} from 'components/UI/Icons/Icons';
 import {firestore} from 'firebase.config';
-import {doc, getDoc} from 'firebase/firestore';
+import {doc, getDoc, updateDoc} from 'firebase/firestore';
 import React, {useEffect, useState, useReducer} from 'react';
 import {useParams} from 'react-router';
 import {GetIndividualUserData} from 'utils/authService';
@@ -55,7 +55,29 @@ const ProfilePage = () => {
     }, [])
 
 
-    const UpdateProfile = () => {}
+  const UpdateProfile = async () => {
+    try {
+      const userToUpdate = doc(firestore, `users/${userID}`);
+      console.log(userToUpdate,userData,profilestate);
+      let response = await updateDoc(userToUpdate, {
+          [userID]: {
+              ...userData,
+          ["bio"]: profilestate.bio,
+          ["name"]:profilestate.name
+        }
+      });
+      console.log(response);
+      setEditToggle(false);
+      const userRef = doc(firestore, `users/${userID}`);
+    
+      let response1 = await getDoc(userRef);
+      console.log(response1.data()[userID]);
+      setUserData(response1.data()[userID]);
+    }
+    catch(error) { 
+        console.log("error");
+    }
+    }
     return (
         <div className='flex main-profile-page'>
             <div className='profile-page-header-container flex'>
@@ -70,27 +92,32 @@ const ProfilePage = () => {
             }
                 <p className='fn-wg-700 profile-page-name'>
                     {
-                    userData ?. name
+                    userData?.name
                 }</p>
                 <p className='gray-txt'>
                     {
                     "@" + userData ?. emailId ?. split("@")[0]
                 }</p>
-                <p onClick={()=> setEditToggle(prev=>!prev)}><NormalButton name="Edit Profile" color="red" padding="7px 1em"/></p>
+          <p onClick={() => {
+            setEditToggle(prev => !prev);
+            console.log(userData?.bio,userData?.name)
+            profiledispatch({ type: "name", name: userData?.name });
+            profiledispatch({ type: "bio", bio: userData?.bio })
+          }}><NormalButton name="Edit Profile" color="red" padding="7px 1em" /></p>
                 <p>{
-                    userData ?. bio || 'No Bio'
+                    userData?.bio || 'No Bio'
                 }</p>
             </div>
             <div className='flex profile-page-stats-container'>
                 <div>
                     <p className='fn-wg-800'>
                         {
-                        userData ?. following ?. length
+                        userData?.following?.length
                     }</p>
                     <p>Following</p>
                 </div>
                 <div>
-                    <p className='fn-wg-800'>D</p>
+            <p className='fn-wg-800'>{ yourPostArray?.length}</p>
                     <p>Posts</p>
                 </div>
                 <div>
@@ -103,7 +130,7 @@ const ProfilePage = () => {
             <div className='profile-your-post-container'>
                 <p className='fn-wg-800'>Your Posts</p>
                 <div> {
-                    yourPostArray ?. map(i => (
+                    yourPostArray?.map(i => (
                       <Post props={i}
                       key={i.postid + i.createdTime} />
                     ))
@@ -120,16 +147,18 @@ const ProfilePage = () => {
                 </span>
                 <div className='post-page-edit-modal-container pd-5'>
                     <textarea value={profilestate.name}
-                        className="post-page-edit-input pd-5 bg-gray"
+                        className="post-page-edit-input pd-5 bg-gray"   placeholder="Name"
                         onChange={
                           (e) => {
                             e.target.style.height = "inherit";
                             e.target.style.height = `${e.target.scrollHeight}px`;
                             profiledispatch({ type: "name", name: e.target.value })
                           }
+                          
                         } />
                <textarea value={profilestate.bio}
-                        className="post-page-edit-input pd-5 bg-gray"
+                className="post-page-edit-input pd-5 bg-gray"
+                placeholder='Bio'
                         onChange={
                           (e) => {
                             e.target.style.height = "inherit";
