@@ -90,7 +90,7 @@ const AddPost = () => {
                         <span className='hover'><IconEmojiInput/></span>
                         <span className='hover'><IconGifInput/></span>
                     </div>
-                    <span onClick={AddPostHandler}><NormalButton name="Post"/></span>
+                    <span onClick={AddPostHandler}><NormalButton name="Post" color="red"/></span>
 
                 </div>
             </div>

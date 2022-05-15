@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
     IconComment,
     IconHeart,
@@ -19,7 +19,18 @@ import { Link, NavLink } from 'react-router-dom';
 const Post = ({props}) => {
     const { userState, userDispatch } = useAuth();
     const { userData, setUserData } = useUserData();
+    const [showCopied, setShowCopied] = useState(false);
 
+    const urlClickHandler = () => {
+        navigator.clipboard.writeText(
+            `https://spaceverse.netlify.app/post/${props.user.userId}/${props.postid}`
+        );
+        setShowCopied(true);
+        setTimeout(() => {
+          setShowCopied(false);
+        }, 2000);
+    };
+    
     const AddLikeOnPost = () => {
         try{
             const postToUpdate = doc(firestore, `posts/${props.postid}`);
@@ -163,7 +174,7 @@ const Post = ({props}) => {
         }
     }
     return (
-        <div className='post-data-container'>
+        <div className='post-data-container relative'>
             <div> {
                 props.user?.photo.length ?
                     <img src={props.user.photo} className='handle-img-np' />
@@ -208,12 +219,13 @@ const Post = ({props}) => {
                     </span>
                     <span className='hover'>
                         <Link to={ `/post/${props.user.userId}/${props.postid}`}><IconComment /></Link></span>
-                    <span className='hover'><IconShare /></span>
+                    <span className='hover' onClick={urlClickHandler}><IconShare /></span>
                     {
                         userData.bookmarks.some(post => post.postid === props.postid)
                             ? <span className='hover' onClick={RemovePostFromBookmarkHandler}><IconsBookmarkFill /></span>
                             : <span className='hover'  onClick={ AddPostInBookmarkHandler}><IconsBookmark /></span>
                     }
+                    {showCopied && <p className="copied-clipboard">Copied!</p>}
                 </div>
             </div>
         </div>

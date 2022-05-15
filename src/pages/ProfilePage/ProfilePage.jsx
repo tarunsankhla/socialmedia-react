@@ -1,6 +1,6 @@
 import Post from 'components/common/Posts/Post';
 import {NormalButton} from 'components/UI/Buttons/buttons';
-import {IconClose} from 'components/UI/Icons/Icons';
+import {IconClose, IconShare} from 'components/UI/Icons/Icons';
 import {firestore} from 'firebase.config';
 import {doc, getDoc, updateDoc} from 'firebase/firestore';
 import React, {useEffect, useState, useReducer} from 'react';
@@ -20,12 +20,13 @@ const profileReducerHandler = (state, action) => {
   return {...state}
 }
 const ProfilePage = () => {
-    const {userID} = useParams();
-    const [userData, setUserData] = useState({});
-    const [yourPostArray, setYourPostArray] = useState([]);
-    const [editToggle, setEditToggle] = useState(false);
-    const [profilestate, profiledispatch] = useReducer(profileReducerHandler, { name: "", bio: "" });
-    console.log(userID);
+  const {userID} = useParams();
+  const [userData, setUserData] = useState({});
+  const [yourPostArray, setYourPostArray] = useState([]);
+  const [editToggle, setEditToggle] = useState(false);
+  const [profilestate, profiledispatch] = useReducer(profileReducerHandler, { name: "", bio: "" });
+  const [showCopied, setShowCopied] = useState(false);
+  console.log(userID);
 
     useEffect(() => {
         const userRef = doc(firestore, `users/${userID}`);
@@ -55,6 +56,16 @@ const ProfilePage = () => {
     }, [])
 
 
+  // copy URLto clipboard
+  const urlClickHandler = () => {
+    navigator.clipboard.writeText(
+      `https://spaceverse.netlify.app/profile/${userID}`
+    );
+    setShowCopied(true);
+    setTimeout(() => {
+      setShowCopied(false);
+    }, 2000);
+  };
   const UpdateProfile = async () => {
     try {
       const userToUpdate = doc(firestore, `users/${userID}`);
@@ -79,8 +90,9 @@ const ProfilePage = () => {
     }
     }
     return (
-        <div className='flex main-profile-page'>
-            <div className='profile-page-header-container flex'>
+      <div className='flex main-profile-page '>
+         
+            <div className='profile-page-header-container flex relative'>
                 {
                 userData ?. photo ?. length ? <img src={
                         userData.photo
@@ -97,17 +109,23 @@ const ProfilePage = () => {
                 <p className='gray-txt'>
                     {
                     "@" + userData ?. emailId ?. split("@")[0]
-                }</p>
-          <p onClick={() => {
-            setEditToggle(prev => !prev);
-            console.log(userData?.bio,userData?.name)
-            profiledispatch({ type: "name", name: userData?.name });
-            profiledispatch({ type: "bio", bio: userData?.bio })
-          }}><NormalButton name="Edit Profile" color="red" padding="7px 1em" /></p>
+            }</p>
+               
+                  <p onClick={() => {
+                    setEditToggle(prev => !prev);
+                    console.log(userData?.bio,userData?.name)
+                    profiledispatch({ type: "name", name: userData?.name });
+                    profiledispatch({ type: "bio", bio: userData?.bio })
+                  }}>
+                    <NormalButton name="Edit Profile" color="red" padding="7px 1em" />
+                  </p>
+                  <NormalButton name="Share Profile" color="red" click={urlClickHandler} padding="7px 1em" icon={<IconShare />} />
+                  {showCopied && <p className="copied-clipboard">Copied!</p>}
+                </div>
                 <p>{
                     userData?.bio || 'No Bio'
                 }</p>
-            </div>
+          
             <div className='flex profile-page-stats-container'>
                 <div>
                     <p className='fn-wg-800'>

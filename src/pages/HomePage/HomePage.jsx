@@ -8,26 +8,28 @@ import "./HomePage.css";
 
 const HomePage = () => {
     const [allDataArray, setAllDataArray] = useState([]);
+   
     // useEffect(() => {
     //     getAllPost();
     // }, [])
 
     useEffect(() => onSnapshot(
         collection(firestore, "posts"), (doc) => {
-        // console.log(doc.docs)
+            // console.log(doc.docs)
             console.log(doc.docs.map(i => {
-                    return {
-                        ...(i.data()[i.id]),
-                        postid: i.id
-                    }
+                return {
+                    ...(i.data()[i.id]),
+                    postid: i.id
+                }
             }).filter(i => Object.keys(i).length > 2));
             setAllDataArray(() => [...doc.docs.map(i => {
                 return {
                     ...(i.data()[i.id]),
                     postid: i.id
                 }
-        }).filter(i => Object.keys(i).length > 2)])
-    }), [])
+            }).filter(i => Object.keys(i).length > 2)])
+    }), []);
+   
     return (
         <div>
             <AddPost/>

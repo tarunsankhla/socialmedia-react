@@ -271,3 +271,16 @@ span {
 .btn:hover {
 	transform: scale(1.05);
 }
+
+
+.copied-clipboard {
+    position: absolute;
+    bottom: 1em;
+    right: 2em;
+    font-size: 0.9rem;
+    background-color: rgb(165, 165, 226);
+    border: 1px solid rgb(196, 196, 255);
+    padding: 8px;
+    border-radius: 5px;
+    z-index: 2;
+  }

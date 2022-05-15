@@ -165,7 +165,7 @@ const PostPage = () => {
                                 </span>
                     }
                     <input type="text" value={comment} onChange={ (e)=>setComment(e.target.value)} placeholder='Comment your reply' className='full-input'/>
-                    <span onClick={AddCommentToPost}><NormalButton name="Post"/></span>
+                    <span onClick={AddCommentToPost}><NormalButton name="Post" color="red"/></span>
                 </div>
             }
             <div>
