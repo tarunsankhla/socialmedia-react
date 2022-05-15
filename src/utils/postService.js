@@ -17,6 +17,7 @@ import {
     collection,
     setDoc,
 } from "firebase/firestore";
+import { GetIndividualUserData } from "./authService";
 
 
 // get all data
@@ -63,6 +64,82 @@ const GetIndividualPostData = async (postId,setPostData) => {
       // alert("error", err.message);
     }
   }
+
+
+//post action
+const AddLikeOnPost = (postData,userID) => {
+  try{
+      const postToUpdate = doc(firestore, `posts/${postData.postid}`);
+      console.log(postToUpdate);
+      let response = updateDoc(postToUpdate, { [postData.postid] : {
+          ...postData,
+          ["likes"]: {...postData.likes,likedBy: [...postData.likes.likedBy, userID],
+              likeCount: postData.likes.likeCount + 1
+          }
+      }});
+      console.log(response);
+  }
+  catch(error) { 
+      console.log("error");
+  }
+}
+
+const RemoveLikeOnPost = (postData, userId) => { 
+  try{
+      const postToUpdate = doc(firestore, `posts/${postData.postid}`);
+      console.log(postToUpdate);
+      let response = updateDoc(postToUpdate, { [postData.postid] : {...postData,
+          ["likes"]: {...postData.likes,
+              likedBy: [...postData.likes.likedBy.filter(userID=> userID !== userId)],
+              likeCount: postData.likes.likeCount - 1
+          }}
+      });
+      console.log(response);
+      
+  }
+  catch(error) { 
+      console.log("error");
+  }
+}
+
+const AddPostInBookmarkHandler = (userData,postUserData,setUserData,userID) => { 
+  
+  try {
+      const userToUpdate = doc(firestore, `users/${userID}`);
+      console.log(userToUpdate,userData);
+      let response = updateDoc(userToUpdate, {
+          [userID]: {
+              ...userData,
+              ["bookmarks"]: [ ...userData.bookmarks,{...postUserData} ]}
+      });
+      console.log(response);
+      GetIndividualUserData(userID, setUserData);
+  }
+  catch(error) { 
+      console.log("error");
+  }
+}
+
+const RemovePostFromBookmarkHandler = (userData,setUserData,postID,userID) => { 
+  try {
+      const userToUpdate = doc(firestore, `users/${userID}`);
+      console.log(userToUpdate,userData); 
+      let response = updateDoc(userToUpdate, {
+          [userID]: {
+              ...userData,
+              ["bookmarks"]: [...userData.bookmarks.filter(post => post.postid !== postID ) ]}
+      });
+      console.log(response);
+      GetIndividualUserData(userID, setUserData);
+  }
+  catch(error) { 
+      console.log("error");
+  }
+}
+
+
+
+
 
 export {
     getAllPost,

@@ -166,7 +166,7 @@ const Post = ({props}) => {
         }
     }
     return (
-        <div className='post--data-container'>
+        <div className='post-data-container'>
             <div> {
                 props.user?.photo.length ?
                     <img src={props.user.photo} className='handle-img-np' />

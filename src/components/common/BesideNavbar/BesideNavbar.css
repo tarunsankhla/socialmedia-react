@@ -6,6 +6,7 @@
     padding: 10px;
     position: sticky;
     top: 0;
+    height: 100vh;
 }
 
 
@@ -14,9 +15,10 @@
     justify-content: flex-start;
     flex-direction: column;
     background-color: white;
-    padding: 5px;
+    padding: 5px 5px 1em;
     width: 100%;
     gap: 1em;
+    height: fit-content;
 }
 
 .beside-user-data-container{
