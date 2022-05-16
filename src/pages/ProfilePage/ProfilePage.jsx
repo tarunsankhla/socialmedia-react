@@ -111,41 +111,44 @@ const ProfilePage = () => {
               </span>
             }
           </div>
-          <div>
+          <div className='profile-page-header-user-detail'>
             <div>
-          <p className='fn-wg-700 profile-page-name'>
-            {userData?.name}
-          </p>
-          <p className='gray-txt'>
-            {"@" + userData?.emailId?.split("@")[0]}
-              </p></div>
-            { userID === userState.user.userId &&
-            <p onClick={() => {
-                setEditToggle(prev => !prev);
-                profiledispatch({
-                    type: "name",
-                    name: userData?.name
-                });
-                profiledispatch({
-                    type: "bio",
-                    bio: userData?.bio
-                })
-            }}>
-              <NormalButton name="Edit Profile" color="red" padding="7px 1em" />
-            </p>
-          }
+              <p className='fn-wg-700 profile-page-name'>
+                {userData?.name}
+              </p>
+              <p className='gray-txt'>
+                {"@" + userData?.emailId?.split("@")[0]}
+              </p>
+            </div>
+                { userID === userState.user.userId &&
+                <p onClick={() => {
+                    setEditToggle(prev => !prev);
+                    profiledispatch({
+                        type: "name",
+                        name: userData?.name
+                    });
+                    profiledispatch({
+                        type: "bio",
+                        bio: userData?.bio
+                    })
+                }}>
+                  <NormalButton name="Edit Profile" color="#8d9bdb" padding="7px 1em" class="profile-btn" />
+                </p>
+              }
           </div>
-          <p>
-            {userData?.bio || 'No Bio'}
-          </p>
-          <NormalButton name="Share Profile" color="red"
-              click={urlClickHandler} padding="7px 1em" icon={<IconShare />} />
-          {showCopied && <p className="copied-clipboard">Copied!</p>}
-          
-          <span className='lg-txt gray-txt flex-center'>
-            <IconCalendar />Joined {userData?.createdAt}
-          </span>
-       
+          <div className="profile-page-header-user-bio">
+            <p className='fn-wg-600 '>
+             Bio : {userData?.bio || 'No Bio'}
+            </p>
+            <div className='flex space-btwn full-width'>
+              <span className='lg-txt gray-txt flex-center'>
+                <IconCalendar />Joined {userData?.createdAt}
+              </span>
+              <NormalButton name="Share Profile" color="#8d9bdb"
+                  click={urlClickHandler} padding="7px 1em" icon={<IconShare />} class="profile-btn" />
+              {showCopied && <p className="copied-clipboard">Copied!</p>}
+            </div>
+        </div>
         <div className='flex profile-page-stats-container'>
           <div>
             <p className='fn-wg-800'>

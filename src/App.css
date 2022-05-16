@@ -303,7 +303,7 @@ span {
 	width: 30vw;
 	display: flex;
 	background-color: var(--black-hl-p5);
-	padding: 10px;
+	padding: 3px 10px;
 	position: sticky;
 	top: 0;
 	height: 100vh;
