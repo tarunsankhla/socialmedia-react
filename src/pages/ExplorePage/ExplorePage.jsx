@@ -7,6 +7,7 @@ import "./ExplorePage.css";
 
 const ExplorePage = () => {
     const [allDataArray, setAllDataArray] = useState([]);
+    const [backupData, setBackUpData] = useState([]);
     const [fitlertype, setFilterType] = useState("");
     const TrendingQuery = query(collection(firestore, "posts"),where("createdTime","==","1652616892864"))
 
@@ -16,34 +17,59 @@ const ExplorePage = () => {
                 ...(i.data()[i.id]),
                 postid: i.id
             }
-        }).filter(i => (Object.keys(i).length > 2) & ((i.createdTime / 1000 / 60) > ((new Date().getTime() / 1000 / 60) - 1440))));
+        }).filter(i => (Object.keys(i).length > 2) ));
         setAllDataArray(() => [...doc.docs.map(i => {
-                return {
-                    ...(i.data()[i.id]),
-                    postid: i.id
-                }
-            }).filter(i => (Object.keys(i).length > 2) & (i?.likes?.likeCount >= 2))])
+            return {
+                ...(i.data()[i.id]),
+                postid: i.id
+            }
+        }).filter(i => (Object.keys(i).length > 2))]);
+        if (fitlertype !== "") {
+            setBackUpData(
+                () => [...doc.docs.map(i => {
+                    return {
+                        ...(i.data()[i.id]),
+                        postid: i.id
+                    }
+                }).filter(i => (Object.keys(i).length > 2))]
+            )
+        } else { 
+            FilterHandler();
+        }
     }), [])
 
 
-    const filterData = (doc)=>{ 
+    useEffect(()=>{ 
+        FilterHandler();
+        
+    }, [fitlertype])
+    
+    const FilterHandler = () => { 
         switch (fitlertype) {
             case "trending":
-                setAllDataArray((prev) => [...prev.filter(i => (Object.keys(i).length > 2) & (i?.likes?.likeCount >= 2))])
+                console.log("tren");
+                setAllDataArray(() => [...backupData.filter(i => (Object.keys(i).length > 2) & (i?.likes?.likeCount >= 2))]);
+                break;
             case "latest":
-                setAllDataArray((prev) => [...prev.filter(i => (Object.keys(i).length > 2) & ((i.createdTime / 1000 / 60) > ((new Date().getTime() / 1000 / 60) - 1440)))])
+                console.log("late");
+                setAllDataArray(() => [...backupData.filter(i => (Object.keys(i).length > 2) & ((i.createdTime / 1000 / 60) > ((new Date().getTime() / 1000 / 60) - 2880)))]);
+                break;
             default:
-                setAllDataArray((prev) => [...prev.filter(i => (Object.keys(i).length > 2))])
+                console.log("default");
+                setAllDataArray(() => [...backupData.filter(i => (Object.keys(i).length > 2))])
+                break;
         }
-        
     }
     return (
         <div>
             <div className='explore-fitler-tab'>
-                <NormalButton name="trending" color="#9675b4" class="explore-fitler-btn" />
-                <NormalButton name="latest" color="#9675b4" class="explore-fitler-btn" />
-                <div className="explore-fitler-btn">clear</div>
+                <NormalButton name="trending" color="#9675b4" class="explore-fitler-btn" click={() =>
+                setFilterType("trending") } />
+                <NormalButton name="latest" color="#9675b4" class="explore-fitler-btn"
+                click={() => setFilterType("latest") }/>
+                <NormalButton class="explore-fitler-btn" color="red" click={() => setFilterType("") }/>
             </div>
+            {!!fitlertype.length && <p>Search Result: {allDataArray.length}</p>}
             <div> {
                 allDataArray.map(i => (
                     <Post props={i}
