@@ -48,7 +48,7 @@ const LoginInWithEmail = async (data, userDispatch, setUserData, navigate) => {
     console.log(response.user.uid,setUserData)
     GetIndividualUserData(response.user.uid,setUserData);
 
-    navigate("/", { replace: true });
+    navigate("/home", { replace: true });
     // Alert("success", "SignIn Successfully!!");
   } catch (err) {
     console.log(err);
@@ -87,7 +87,7 @@ const LoginWIthGoogleAuth = async (userDispatch, setUserData, navigate) => {
 
     console.log(response.user.uid,setUserData)
     GetIndividualUserData(response.user.uid,setUserData);
-    navigate("/", { replace: true });
+    navigate("/home", { replace: true });
     // Alert("success", "Logged In Successfully!");
   } catch (err) {
     console.log(err);
@@ -122,7 +122,7 @@ const SignupWithEmail = async (userDispatch, data,setUserData, navigate) => {
 
     console.log(response.user.uid,setUserData)
     GetIndividualUserData(response.user.uid,setUserData);
-    navigate("/", { replace: true });
+    navigate("/home", { replace: true });
     // Alert("success", "SignUp Successfully!!");
   } catch (err) {
     console.log(err);

@@ -8,6 +8,8 @@ import { ROUTES } from "utils/routes";
 import { Suspense } from "react";
 import react from "react";
 import Navbar from "components/common/Navbar/Navbar";
+import NotFoundPage from "pages/NotFoundPage/NotFoundPage";
+import LandingPage from "pages/LandingPage/LandingPage";
 
 
 const PostPage = react.lazy(() => import("pages/PostPage/PostPage"));
@@ -17,7 +19,7 @@ const ExplorePage  = react.lazy(() => import("pages/ExplorePage/ExplorePage"));
 const LoginPage    = react.lazy(() => import("pages/LoginPage/LoginPage"));
 const SignUpPage   = react.lazy(() => import("pages/SignUpPage/SignUpPage"));
 const BookmarkPage = react.lazy(() => import("pages/BookmarkPage/BookmarkPage"));
-const NotFoundPage = react.lazy(() => import("pages/NotFoundPage/NotFoundPage"));
+// const NotFoundPage = react.lazy(() => import("pages/NotFoundPage/NotFoundPage"));
 
 
 function App() {
@@ -69,6 +71,7 @@ function App() {
             </Suspense>}
         />
         <Route path="/404" element={<NotFoundPage />} />
+        <Route path={ROUTES.ROUTE_PATH_LANDINGPAGE} element={<LandingPage />} />
 				<Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
