@@ -1,6 +1,8 @@
 .explore-fitler-btn{
     border-radius: 2em;
-    margin: 0 5px;
+    margin: 0 5px;  
+    gap: 1em;
+    min-width: fit-content;
 }
 
 .explore-fitler-tab{
@@ -13,6 +15,7 @@
 
 .explore-fitler-btn::selection{
     color: black;
+   
 }
 
 .explore-fitler-btn::-webkit-fleetsbar {

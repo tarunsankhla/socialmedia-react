@@ -1,5 +1,6 @@
 import Post from 'components/common/Posts/Post';
 import { NormalButton } from 'components/UI/Buttons/buttons';
+import { IconClose } from 'components/UI/Icons/Icons';
 import {firestore} from 'firebase.config';
 import {collection, onSnapshot, query, where} from 'firebase/firestore';
 import React, {useState, useEffect} from 'react';
@@ -56,9 +57,13 @@ const ExplorePage = () => {
                 console.log("tren");
                 setAllDataArray(() => [...backupData.filter(i => (Object.keys(i).length > 2) & (i?.likes?.likeCount >= 2))]);
                 break;
-            case "latest":
-                console.log("late");
+            case "Recent":
+                console.log("rec");
                 setAllDataArray(() => [...backupData.filter(i => (Object.keys(i).length > 2) & ((i.createdTime / 1000 / 60) > ((new Date().getTime() / 1000 / 60) - 2880)))]);
+                break;
+            case "Latest":
+                console.log("late");
+                setAllDataArray(() => [...backupData.filter(i => (Object.keys(i).length > 2)).sort((a,b)=> b.createdTime - a.createdTime )]);
                 break;
             default:
                 console.log("default");
@@ -70,14 +75,17 @@ const ExplorePage = () => {
         <div>
             <div className='explore-fitler-tab'>
                 <div className='flex'>
-                    <NormalButton name="trending" color="#9675b4" class="explore-fitler-btn" click={() =>
-                    setFilterType("trending") } />
-                    <NormalButton name="latest" color="#9675b4" class="explore-fitler-btn"
-                            click={() => setFilterType("latest")} />
+                    <NormalButton name="Trending" color="#9675b4" class="explore-fitler-btn" click={() =>
+                    setFilterType("Trending") } />
+                    <NormalButton name="Recent" color="#9675b4" class="explore-fitler-btn"
+                        click={() => setFilterType("Recent")} />
+                    <NormalButton name="Sort by Latest" color="#9675b4" class="explore-fitler-btn"
+                            click={() => setFilterType("Latest")} />
                 </div>
-                <NormalButton class="explore-fitler-btn" color="red"  name="clear" click={() => setFilterType("") }/>
+                <NormalButton class="explore-fitler-btn" color="red" icon={<IconClose />} name="clear" click={() => setFilterType("")} />
+                
             </div>
-            {!!fitlertype.length && <p>Search Result: {allDataArray.length}</p>}
+            {!!fitlertype.length && <p className='gray-txt fn-wg-700'>Search Result: {allDataArray.length}</p>}
             <div> {
                 allDataArray.map(i => (
                     <Post props={i}
