@@ -4,28 +4,31 @@ FOLLOW PEOPLE AROUND THE GLOBE
 CONNECT WITH YOUR FRIENDS
 SHARE WHAT YOU THINKING
 
-/
+
 [Live DEMO](https://spaceverse.netlify.app/)
 
 Feature:
-Post managment (create , update, delete).
-Like Post, Share a post, Comment Post
-Bookmark Page,
-Explore Page,
-Filter and Sort,
-Follow and unfollow user,
-Profile and edit feature,
-Share Post,
-Login page ,
-Signup page,
-Google Sign up,
-Landing Page
+###Post managment (create , update, delete).
+###Like Post, Share a post, Comment Post
+###Bookmark Page,
+###Explore Page,
+###Filter and Sort,
+###Follow and unfollow user,
+###Profile and edit feature,
+###Share Post,
+###Login page ,
+###Signup page,
+###Google Sign up,
+###Landing Page
 
 
 <hr/>
 Tech Stack involved:
 React, Firebase, Javascript, CSS
 
+
+
+![image](https://user-images.githubusercontent.com/47709623/168696775-9497c80b-4ab9-4c5e-8160-8485a65c1e4d.png)
 
 
 <hr/>
