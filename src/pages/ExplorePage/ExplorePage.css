@@ -1,18 +1,32 @@
 .explore-fitler-btn{
-    border-radius: 2em;
-    margin: 0 5px;  
+    /* border-radius: 2em;
+    margin: 0 5px;   */
     gap: 1em;
     min-width: fit-content;
+        flex-grow: 1;
 }
 
 .explore-fitler-tab{
     display: flex;
     /* overflow-x: scroll; */
     width: 100%;
+    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: space-between;
     padding: 10px 0;
 }
+.explore-filter-tag{
+    width: 100%;
+    display: flex;
+    gap: 0;
+    margin: 0;
+}
 
+.clear-btn{
+    min-width: fit-content;
+    padding: 5px;
+    margin-left: auto;
+}
 .explore-fitler-btn::selection{
     color: black;
    

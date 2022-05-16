@@ -283,7 +283,7 @@ span {
 
 .btn-login-signup{
 	/* border-radius: 1em; */
-	width: 100%;
+	width: 40%;
     padding: 10px 1.2em !important;
 	background-color: var(--primary-color) !important;
 }

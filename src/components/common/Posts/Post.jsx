@@ -114,7 +114,7 @@ const Post = ({props}) => {
             let response = await updateDoc(userToUpdate, {
                 [userState.user.userId]: {
                     ...userData,
-                    ["followers"]: [ ...userData.followers,{...props.user} ]}
+                    ["following"]: [ ...userData.following,{...props.user} ]}
             });
             console.log(response);
 
@@ -129,7 +129,7 @@ const Post = ({props}) => {
             let response2 = updateDoc(followingUserToUpdate, {
                 [props.user.userId]: {
                     ...otherUserData,
-                    ["following"]: [...otherUserData.following, {
+                    ["followers"]: [...otherUserData.followers, {
                             name: userData.name,
                             userId: userData.userId,
                             photo: userData.photo,
@@ -153,7 +153,7 @@ const Post = ({props}) => {
             let response = await updateDoc(userToUpdate, {
                 [userState.user.userId]: {
                     ...userData,
-                    ["followers"]: [ ...userData.followers.filter(user=> user.userId !==props.user.userId) ]}
+                    ["following"]: [ ...userData.following.filter(user=> user.userId !==props.user.userId) ]}
             });
             console.log(response);
 
@@ -168,7 +168,7 @@ const Post = ({props}) => {
             let response2 = updateDoc(followingUserToUpdate, {
                 [props.user.userId]: {
                     ...otherUserData,
-                    ["following"]: [...otherUserData.following.filter(user=> user.userId !== userState.user.userId)]
+                    ["followers"]: [...otherUserData.followers.filter(user=> user.userId !== userState.user.userId)]
                 }
             });
             console.log(response2);
@@ -195,7 +195,7 @@ const Post = ({props}) => {
                     <p>
                     <span className='fn-wg-700'>{props.user.name || "dummy name"}</span>
                         {props.user.userId !== userData.userId &&
-                            (userData.followers.some(user => user.userId === props.user.userId ) ?
+                            (userData.following.some(user => user.userId === props.user.userId ) ?
                             <span className='post-data-follow-container hover gray-txt lg-txt' onClick={RemoveUserFromFollowersHandler}>
                                 following
                             </span>

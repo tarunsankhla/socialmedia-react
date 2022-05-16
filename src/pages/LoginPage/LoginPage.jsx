@@ -33,6 +33,16 @@ const LoginPage = () => {
       [e.target.name]: e.target.value,
     }));
   };
+  const GuestLoginHandler = () => { 
+    setData({
+      email: "adarshbalika@gmail.com",
+      password: "adarshBalika123"
+    });
+    LoginInWithEmail({
+      email: "adarshbalika@gmail.com",
+      password: "adarshBalika123"
+    }, userDispatch, setUserData, navigate);
+  }
 
   useEffect(() => {
     if (!!userState?.token.length) {
@@ -77,38 +87,17 @@ const LoginPage = () => {
               >
                 Forgot your password?
               </div>
-              <div className='flex-center pd-10' style={{gap:"2em"}}>
+              <div className='flex-center pd-10' style={{gap:"2em",flexWrap:"wrap"}}>
                 <NormalButton name="Login" color="red" click={loginClickHandler} class="btn-login-signup" />
-                <NormalButton name=" Google" color="red" click={(e) => {
-                    e.preventDefault();
-                    LoginWIthGoogleAuth(userDispatch, setUserData, navigate);
+                <NormalButton name=" Google" color="red" click={(e) => { e.preventDefault();
+                  LoginWIthGoogleAuth(userDispatch, setUserData, navigate);
                 }} icon={<IconGoogle />} class="btn-login-signup" />
+                <NormalButton name="Guest Login" color="red" click={GuestLoginHandler} class="btn-login-signup" />
               </div>
 
-              {/* <div className="login-cta-buttons"> */}
-                {/* <span
-                  className="btn primary-btn-md"
-                  onClick={loginClickHandler}
-                > */}
-                  
-                  {/* Login */}
-                {/* </span> */}
-              {/* </div> */}
+              
             </form>
-            {/* <div className="google-login-container"> */}
-              {/* <span
-                className="btn secondary-outline-btn-md google-login"
-                onClick={(e) => {
-                  e.preventDefault();
-                  LoginWIthGoogleAuth(userDispatch,setUserData, navigate);
-                }}
-              > */}
-                {/* <i className="fab fa-google"></i> */}
-            {/* login with Google */}
-            
-           
-              {/* </span> */}
-            {/* </div> */}
+          
             <Link className="cursive underline" to="/signup">
               Create New Account
             </Link>

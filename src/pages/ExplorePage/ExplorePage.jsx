@@ -53,7 +53,7 @@ const ExplorePage = () => {
     
     const FilterHandler = () => { 
         switch (fitlertype) {
-            case "trending":
+            case "Trending":
                 console.log("tren");
                 setAllDataArray(() => [...backupData.filter(i => (Object.keys(i).length > 2) & (i?.likes?.likeCount >= 2))]);
                 break;
@@ -65,6 +65,10 @@ const ExplorePage = () => {
                 console.log("late");
                 setAllDataArray(() => [...backupData.filter(i => (Object.keys(i).length > 2)).sort((a,b)=> b.createdTime - a.createdTime )]);
                 break;
+            case "Oldest":
+                console.log("late");
+                setAllDataArray(() => [...backupData.filter(i => (Object.keys(i).length > 2)).sort((a,b)=> a.createdTime - b.createdTime )]);
+                break;
             default:
                 console.log("default");
                 setAllDataArray(() => [...backupData.filter(i => (Object.keys(i).length > 2))])
@@ -74,15 +78,19 @@ const ExplorePage = () => {
     return (
         <div>
             <div className='explore-fitler-tab'>
-                <div className='flex'>
-                    <NormalButton name="Trending" color="#9675b4" class="explore-fitler-btn" click={() =>
-                    setFilterType("Trending") } />
-                    <NormalButton name="Recent" color="#9675b4" class="explore-fitler-btn"
+                <NormalButton class="clear-btn" color="red" name="clear" click={() => setFilterType("")} />
+                <div className='explore-filter-tag'>
+                    
+                    <NormalButton name="Trending" txtcolor={`${fitlertype === "Trending" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn" click={() =>
+                        setFilterType("Trending") } />
+                    <NormalButton name="Recent" txtcolor={`${fitlertype === "Recent" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn"
                         click={() => setFilterType("Recent")} />
-                    <NormalButton name="Sort by Latest" color="#9675b4" class="explore-fitler-btn"
-                            click={() => setFilterType("Latest")} />
+                    <NormalButton name="Sort by Latest" txtcolor={`${fitlertype === "Latest" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn"
+                        click={() => setFilterType("Latest")} />
+                    <NormalButton name="Sort by Oldest" txtcolor={`${fitlertype === "Oldest" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn"
+                            click={() => setFilterType("Oldest")} />
                 </div>
-                <NormalButton class="explore-fitler-btn" color="red" icon={<IconClose />} name="clear" click={() => setFilterType("")} />
+                
                 
             </div>
             {!!fitlertype.length && <p className='gray-txt fn-wg-700'>Search Result: {allDataArray.length}</p>}
