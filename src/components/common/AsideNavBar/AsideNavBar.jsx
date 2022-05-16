@@ -66,8 +66,7 @@ const AsideNavBar = () => {
                         
                         {!userState.token ? (
                             <NavLink style={getActiveStyle}
-                            to={ROUTES.ROUTE_PATH_LoginPage}>
-                            {/* <IconsProfile height="1.5em" width="1.5em" /> */}
+                            to={userData.userId.length ? `/profile/${userData.userId}` : "/login"}>
                             <button className="primary-outline-btn-md btn">Login</button>
                         </NavLink>
                             ) : (

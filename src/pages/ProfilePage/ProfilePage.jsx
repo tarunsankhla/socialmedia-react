@@ -53,9 +53,9 @@ const ProfilePage = () => {
 
                 // get All data
                 console.log(getAllPost());
-                let data = await getAllPost();
+                const data = await getAllPost();
                 // if (data.isArray()) {
-                setYourPostArray(() => data ?. filter(i => Object.keys(i).length > 2 && i.user.userId === userID))
+                setYourPostArray(() => data?.filter(i => Object.keys(i).length > 2 && i.user.userId === userID))
                 // }
             } catch (err) {
                 console.log(err.message)

@@ -211,11 +211,11 @@ const Post = ({props}) => {
                     }</span>
                 </div>
                 <Link to={`/post/${props.user.userId}/${props.postid}`}>
-                    <div className='post-data-content-container'>
+                    <p className='post-data-content-container'>
                         {
                             props.content
                         }
-                    </div>
+                    </p>
                 </Link>
                 <div className='post-data-action-container'>
                     <span className='hover flex flex-center lg-txt'>

@@ -5,8 +5,9 @@
 
 .explore-fitler-tab{
     display: flex;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
     width: 100%;
+    justify-content: space-between;
     padding: 10px 0;
 }
 

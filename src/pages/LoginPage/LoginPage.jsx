@@ -11,9 +11,9 @@ const LoginPage = () => {
   const [data, setData] = useState({ email: "", password: "" });
   const [showResetPassword, setShowResetPassword] = useState(false);
   const { userData, setUserData } = useUserData();
-
-  const navigate = Navigate();
   const { userState, userDispatch } = useAuth();
+  const navigate = Navigate();
+  console.log("login ")
 
   const loginClickHandler = (e) => {
     e.preventDefault();
@@ -33,11 +33,11 @@ const LoginPage = () => {
     }));
   };
 
-  useEffect(() => {
-    if (userState?.token) {
-      navigate("/", { replace: true });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!!userState?.token.length) {
+  //     navigate("/", { replace: true });
+  //   }
+  // }, []);
   return (
     <>
       {/* {showResetPassword && (

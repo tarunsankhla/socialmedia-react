@@ -28,14 +28,21 @@ const LoginInWithEmail = async (data, userDispatch, setUserData, navigate) => {
       data.password
     );
     console.log(response);
+
+    const userRef = doc(firestore, `users/${response.user.uid}`);
+    const responseOfDOC = await getDoc(userRef);
+    console.log(responseOfDOC.data(), responseOfDOC.id, setUserData, response.user.uid);
+    console.log(responseOfDOC.data()[response.user.uid]);
+
+
     
     userDispatch({
       type: "userauth",
       token: response?.user?.accessToken ?? "",
-      name: response?.user?.displayName ?? "",
+      name: response?.user?.displayName || responseOfDOC.data()[response.user.uid].name,
       emailId: response?.user?.email ?? "",
       userId: response?.user?.uid ?? "",
-      photo: response.user.photoURL ?? "",
+      photo: response.user.photoURL || responseOfDOC.data()[response.user.uid].photo,
     });
     
     console.log(response.user.uid,setUserData)
@@ -65,13 +72,17 @@ const LoginWIthGoogleAuth = async (userDispatch, setUserData, navigate) => {
     if (!doesUserAlreadyExist) { 
       await CreateUser(obj);
     }
+    const userRef = doc(firestore, `users/${response.user.uid}`);
+      const responseOfDOC = await getDoc(userRef);
+      console.log(response.data(), responseOfDOC.id, setUserData, response.user.uid);
+      console.log(response.data()[response.user.uid]);
     userDispatch({
       type: "userauth",
       token: response?.user?.accessToken ?? "",
-      name: response?.user?.displayName ?? "",
+      name: response?.user?.displayName,
       emailId: response?.user?.email ?? "",
       userId: response?.user?.uid ?? "",
-      photo: response.user.photoURL ?? "",
+      photo: response.user.photoURL,
     });
 
     console.log(response.user.uid,setUserData)

@@ -20,4 +20,5 @@
 .post-data-content-container{
     padding: 10px 5px;
     color: black;
+    white-space: pre-wrap;
 }

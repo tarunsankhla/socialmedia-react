@@ -28,7 +28,7 @@ const PostPage = () => {
 
     const AddCommentToPost = () => { 
         try{
-            const postToUpdate = doc(firestore, `posts/${postData.postid}`);
+            const postToUpdate = doc(firestore, `posts/${postID}`);
             console.log(postToUpdate);
             let newComment = {
                 content: comment,
@@ -43,9 +43,10 @@ const PostPage = () => {
                 }
             }
             console.log(newComment);
-            let response = updateDoc(postToUpdate, { [postData.postid] : {
+            let response = updateDoc(postToUpdate, { [postID] : {
                 ...postData,
-                ["comments"]: [...postData.comments, {...newComment}]
+                ["comments"]: [...postData.comments, { ...newComment }],
+                postid:postID
             }});
             console.log(response);
             GetIndividualPostData(postID, setPostData);
@@ -59,12 +60,13 @@ const PostPage = () => {
 
     const UpdatePost = () => { 
         try{
-            const postToUpdate = doc(firestore, `posts/${postData.postid}`);
+            const postToUpdate = doc(firestore, `posts/${postID}`);
             console.log(postToUpdate);
             
-            let response = updateDoc(postToUpdate, { [postData.postid] : {
+            let response = updateDoc(postToUpdate, { [postID] : {
                 ...postData,
-                ["content"]: postContent
+                ["content"]: postContent,
+                postid:postID
             }});
             console.log(response);
             GetIndividualPostData(postID, setPostData);

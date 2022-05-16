@@ -35,30 +35,36 @@ const AddPost = () => {
     const { userData,setUserData} = useUserData()
 
     const AddPostHandler = async () => {
-        let postId = uuid();
-        console.log(postId);
-        Post.user = userState.user ?? "";
-        Post.date = new Date();
-        Post.createdTime = new Date().getTime();
-        Post.createdAt = new Date().toDateString();
-        Post.updatedAt = new Date().toDateString();
-        console.log(Post);
-        const userRef = doc(firestore, `posts/${postId}`);
-        console.log(Post)
-        try {
-            await setDoc(userRef, { // ...dashboard,
-                [postId]: Post
-            });
+        
+        if (Post.content.trim() === "") {
+            // Alert("error", "Input cannot be blank");
+            alert("Input cannot be blank")
+        } else {
+            let postId = uuid();
+            console.log(postId);
+            Post.user = userState.user ?? "";
+            Post.date = new Date();
+            Post.createdTime = new Date().getTime();
+            Post.createdAt = new Date().toDateString();
+            Post.updatedAt = new Date().toDateString();
+            console.log(Post);
+            const userRef = doc(firestore, `posts/${postId}`);
+            console.log(Post)
+            try {
+                await setDoc(userRef, { // ...dashboard,
+                    [postId]: Post
+                });
            
-            // Alert("success", "Nkew Project Added!!");
-        } catch (err) {
-            console.log(err.message)
-            // Alert("info", err.message);
+                // Alert("success", "Nkew Project Added!!");
+            } catch (err) {
+                console.log(err.message)
+                // Alert("info", err.message);
+            }
+            setPost((boardObj) => ({
+                ...boardObj,
+                "content": ""
+            }));
         }
-        setPost((boardObj) => ({
-            ...boardObj,
-            "content": ""
-        }));
     }
 
     const changeHandler = (e) => {

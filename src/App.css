@@ -276,7 +276,7 @@ span {
 	position: absolute;
 	bottom: 1em;
 	right: 2em;
-	font-size: 0.9rem;
+	font-size: 10px;
 	background-color: rgb(165, 165, 226);
 	border: 1px solid rgb(196, 196, 255);
 	padding: 8px;

@@ -14,11 +14,8 @@ const Main = () => {
                     <span className='outlet-body'>
                         <Outlet/>
                     </span>
-                    <BesideNavbar/> {/* {loginShow ?
-                    <LoginPage props={setLoginShow} />
-                    : <SignUpPage  props={setLoginShow} />
-             }
-            <ToastContainer style={{ fontSize: "1.5em" }} /> */} </div>
+                    <BesideNavbar />
+                </div>
 
             </div>
         </>

@@ -17,15 +17,8 @@ const ExplorePage = () => {
                 ...(i.data()[i.id]),
                 postid: i.id
             }
-        }).filter(i => (Object.keys(i).length > 2) ));
-        setAllDataArray(() => [...doc.docs.map(i => {
-            return {
-                ...(i.data()[i.id]),
-                postid: i.id
-            }
-        }).filter(i => (Object.keys(i).length > 2))]);
-        if (fitlertype !== "") {
-            setBackUpData(
+        }).filter(i => (Object.keys(i).length > 2)));
+        setBackUpData(
                 () => [...doc.docs.map(i => {
                     return {
                         ...(i.data()[i.id]),
@@ -33,9 +26,22 @@ const ExplorePage = () => {
                     }
                 }).filter(i => (Object.keys(i).length > 2))]
             )
-        } else { 
-            FilterHandler();
-        }
+        setAllDataArray(() => [...doc.docs.map(i => {
+            return {
+                ...(i.data()[i.id]),
+                postid: i.id
+            }
+        }).filter(i => (Object.keys(i).length > 2))]);
+        // if (fitlertype !== "") {
+        //     setAllDataArray(() => [...doc.docs.map(i => {
+        //         return {
+        //             ...(i.data()[i.id]),
+        //             postid: i.id
+        //         }
+        //     }).filter(i => (Object.keys(i).length > 2))]);
+        // } else { 
+        //     FilterHandler();
+        // }
     }), [])
 
 
@@ -63,11 +69,13 @@ const ExplorePage = () => {
     return (
         <div>
             <div className='explore-fitler-tab'>
-                <NormalButton name="trending" color="#9675b4" class="explore-fitler-btn" click={() =>
-                setFilterType("trending") } />
-                <NormalButton name="latest" color="#9675b4" class="explore-fitler-btn"
-                click={() => setFilterType("latest") }/>
-                <NormalButton class="explore-fitler-btn" color="red" click={() => setFilterType("") }/>
+                <div className='flex'>
+                    <NormalButton name="trending" color="#9675b4" class="explore-fitler-btn" click={() =>
+                    setFilterType("trending") } />
+                    <NormalButton name="latest" color="#9675b4" class="explore-fitler-btn"
+                            click={() => setFilterType("latest")} />
+                </div>
+                <NormalButton class="explore-fitler-btn" color="red"  name="clear" click={() => setFilterType("") }/>
             </div>
             {!!fitlertype.length && <p>Search Result: {allDataArray.length}</p>}
             <div> {
