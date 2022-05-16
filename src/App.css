@@ -282,8 +282,10 @@ span {
 
 
 .btn-login-signup{
-	border-radius: 1em;
-    padding: 7px 1em;
+	/* border-radius: 1em; */
+	width: 100%;
+    padding: 10px 1.2em !important;
+	background-color: var(--primary-color) !important;
 }
 
 .btn-login-signup:hover{

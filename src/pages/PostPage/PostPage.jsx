@@ -113,7 +113,7 @@ const PostPage = () => {
                 </span>
                
             </div>
-            <p className='flex pd-10' style={{whiteSpace: "pre-wrap"}}>
+            <p className='flex pd-10' style={{whiteSpace: "pre-wrap",textAlign:"justify"}}>
                 {postData.content}
             </p>
             <p className='flex gray-txt lg-txt pd-5'>

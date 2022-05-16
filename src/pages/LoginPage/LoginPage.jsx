@@ -77,13 +77,20 @@ const LoginPage = () => {
               >
                 Forgot your password?
               </div>
+              <div className='flex-center pd-10' style={{gap:"2em"}}>
+                <NormalButton name="Login" color="red" click={loginClickHandler} class="btn-login-signup" />
+                <NormalButton name=" Google" color="red" click={(e) => {
+                    e.preventDefault();
+                    LoginWIthGoogleAuth(userDispatch, setUserData, navigate);
+                }} icon={<IconGoogle />} class="btn-login-signup" />
+              </div>
 
               {/* <div className="login-cta-buttons"> */}
                 {/* <span
                   className="btn primary-btn-md"
                   onClick={loginClickHandler}
                 > */}
-                  <NormalButton name="Login" color="red" click={loginClickHandler} class="btn-login-signup"/>
+                  
                   {/* Login */}
                 {/* </span> */}
               {/* </div> */}
@@ -97,11 +104,9 @@ const LoginPage = () => {
                 }}
               > */}
                 {/* <i className="fab fa-google"></i> */}
-                {/* login with Google */}
-            <NormalButton name=" Google" color="red" click={(e) => {
-              e.preventDefault();
-              LoginWIthGoogleAuth(userDispatch, setUserData, navigate);
-            }} icon={<IconGoogle />} class="btn-login-signup"/>
+            {/* login with Google */}
+            
+           
               {/* </span> */}
             {/* </div> */}
             <Link className="cursive underline" to="/signup">

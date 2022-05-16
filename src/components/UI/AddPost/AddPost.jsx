@@ -40,6 +40,10 @@ const AddPost = () => {
             // Alert("error", "Input cannot be blank");
             alert("Input cannot be blank")
         } else {
+            setPost((boardObj) => ({
+                ...boardObj,
+                "content": ""
+            }));
             let postId = uuid();
             console.log(postId);
             Post.user = userState.user ?? "";
@@ -60,10 +64,7 @@ const AddPost = () => {
                 console.log(err.message)
                 // Alert("info", err.message);
             }
-            setPost((boardObj) => ({
-                ...boardObj,
-                "content": ""
-            }));
+            
         }
     }
 

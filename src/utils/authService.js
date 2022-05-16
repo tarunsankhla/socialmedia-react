@@ -74,8 +74,8 @@ const LoginWIthGoogleAuth = async (userDispatch, setUserData, navigate) => {
     }
     const userRef = doc(firestore, `users/${response.user.uid}`);
       const responseOfDOC = await getDoc(userRef);
-      console.log(response.data(), responseOfDOC.id, setUserData, response.user.uid);
-      console.log(response.data()[response.user.uid]);
+      console.log(responseOfDOC.data(), responseOfDOC.id, setUserData, response.user.uid);
+      console.log(responseOfDOC.data()[response.user.uid]);
     userDispatch({
       type: "userauth",
       token: response?.user?.accessToken ?? "",
