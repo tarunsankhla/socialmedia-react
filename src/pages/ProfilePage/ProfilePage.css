@@ -1,10 +1,12 @@
 .profile-page-header-container{
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    background-color: white;
+    padding-bottom: 1em;
 }
 
 .main-profile-page{
-    padding: 2em 1em 1em;
+    /* padding:1em; */
     justify-content: center;
     flex-direction: column;
 }
@@ -21,11 +23,12 @@
     justify-content: center;
     font-size: 2em;
     font-weight: 700;
+    border: 3px solid;
 }
 
-.profile-page-name{
-    padding: 1.5em 10px 10px;
-}
+/* .profile-page-name{
+    padding: 1.5em 10px 0;
+} */
 
 .profile-page-stats-container{
     justify-content: center;
@@ -47,7 +50,7 @@
     top: 45%;
     /* left: 25%; */
     z-index: 99;
-    min-width: 60%;
+    min-width: 50%;
 
 }
 
@@ -69,4 +72,17 @@
 .edit-post-header{
 	background-color: #999fd6 !important;
 	color: white;
+}
+
+.profile-page-header-photo{
+background: rgb(255,255,255);
+/* background: linear-gradient(354deg, rgba(255,255,255,1) 50%, rgba(133,153,222,1) 51%, rgba(255,182,182,1) 100%); */
+background: linear-gradient(354deg, rgba(255,255,255,0.01) 39%, rgba(133,153,222,1) 46%, rgba(255,182,182,1) 100%);
+}
+
+
+@media screen and (max-width:720px) {
+    .post-page-edit-modal{
+        min-width: 80%
+    }
 }

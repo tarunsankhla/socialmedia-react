@@ -1,11 +1,11 @@
 import Post from 'components/common/Posts/Post';
 import {NormalButton} from 'components/UI/Buttons/buttons';
 import {IconCalendar, IconClose, IconShare} from 'components/UI/Icons/Icons';
+import { useAuth } from 'context/AuthContext';
 import {firestore} from 'firebase.config';
 import {doc, getDoc, updateDoc} from 'firebase/firestore';
 import React, {useEffect, useState, useReducer} from 'react';
 import {useParams} from 'react-router';
-import {GetIndividualUserData} from 'utils/authService';
 import {getAllPost} from 'utils/postService';
 import "./ProfilePage.css";
 
@@ -28,7 +28,8 @@ const profileReducerHandler = (state, action) => {
     }
 }
 const ProfilePage = () => {
-    const {userID} = useParams();
+  const { userID } = useParams();
+  const { userState, userDispatch } = useAuth();
     const [userData, setUserData] = useState({});
     const [yourPostArray, setYourPostArray] = useState([]);
     const [editToggle, setEditToggle] = useState(false);
@@ -74,7 +75,8 @@ const ProfilePage = () => {
         setTimeout(() => {
             setShowCopied(false);
         }, 2000);
-    };
+  };
+  
     const UpdateProfile = async () => {
         try {
             const userToUpdate = doc(firestore, `users/${userID}`);
@@ -96,43 +98,54 @@ const ProfilePage = () => {
         } catch (error) {
             console.log("error");
         }
-    }
+  }
+  
     return (
       <div className='flex main-profile-page '>
         <div className='profile-page-header-container flex relative'>
-          {userData?.photo?.length ?
-            <img src={userData.photo} className='handle-img-np user-img profile-img' />
-            : <span className='handle-img-np profile-digit'>
-              {userData?.name ? userData?.name[0].toUpperCase() : "D"}
-            </span>
-          }
+          <div className='profile-page-header-photo'>
+            {userData?.photo?.length ?
+              <img src={userData.photo} className='handle-img-np user-img profile-img' />
+              : <span className='handle-img-np profile-digit'>
+                {userData?.name ? userData?.name[0].toUpperCase() : "D"}
+              </span>
+            }
+          </div>
+          <div>
+            <div>
           <p className='fn-wg-700 profile-page-name'>
             {userData?.name}
           </p>
           <p className='gray-txt'>
             {"@" + userData?.emailId?.split("@")[0]}
-          </p>
-          <p onClick={() => {
-              setEditToggle(prev => !prev);
-              profiledispatch({
-                  type: "name",
-                  name: userData?.name
-              });
-              profiledispatch({
-                  type: "bio",
-                  bio: userData?.bio
-              })
-          }}>
-            <NormalButton name="Edit Profile" color="red" padding="7px 1em" />
+              </p></div>
+            { userID === userState.user.userId &&
+            <p onClick={() => {
+                setEditToggle(prev => !prev);
+                profiledispatch({
+                    type: "name",
+                    name: userData?.name
+                });
+                profiledispatch({
+                    type: "bio",
+                    bio: userData?.bio
+                })
+            }}>
+              <NormalButton name="Edit Profile" color="red" padding="7px 1em" />
+            </p>
+          }
+          </div>
+          <p>
+            {userData?.bio || 'No Bio'}
           </p>
           <NormalButton name="Share Profile" color="red"
-              click={urlClickHandler}
-              padding="7px 1em"
-            icon={<IconShare />} />
+              click={urlClickHandler} padding="7px 1em" icon={<IconShare />} />
           {showCopied && <p className="copied-clipboard">Copied!</p>}
-          <p>{userData?.bio || 'No Bio'}</p>
-          {/* <span><IconCalendar />{userData?.createdAt?.split("at")[0] }</span> */}
-        </div>
+          
+          <span className='lg-txt gray-txt flex-center'>
+            <IconCalendar />Joined {userData?.createdAt}
+          </span>
+       
         <div className='flex profile-page-stats-container'>
           <div>
             <p className='fn-wg-800'>
@@ -150,6 +163,7 @@ const ProfilePage = () => {
                 { userData?.followers?.length}
             </p>
             <p>Followers</p>
+          </div>
           </div>
         </div>
         <div className='profile-your-post-container'>
