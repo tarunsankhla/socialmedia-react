@@ -181,13 +181,14 @@ const Post = ({props}) => {
 
     return (
         <div className='post-data-container relative'>
-            <div> {
+            <div>
+            <Link to={`/profile/${props.user.userId}`}>{
                 props.user?.photo.length ?
                     <img src={props.user.photo} className='handle-img-np' />
                     : <span className='handle-img-np handle-img-ph'>
                         {  props.user.name ? props.user.name[0].toUpperCase() : "D"   }
                     </span>
-            }
+            }</Link>
             </div>
             <div className='post-data-show-container'>
                 <div className='flex post-data-content-header'>
@@ -209,9 +210,13 @@ const Post = ({props}) => {
                         props.createdAt
                     }</span>
                 </div>
-                <div className='post-data-content-container'> {
-                    props.content
-                } </div>
+                <Link to={`/post/${props.user.userId}/${props.postid}`}>
+                    <div className='post-data-content-container'>
+                        {
+                            props.content
+                        }
+                    </div>
+                </Link>
                 <div className='post-data-action-container'>
                     <span className='hover flex flex-center lg-txt'>
                         {props.likes.likedBy.includes(userState.user.userId) ?
