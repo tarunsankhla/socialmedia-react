@@ -8,6 +8,7 @@ import {firestore} from "firebase.config";
 import {doc, setDoc} from "firebase/firestore";
 import {useState} from 'react';
 import {useAuth} from 'context/AuthContext';
+import { useUserData } from 'context/UserContext';
 
 const img = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToLFJbTrVFnOBgjYC_-vGIIM4aQwuYco1Xww&usqp=CAU";
 
@@ -30,7 +31,8 @@ const initialPostObject = {
 const AddPost = () => {
 
     const [Post, setPost] = useState(initialPostObject);
-    const {userState, userDispatch} = useAuth();
+    const { userState, userDispatch } = useAuth();
+    const { userData,setUserData} = useUserData()
 
     const AddPostHandler = async () => {
         let postId = uuid();

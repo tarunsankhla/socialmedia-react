@@ -119,7 +119,7 @@ const AddPostInBookmarkHandler = async (userData,postData,setUserData,postID,use
       let response = await updateDoc(userToUpdate, {
           [userData.userId]: {
               ...userData,
-              ["bookmarks"]: [ ...userData.bookmarks,{...postData,postid:postID} ]}
+              ["bookmarks"]: [ ...userData.bookmarks,postID ]}
       });
       console.log(response);
       GetIndividualUserData(userID, setUserData);
@@ -136,7 +136,7 @@ const RemovePostFromBookmarkHandler = (userData,setUserData,postID,userID) => {
       let response = updateDoc(userToUpdate, {
           [userID]: {
               ...userData,
-              ["bookmarks"]: [...userData.bookmarks.filter(post => post.postid !== postID ) ]}
+              ["bookmarks"]: [...userData.bookmarks.filter(post => post !== postID ) ]}
       });
       console.log(response);
       GetIndividualUserData(userID, setUserData);

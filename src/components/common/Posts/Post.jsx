@@ -71,10 +71,15 @@ const Post = ({props}) => {
         try {
             const userToUpdate = doc(firestore, `users/${userState.user.userId}`);
             console.log(userToUpdate,userData);
+            // let response = await updateDoc(userToUpdate, {
+            //     [userState.user.userId]: {
+            //         ...userData,
+            //         ["bookmarks"]: [ ...userData.bookmarks,{...props} ]}
+            // });
             let response = await updateDoc(userToUpdate, {
                 [userState.user.userId]: {
                     ...userData,
-                    ["bookmarks"]: [ ...userData.bookmarks,{...props} ]}
+                    ["bookmarks"]: [ ...userData.bookmarks,props.postid ]}
             });
             console.log(response,props);
             GetIndividualUserData(userState.user.userId, setUserData);
@@ -91,7 +96,7 @@ const Post = ({props}) => {
             let response = updateDoc(userToUpdate, {
                 [userState.user.userId]: {
                     ...userData,
-                    ["bookmarks"]: [...userData.bookmarks.filter(post => post.postid !== props.postid ) ]}
+                    ["bookmarks"]: [...userData.bookmarks.filter(post => post !== props.postid ) ]}
             });
             console.log(response);
             GetIndividualUserData(userState.user.userId, setUserData);
@@ -173,6 +178,7 @@ const Post = ({props}) => {
             console.log("error");
         }
     }
+
     return (
         <div className='post-data-container relative'>
             <div> {
@@ -221,7 +227,7 @@ const Post = ({props}) => {
                         <Link to={ `/post/${props.user.userId}/${props.postid}`}><IconComment /></Link></span>
                     <span className='hover' onClick={urlClickHandler}><IconShare /></span>
                     {
-                        userData.bookmarks.some(post => post.postid === props.postid)
+                        userData.bookmarks.some(post => post === props.postid)
                             ? <span className='hover' onClick={RemovePostFromBookmarkHandler}><IconsBookmarkFill /></span>
                             : <span className='hover'  onClick={ AddPostInBookmarkHandler}><IconsBookmark /></span>
                     }

@@ -143,7 +143,7 @@ const PostPage = () => {
                     </span>
                 <span onClick={()=>setToggleComment(prev=>!prev)}><IconComment /></span>
                 {
-                        userData.bookmarks.some(post => post.postid === postID)
+                        userData.bookmarks.some(post => post === postID)
                         ? <span className='hover' onClick={() => {
                             RemovePostFromBookmarkHandler(userData, setUserData, postID, userID);
                             GetIndividualPostData(postID, setPostData);
