@@ -6,6 +6,7 @@ import { useAuth } from 'context/AuthContext';
 import { LoginInWithEmail, LoginWIthGoogleAuth } from 'utils/authService';
 import { NormalButton } from 'components/UI/Buttons/buttons';
 import { useUserData } from 'context/UserContext';
+import { IconGoogle } from 'components/UI/Icons/Icons';
 
 const LoginPage = () => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -33,20 +34,20 @@ const LoginPage = () => {
     }));
   };
 
-  // useEffect(() => {
-  //   if (!!userState?.token.length) {
-  //     navigate("/", { replace: true });
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!!userState?.token.length) {
+      navigate("/", { replace: true });
+    }
+  }, []);
   return (
-    <>
+    <div className='no-one-container'>
       {/* {showResetPassword && (
         <ResetPassword setShowResetPassword={setShowResetPassword} />
       )} */}
       <div className="login-body-container">
         <div className="login-container">
           <div className="title-header">
-            <h1 className="title-xl-wt-bold mg-1-bot">Login</h1>
+            <h1 className="xxlg-txt page-title">Login</h1>
             <form onSubmit={(e) => loginClickHandler(e)}>
               <div className="login-credential-container">
                 <input
@@ -77,17 +78,17 @@ const LoginPage = () => {
                 Forgot your password?
               </div>
 
-              <div className="login-cta-buttons">
+              {/* <div className="login-cta-buttons"> */}
                 {/* <span
                   className="btn primary-btn-md"
                   onClick={loginClickHandler}
                 > */}
-                  <NormalButton name="Login" color="red" click={loginClickHandler}/>
+                  <NormalButton name="Login" color="red" click={loginClickHandler} class="btn-login-signup"/>
                   {/* Login */}
                 {/* </span> */}
-              </div>
+              {/* </div> */}
             </form>
-            <div className="google-login-container">
+            {/* <div className="google-login-container"> */}
               {/* <span
                 className="btn secondary-outline-btn-md google-login"
                 onClick={(e) => {
@@ -97,19 +98,19 @@ const LoginPage = () => {
               > */}
                 {/* <i className="fab fa-google"></i> */}
                 {/* login with Google */}
-                <NormalButton name="login with Google" color="red" click={(e) => {
-                  e.preventDefault();
-                  LoginWIthGoogleAuth(userDispatch,setUserData, navigate);
-                }}/>
+            <NormalButton name=" Google" color="red" click={(e) => {
+              e.preventDefault();
+              LoginWIthGoogleAuth(userDispatch, setUserData, navigate);
+            }} icon={<IconGoogle />} class="btn-login-signup"/>
               {/* </span> */}
-            </div>
-            <Link className=" primary-text-btn-md mg-1-top" to="/signup">
+            {/* </div> */}
+            <Link className="cursive underline" to="/signup">
               Create New Account
             </Link>
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

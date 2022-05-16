@@ -19,6 +19,7 @@
 }
 .App {
 	text-align: center;
+	min-height: 100vh;
 }
 
 .App-logo {
@@ -170,6 +171,13 @@ span {
 .bg-st-gray {
 	background-color: grey !important;
 }
+
+.cursive{
+	font-family: cursive;
+}
+.underline{
+	text-decoration: underline;
+}
 .handle-img-np {
 	height: 2.5em;
 	width: 2.5em;
@@ -272,6 +280,16 @@ span {
 	transform: scale(1.05);
 }
 
+
+.btn-login-signup{
+	border-radius: 1em;
+    padding: 7px 1em;
+}
+
+.btn-login-signup:hover{
+	transform: scale(1.02);
+	transition: height 1s;
+}
 .copied-clipboard {
 	position: absolute;
 	bottom: 1em;
@@ -284,6 +302,13 @@ span {
 	z-index: 2;
 }
 
+
+.no-one-container{
+	display: flex;
+	justify-content: center;
+	min-height: 100vh;
+	background-color: rgba(0,0,0,0.05);
+}
 /* responsive layout */
 
 

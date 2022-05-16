@@ -10,7 +10,8 @@
 	gap: 1.5rem;
 	width: fit-content;
 	min-width: 50%;
-	background-color: whitesmoke;
+	height: fit-content;
+	background-color: #ffdd61;
 }
 
 .signup-container {
@@ -22,7 +23,7 @@
 	font-size: 1.5rem;
 	gap: 1em;
 	border-radius: 10px;
-	border: 1px solid rgb(186, 186, 186);
+	/* border: 1px solid rgb(186, 186, 186); */
 	background-color: white;
 }
 

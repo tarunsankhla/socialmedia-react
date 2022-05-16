@@ -102,20 +102,18 @@ const PostPage = () => {
                             <span className='fn-wg-700 flex align-center full-width space-btwn'>
                                 Action <span onClick={() => settoggleAction(prev => !prev)}><IconClose /></span>
                             </span>
-                            <button className='btn' onClick={() => {
+                            <NormalButton class='btn post-page-editor-btn' click={() => {
                                 settoggleEdit(prev => !prev);
                                 setPostContent(postData.content);
-                            }}>Edit</button>
-                            <button className='btn' onClick={() => {
+                            }}  name="Edit" />
+                            <NormalButton class='btn post-page-editor-btn' click={() => {
                                 navigate(-1);
-                                deletePost(postID);
-                                
-                            }}>Delete</button>
+                                deletePost(postID); }} name="Delete"/>
                     </span>}
                 </span>
                
             </div>
-            <p className='flex pd-10'>
+            <p className='flex pd-10' style={{whiteSpace: "pre-wrap"}}>
                 {postData.content}
             </p>
             <p className='flex gray-txt lg-txt pd-5'>
@@ -167,7 +165,9 @@ const PostPage = () => {
                                 </span>
                     }
                     <input type="text" value={comment} onChange={ (e)=>setComment(e.target.value)} placeholder='Comment your reply' className='full-input'/>
-                    <span onClick={AddCommentToPost}><NormalButton name="Post" color="red"/></span>
+                    <span onClick={AddCommentToPost}>
+                        <NormalButton name="Post" color="red" />
+                    </span>
                 </div>
             }
             <div>
@@ -234,7 +234,9 @@ const PostPage = () => {
                         <textarea value={postContent} className="post-page-edit-input pd-5 bg-gray"
                             onChange={(e)=>setPostContent(e.target.value)}/>
                        
-                        <span onClick={UpdatePost}><NormalButton name="Save Post"  color="red"/></span>
+                        <span onClick={UpdatePost}>
+                            <NormalButton name="Save Post" color="red" />
+                        </span>
                     </div>
                 </div>
             }

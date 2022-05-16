@@ -1,6 +1,8 @@
+import { NormalButton } from 'components/UI/Buttons/buttons';
+import { IconGoogle } from 'components/UI/Icons/Icons';
 import { useAuth } from 'context/AuthContext';
 import { useUserData } from 'context/UserContext';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate as Navigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { LoginWIthGoogleAuth, SignupWithEmail } from 'utils/authService';
@@ -8,7 +10,7 @@ import "./SignUpPage.css";
 
 const SignUpPage = () => {
   const [data, setData] = useState({ email: "", password: "", name:"" });
-  const { userDispatch } = useAuth();
+  const { userState, userDispatch } = useAuth();
   const { userData, setUserData } = useUserData();
   const navigate = Navigate();
 
@@ -29,61 +31,69 @@ const SignUpPage = () => {
     }
     
   };
+  useEffect(() => {
+    if (!!userState?.token.length) {
+      navigate("/", { replace: true });
+    }
+  }, []);
 
   const signupWithGoogleHandler = () => {
     LoginWIthGoogleAuth(userDispatch, setUserData, navigate);
   };
   return (
-    <div className="signup-body-container">
-    {/* <img src={Login} className="signup-image" alt="login-logo" /> */}
-    <div className="signup-container">
-      <div className="title-header">
-        <input
-          placeholder="Email Address - xyz@gmail.com"
-          name="email"
-          value={data.email}
-          onChange={inputHandler}
-        />
-        <input
-          type="password"
-          onChange={inputHandler}
-          name="password"
-          value={data.password}
-          placeholder="Password"
-          id=""
+    <div className='no-one-container'>
+      <div className="signup-body-container">
+      {/* <img src={Login} className="signup-image" alt="login-logo" /> */}
+        {/* <div className="signup-container"> */}
+        
+        <div className="title-header">
+          <p className='xxlg-txt page-title'>Create your Account</p>
+          <input
+            placeholder="Email Address - xyz@gmail.com"
+            name="email"
+            value={data.email}
+            onChange={inputHandler}
           />
-        <input
-          type="text"
-          onChange={inputHandler}
-          name="name"
-          value={data.name}
-          placeholder="Name"
-          id=""
-        />
-        <div className="login-cta-buttons">
-          <button
-            className="btn primary-btn-md"
-            onClick={signupSubmitHandler}
-          >
-            Sign Up
-          </button>
-          <button
-            className="btn secondary-outline-btn-md"
-            onClick={signupWithGoogleHandler}
-          >
-            <i className="fab fa-google mg-point6-rt"></i>
-            Continue with Google
-          </button>
+          <input
+            type="password"
+            onChange={inputHandler}
+            name="password"
+            value={data.password}
+            placeholder="Password"
+            id=""
+            />
+          <input
+            type="text"
+            onChange={inputHandler}
+            name="name"
+            value={data.name}
+            placeholder="Name"
+            id=""
+          />
+          <div className='flex-center space-btwn pd-10 fn-wg-700 '  style={{gap:"3em"}}>
+            <NormalButton
+              // class="btn primary-btn-md"
+              click={signupSubmitHandler} name="Sign Up" color="red" class="btn-login-signup"
+            />
+              
+            {/* </Norm> */}
+            <NormalButton
+              // className="btn secondary-outline-btn-md"
+              click={signupWithGoogleHandler} name=" Google" color="red" class="btn-login-signup" icon={<IconGoogle />}
+            />
+              
+            {/* </NormalButton> */}
+          </div>
+          <Link className="flex-row-center text-dark" to="/login">
+            <h2 className="cursive underline">Account Already Exist ?</h2>
+            {/* <span>
+              <h2 className="title-md-wt-5">Sign In</h2>
+            </span> */}
+          </Link>
         </div>
-        <Link className="flex-row-center text-dark" to="/login">
-          <h2 className="title-md-wt-4 mg-1-rt">Account Already Exist ?</h2>
-          {/* <span>
-            <h2 className="title-md-wt-5">Sign In</h2>
-          </span> */}
-        </Link>
-      </div>
+      {/* </div> */}
+        </div>
     </div>
-  </div>
   )
 }
 
