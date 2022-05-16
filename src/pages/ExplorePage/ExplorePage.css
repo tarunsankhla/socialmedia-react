@@ -1,0 +1,36 @@
+.explore-fitler-btn{
+    border-radius: 2em;
+    margin: 0 5px;
+}
+
+.explore-fitler-tab{
+    display: flex;
+    overflow-x: scroll;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.explore-fitler-btn::selection{
+    color: black;
+}
+
+.explore-fitler-btn::-webkit-fleetsbar {
+	width: 1rem;
+}
+.explore-fitler-btn::-webkit-fleetsbar-track {
+	/* background-color: var(--shade-1); */
+    background-color: black;
+    color: black;
+}
+.explore-fitler-btn::-webkit-fleetsbar-thumb {
+	/* background-color: var(--btn-text-color-2); */
+    background-color: black;
+	border-radius: 1rem;
+    color: black;
+	border: 3px solid var(--shade-1);
+}
+
+.explore-fitler-btn::-webkit-fleetsbar :hover {
+	transform: scale(1.2);
+	cursor: pointer;
+}

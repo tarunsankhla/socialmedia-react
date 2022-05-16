@@ -1,38 +1,60 @@
 import Post from 'components/common/Posts/Post';
-import { firestore } from 'firebase.config';
-import { collection, onSnapshot } from 'firebase/firestore';
-import React,{useState,useEffect} from 'react';
+import { NormalButton } from 'components/UI/Buttons/buttons';
+import {firestore} from 'firebase.config';
+import {collection, onSnapshot, query, where} from 'firebase/firestore';
+import React, {useState, useEffect} from 'react';
 import "./ExplorePage.css";
 
 const ExplorePage = () => {
-  const [allDataArray, setAllDataArray] = useState([]);
+    const [allDataArray, setAllDataArray] = useState([]);
+    const [fitlertype, setFilterType] = useState("");
+    const TrendingQuery = query(collection(firestore, "posts"),where("createdTime","==","1652616892864"))
 
-  useEffect(() => onSnapshot(
-      collection(firestore, "posts"), (doc) => {
-          console.log(doc.docs.map(i => {
-                  return {
-                      ...(i.data()[i.id]),
-                      postid: i.id
-                  }
-          }).filter(i => Object.keys(i).length > 2));
-          setAllDataArray(() => [...doc.docs.map(i => {
-              return {
-                  ...(i.data()[i.id]),
-                  postid: i.id
-              }
-      }).filter(i => Object.keys(i).length > 2)])
-  }), [])
-  return (
-      <div>
-          <div> {
-              allDataArray.map(i => (
-                  <Post props={i}
-                      key={i.postid + i.createdTime} />
-                 
-              ))
-          } </div>
-      </div>
-  )
+    useEffect(() => onSnapshot(collection(firestore, "posts"), (doc) => {
+        console.log(doc.docs.map(i => {
+            return {
+                ...(i.data()[i.id]),
+                postid: i.id
+            }
+        }).filter(i => (Object.keys(i).length > 2) & ((i.createdTime / 1000 / 60) > ((new Date().getTime() / 1000 / 60) - 1440))));
+        setAllDataArray(() => [...doc.docs.map(i => {
+                return {
+                    ...(i.data()[i.id]),
+                    postid: i.id
+                }
+            }).filter(i => (Object.keys(i).length > 2) & (i?.likes?.likeCount >= 2))])
+    }), [])
+
+
+    const filterData = (doc)=>{ 
+        switch (fitlertype) {
+            case "trending":
+                setAllDataArray((prev) => [...prev.filter(i => (Object.keys(i).length > 2) & (i?.likes?.likeCount >= 2))])
+            case "latest":
+                setAllDataArray((prev) => [...prev.filter(i => (Object.keys(i).length > 2) & ((i.createdTime / 1000 / 60) > ((new Date().getTime() / 1000 / 60) - 1440)))])
+            default:
+                setAllDataArray((prev) => [...prev.filter(i => (Object.keys(i).length > 2))])
+        }
+        
+    }
+    return (
+        <div>
+            <div className='explore-fitler-tab'>
+                <NormalButton name="trending" color="#9675b4" class="explore-fitler-btn" />
+                <NormalButton name="latest" color="#9675b4" class="explore-fitler-btn" />
+                <div className="explore-fitler-btn">clear</div>
+            </div>
+            <div> {
+                allDataArray.map(i => (
+                    <Post props={i}
+                        key={
+                            i.postid + i.createdTime
+                        }/>
+
+                ))
+            } </div>
+        </div>
+    )
 }
 
 export default ExplorePage
