@@ -1,3 +1,31 @@
+SPACE VERSE
+
+FOLLOW PEOPLE AROUND THE GLOBE
+CONNECT WITH YOUR FRIENDS
+SHARE WHAT YOU THINKING
+
+Feature:
+Post managment (create , update, delete).
+Like Post, Share a post, Comment Post
+Bookmark Page,
+Explore Page,
+Filter and Sort,
+Follow and unfollow user,
+Profile and edit feature,
+Share Post,
+Login page ,
+Signup page,
+Google Sign up,
+Landing Page
+
+
+<hr/>
+Tech Stack involved:
+React, Firebase, Javascript, CSS
+
+
+
+<hr/>
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
