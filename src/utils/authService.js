@@ -125,7 +125,7 @@ const CreateUser = async (obj) => {
     name: obj.name,
     emailId: obj.emailId,
     photo: obj.photo,
-    createdAt: new Date(),
+    createdAt: new Date().toDateString(),
     updatedAt: new Date(),
     followers: [],
     following: [],

@@ -73,6 +73,9 @@
     font-weight: 700;
     width: 90%;
     padding: 2rem;
+    gap: 1em;
+    display: flex;
+    flex-direction: column;
   }
   
   .login-footer {
@@ -108,14 +111,14 @@
     cursor: not-allowed;
   }
   
-  .login-cta-buttons {
+  /* .login-cta-buttons {
     margin-top: 1rem;
   }
-  
+   */
   .login-cta-buttons,
   .google-login-container {
     display: grid;
-    margin: 5px 0;
+    /* margin: 5px 0; */
     width: 100%;
   }
   

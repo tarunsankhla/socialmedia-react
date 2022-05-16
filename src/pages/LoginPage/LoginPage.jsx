@@ -19,6 +19,7 @@ const LoginPage = () => {
     e.preventDefault();
     if (data.email.trim() === "" || data.password.trim() === "") {
       // Alert("error", "Input cannot be blank");
+      alert("Input cannot be blank")
     } else {
       console.log(setUserData,userData);
       LoginInWithEmail(data, userDispatch, setUserData, navigate);
@@ -77,29 +78,32 @@ const LoginPage = () => {
               </div>
 
               <div className="login-cta-buttons">
-                <span
+                {/* <span
                   className="btn primary-btn-md"
                   onClick={loginClickHandler}
-                >
-                  <NormalButton name="Login"/>
+                > */}
+                  <NormalButton name="Login" color="red" click={loginClickHandler}/>
                   {/* Login */}
-                </span>
+                {/* </span> */}
               </div>
             </form>
             <div className="google-login-container">
-              <span
+              {/* <span
                 className="btn secondary-outline-btn-md google-login"
                 onClick={(e) => {
                   e.preventDefault();
                   LoginWIthGoogleAuth(userDispatch,setUserData, navigate);
                 }}
-              >
+              > */}
                 {/* <i className="fab fa-google"></i> */}
                 {/* login with Google */}
-                <NormalButton name="login with Google"/>
-              </span>
+                <NormalButton name="login with Google" color="red" click={(e) => {
+                  e.preventDefault();
+                  LoginWIthGoogleAuth(userDispatch,setUserData, navigate);
+                }}/>
+              {/* </span> */}
             </div>
-            <Link className="btn primary-text-btn-md mg-1-top" to="/signup">
+            <Link className=" primary-text-btn-md mg-1-top" to="/signup">
               Create New Account
             </Link>
           </div>

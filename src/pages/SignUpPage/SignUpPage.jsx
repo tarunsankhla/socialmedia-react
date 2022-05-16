@@ -20,7 +20,14 @@ const SignUpPage = () => {
   };
 
   const signupSubmitHandler = () => {
-    SignupWithEmail(userDispatch, data, setUserData, navigate);
+    if (data.email.trim() === "" || data.password.trim() === "") {
+      // Alert("error", "Input cannot be blank");
+      alert("Input cannot be blank")
+    } else {
+      console.log(setUserData, userData);
+      SignupWithEmail(userDispatch, data, setUserData, navigate);
+    }
+    
   };
 
   const signupWithGoogleHandler = () => {
@@ -69,10 +76,10 @@ const SignUpPage = () => {
           </button>
         </div>
         <Link className="flex-row-center text-dark" to="/login">
-          <h2 className="title-md-wt-4 mg-1-rt"> Already Exist ?</h2>
-          <span>
+          <h2 className="title-md-wt-4 mg-1-rt">Account Already Exist ?</h2>
+          {/* <span>
             <h2 className="title-md-wt-5">Sign In</h2>
-          </span>
+          </span> */}
         </Link>
       </div>
     </div>
