@@ -8,6 +8,7 @@ import {firestore} from "firebase.config";
 import {doc, setDoc} from "firebase/firestore";
 import {useState} from 'react';
 import {useAuth} from 'context/AuthContext';
+import { useUserData } from 'context/UserContext';
 
 const img = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToLFJbTrVFnOBgjYC_-vGIIM4aQwuYco1Xww&usqp=CAU";
 
@@ -30,33 +31,41 @@ const initialPostObject = {
 const AddPost = () => {
 
     const [Post, setPost] = useState(initialPostObject);
-    const {userState, userDispatch} = useAuth();
+    const { userState, userDispatch } = useAuth();
+    const { userData,setUserData} = useUserData()
 
     const AddPostHandler = async () => {
-        let postId = uuid();
-        console.log(postId);
-        Post.user = userState.user ?? "";
-        Post.date = new Date();
-        Post.createdTime = new Date().getTime();
-        Post.createdAt = new Date().toDateString();
-        Post.updatedAt = new Date().toDateString();
-        console.log(Post);
-        const userRef = doc(firestore, `posts/${postId}`);
-        console.log(Post)
-        try {
-            await setDoc(userRef, { // ...dashboard,
-                [postId]: Post
-            });
+        
+        if (Post.content.trim() === "") {
+            // Alert("error", "Input cannot be blank");
+            alert("Input cannot be blank")
+        } else {
+            setPost((boardObj) => ({
+                ...boardObj,
+                "content": ""
+            }));
+            let postId = uuid();
+            console.log(postId);
+            Post.user = userState.user ?? "";
+            Post.date = new Date();
+            Post.createdTime = new Date().getTime();
+            Post.createdAt = new Date().toDateString();
+            Post.updatedAt = new Date().toDateString();
+            console.log(Post);
+            const userRef = doc(firestore, `posts/${postId}`);
+            console.log(Post)
+            try {
+                await setDoc(userRef, { // ...dashboard,
+                    [postId]: Post
+                });
            
-            // Alert("success", "Nkew Project Added!!");
-        } catch (err) {
-            console.log(err.message)
-            // Alert("info", err.message);
+                // Alert("success", "Nkew Project Added!!");
+            } catch (err) {
+                console.log(err.message)
+                // Alert("info", err.message);
+            }
+            
         }
-        setPost((boardObj) => ({
-            ...boardObj,
-            "content": ""
-        }));
     }
 
     const changeHandler = (e) => {
@@ -90,7 +99,7 @@ const AddPost = () => {
                         <span className='hover'><IconEmojiInput/></span>
                         <span className='hover'><IconGifInput/></span>
                     </div>
-                    <span onClick={AddPostHandler}><NormalButton name="Post"/></span>
+                    <span onClick={AddPostHandler}><NormalButton name="Post" color="red"/></span>
 
                 </div>
             </div>

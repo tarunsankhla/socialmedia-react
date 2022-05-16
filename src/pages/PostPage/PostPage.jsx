@@ -28,7 +28,7 @@ const PostPage = () => {
 
     const AddCommentToPost = () => { 
         try{
-            const postToUpdate = doc(firestore, `posts/${postData.postid}`);
+            const postToUpdate = doc(firestore, `posts/${postID}`);
             console.log(postToUpdate);
             let newComment = {
                 content: comment,
@@ -43,9 +43,10 @@ const PostPage = () => {
                 }
             }
             console.log(newComment);
-            let response = updateDoc(postToUpdate, { [postData.postid] : {
+            let response = updateDoc(postToUpdate, { [postID] : {
                 ...postData,
-                ["comments"]: [...postData.comments, {...newComment}]
+                ["comments"]: [...postData.comments, { ...newComment }],
+                postid:postID
             }});
             console.log(response);
             GetIndividualPostData(postID, setPostData);
@@ -59,12 +60,13 @@ const PostPage = () => {
 
     const UpdatePost = () => { 
         try{
-            const postToUpdate = doc(firestore, `posts/${postData.postid}`);
+            const postToUpdate = doc(firestore, `posts/${postID}`);
             console.log(postToUpdate);
             
-            let response = updateDoc(postToUpdate, { [postData.postid] : {
+            let response = updateDoc(postToUpdate, { [postID] : {
                 ...postData,
-                ["content"]: postContent
+                ["content"]: postContent,
+                postid:postID
             }});
             console.log(response);
             GetIndividualPostData(postID, setPostData);
@@ -100,20 +102,18 @@ const PostPage = () => {
                             <span className='fn-wg-700 flex align-center full-width space-btwn'>
                                 Action <span onClick={() => settoggleAction(prev => !prev)}><IconClose /></span>
                             </span>
-                            <button className='btn' onClick={() => {
+                            <NormalButton class='btn post-page-editor-btn' click={() => {
                                 settoggleEdit(prev => !prev);
                                 setPostContent(postData.content);
-                            }}>Edit</button>
-                            <button className='btn' onClick={() => {
+                            }}  name="Edit" />
+                            <NormalButton class='btn post-page-editor-btn' click={() => {
                                 navigate(-1);
-                                deletePost(postID);
-                                
-                            }}>Delete</button>
+                                deletePost(postID); }} name="Delete"/>
                     </span>}
                 </span>
                
             </div>
-            <p className='flex pd-10'>
+            <p className='flex pd-10' style={{whiteSpace: "pre-wrap",textAlign:"justify"}}>
                 {postData.content}
             </p>
             <p className='flex gray-txt lg-txt pd-5'>
@@ -143,7 +143,7 @@ const PostPage = () => {
                     </span>
                 <span onClick={()=>setToggleComment(prev=>!prev)}><IconComment /></span>
                 {
-                        userData.bookmarks.some(post => post.postid === postID)
+                        userData.bookmarks.some(post => post === postID)
                         ? <span className='hover' onClick={() => {
                             RemovePostFromBookmarkHandler(userData, setUserData, postID, userID);
                             GetIndividualPostData(postID, setPostData);
@@ -165,7 +165,9 @@ const PostPage = () => {
                                 </span>
                     }
                     <input type="text" value={comment} onChange={ (e)=>setComment(e.target.value)} placeholder='Comment your reply' className='full-input'/>
-                    <span onClick={AddCommentToPost}><NormalButton name="Post"/></span>
+                    <span onClick={AddCommentToPost}>
+                        <NormalButton name="Post" color="red" />
+                    </span>
                 </div>
             }
             <div>
@@ -232,7 +234,9 @@ const PostPage = () => {
                         <textarea value={postContent} className="post-page-edit-input pd-5 bg-gray"
                             onChange={(e)=>setPostContent(e.target.value)}/>
                        
-                        <span onClick={UpdatePost}><NormalButton name="Save Post"/></span>
+                        <span onClick={UpdatePost}>
+                            <NormalButton name="Save Post" color="red" />
+                        </span>
                     </div>
                 </div>
             }

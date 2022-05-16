@@ -25,17 +25,19 @@ import { GetIndividualUserData } from "./authService";
 
 
 // get all data
-const getAllPost = async () => {
-    // const userRef = doc(firestore, `users/${userId}`);
-    // const collectionRef = query(collection(firestore, "posts"), orderBy("createdTime"));
+const getAllPost =async () => {
     const collectionRef = collection(firestore, "posts")
-    try {
-        const response = await getDocs(collectionRef);
-        console.log(response.docs)
-        console.log(response.docs.map(i => {
-            return { ...(i.data()[i.id]), postid :i.id }
-        }))
-        // setData(res1.data() ?? {});
+  try {
+    let response = await getDocs(collectionRef);
+      console.log(response.docs, response)
+      console.log(response.docs.map(i => {
+        return { ...(i.data()[i.id]), postid: i.id }
+      }))
+      // setData(res1.data() ?? {});
+      return [...response?.docs.map(i => {
+        return { ...(i.data()[i.id]), postid: i.id }
+      })]
+
     } catch (err) {
         console.log(err);
         // Alert("error", err.meskksage);
@@ -117,7 +119,7 @@ const AddPostInBookmarkHandler = async (userData,postData,setUserData,postID,use
       let response = await updateDoc(userToUpdate, {
           [userData.userId]: {
               ...userData,
-              ["bookmarks"]: [ ...userData.bookmarks,{...postData,postid:postID} ]}
+              ["bookmarks"]: [ ...userData.bookmarks,postID ]}
       });
       console.log(response);
       GetIndividualUserData(userID, setUserData);
@@ -134,7 +136,7 @@ const RemovePostFromBookmarkHandler = (userData,setUserData,postID,userID) => {
       let response = updateDoc(userToUpdate, {
           [userID]: {
               ...userData,
-              ["bookmarks"]: [...userData.bookmarks.filter(post => post.postid !== postID ) ]}
+              ["bookmarks"]: [...userData.bookmarks.filter(post => post !== postID ) ]}
       });
       console.log(response);
       GetIndividualUserData(userID, setUserData);

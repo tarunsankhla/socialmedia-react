@@ -8,17 +8,14 @@ const Main = () => {
     return (
         <>
             <div className='main-container'>
-                <Navbar/>
+                
                 <div className='main-body'>
                     <AsideNavBar/>
                     <span className='outlet-body'>
                         <Outlet/>
                     </span>
-                    <BesideNavbar/> {/* {loginShow ?
-                    <LoginPage props={setLoginShow} />
-                    : <SignUpPage  props={setLoginShow} />
-             }
-            <ToastContainer style={{ fontSize: "1.5em" }} /> */} </div>
+                    <BesideNavbar />
+                </div>
 
             </div>
         </>

@@ -1,0 +1,54 @@
+.explore-fitler-btn{
+    /* border-radius: 2em;
+    margin: 0 5px;   */
+    gap: 1em;
+    min-width: fit-content;
+        flex-grow: 1;
+}
+
+.explore-fitler-tab{
+    display: flex;
+    /* overflow-x: scroll; */
+    width: 100%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+.explore-filter-tag{
+    width: 100%;
+    display: flex;
+    gap: 0;
+    margin: 0;
+}
+
+.clear-btn{
+    min-width: fit-content;
+    padding: 5px;
+    margin-left: auto;
+}
+.explore-fitler-btn::selection{
+    color: black;
+   
+}
+
+.explore-fitler-btn::-webkit-fleetsbar {
+	width: 1rem;
+}
+.explore-fitler-btn::-webkit-fleetsbar-track {
+	/* background-color: var(--shade-1); */
+    background-color: black;
+    color: black;
+}
+.explore-fitler-btn::-webkit-fleetsbar-thumb {
+	/* background-color: var(--btn-text-color-2); */
+    background-color: black;
+	border-radius: 1rem;
+    color: black;
+	border: 3px solid var(--shade-1);
+}
+
+.explore-fitler-btn::-webkit-fleetsbar :hover {
+	transform: scale(1.2);
+	cursor: pointer;
+}

@@ -1,19 +1,4 @@
-.AsideNav {
-	display: flex;
-	min-width: -moz-fit-content;
-	min-width: 10em;
-	height: 80vh;
-	background-color: var(--black-hl-p5);
-	justify-content: space-between;
-	flex-direction: column;
-	padding-top: 1em;
-	padding: 1em;
-	position: sticky;
-	top: 0;
-	font-size: 1.2em;
-	font-weight: 600;
-	align-items: center;
-}
+
 
 .AsideNav li {
 	list-style: none;
@@ -35,7 +20,7 @@
 .AsideNav {
 	height: 100vh;
 	padding-bottom: 3em;
-	width: 27vw;
+	/* width: 27vw; */
 }
 
 .aside-nav-logout {
@@ -70,7 +55,9 @@
 		height: 3em;
 		background-color: red;
 		z-index: 999;
-    	background-color: rgba(255,255,255,0.7);
+    	/* background-color: rgba(255,255,255,0.7); */
+		background-color: white;
+		justify-content: space-around;
 		align-items: baseline;
 		padding: 0 1em 0 0;;
 		bottom: 0;

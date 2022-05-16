@@ -6,19 +6,21 @@ import { useAuth } from 'context/AuthContext';
 import { LoginInWithEmail, LoginWIthGoogleAuth } from 'utils/authService';
 import { NormalButton } from 'components/UI/Buttons/buttons';
 import { useUserData } from 'context/UserContext';
+import { IconGoogle } from 'components/UI/Icons/Icons';
 
 const LoginPage = () => {
   const [data, setData] = useState({ email: "", password: "" });
   const [showResetPassword, setShowResetPassword] = useState(false);
   const { userData, setUserData } = useUserData();
-
-  const navigate = Navigate();
   const { userState, userDispatch } = useAuth();
+  const navigate = Navigate();
+  console.log("login ")
 
   const loginClickHandler = (e) => {
     e.preventDefault();
     if (data.email.trim() === "" || data.password.trim() === "") {
       // Alert("error", "Input cannot be blank");
+      alert("Input cannot be blank")
     } else {
       console.log(setUserData,userData);
       LoginInWithEmail(data, userDispatch, setUserData, navigate);
@@ -31,21 +33,31 @@ const LoginPage = () => {
       [e.target.name]: e.target.value,
     }));
   };
+  const GuestLoginHandler = () => { 
+    setData({
+      email: "adarshbalika@gmail.com",
+      password: "adarshBalika123"
+    });
+    LoginInWithEmail({
+      email: "adarshbalika@gmail.com",
+      password: "adarshBalika123"
+    }, userDispatch, setUserData, navigate);
+  }
 
   useEffect(() => {
-    if (userState?.token) {
+    if (!!userState?.token.length) {
       navigate("/", { replace: true });
     }
   }, []);
   return (
-    <>
+    <div className='no-one-container'>
       {/* {showResetPassword && (
         <ResetPassword setShowResetPassword={setShowResetPassword} />
       )} */}
       <div className="login-body-container">
         <div className="login-container">
           <div className="title-header">
-            <h1 className="title-xl-wt-bold mg-1-bot">Login</h1>
+            <h1 className="xxlg-txt page-title">Login</h1>
             <form onSubmit={(e) => loginClickHandler(e)}>
               <div className="login-credential-container">
                 <input
@@ -75,37 +87,24 @@ const LoginPage = () => {
               >
                 Forgot your password?
               </div>
-
-              <div className="login-cta-buttons">
-                <span
-                  className="btn primary-btn-md"
-                  onClick={loginClickHandler}
-                >
-                  <NormalButton name="Login"/>
-                  {/* Login */}
-                </span>
+              <div className='flex-center pd-10' style={{gap:"2em",flexWrap:"wrap"}}>
+                <NormalButton name="Login" color="red" click={loginClickHandler} class="btn-login-signup" />
+                <NormalButton name=" Google" color="red" click={(e) => { e.preventDefault();
+                  LoginWIthGoogleAuth(userDispatch, setUserData, navigate);
+                }} icon={<IconGoogle />} class="btn-login-signup" />
+                <NormalButton name="Guest Login" color="red" click={GuestLoginHandler} class="btn-login-signup" />
               </div>
+
+              
             </form>
-            <div className="google-login-container">
-              <span
-                className="btn secondary-outline-btn-md google-login"
-                onClick={(e) => {
-                  e.preventDefault();
-                  LoginWIthGoogleAuth(userDispatch,setUserData, navigate);
-                }}
-              >
-                {/* <i className="fab fa-google"></i> */}
-                {/* login with Google */}
-                <NormalButton name="login with Google"/>
-              </span>
-            </div>
-            <Link className="btn primary-text-btn-md mg-1-top" to="/signup">
+          
+            <Link className="cursive underline" to="/signup">
               Create New Account
             </Link>
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

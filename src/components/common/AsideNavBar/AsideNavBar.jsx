@@ -1,5 +1,6 @@
 import { IconsBookmark, IconsExploreNavbar, IconsHomeNavbar, IconsProfile } from 'components/UI/Icons/Icons';
 import { useAuth } from 'context/AuthContext';
+import {useUserData} from 'context/UserContext'
 import React from 'react';
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
@@ -21,17 +22,19 @@ const getActiveStyle = ({ isActive }) => ({
 const AsideNavBar = () => {
     const { userState, userDispatch } = useAuth();
     let navigate = useNavigate();
+    const { userData, setUserData } = useUserData();
     // const { modalToggle, setmodalToggle } = useModal();
     const LogoutHandler = () => {
         userDispatch({ type: "reset" });
+        setUserData({ type: "reset" });
         navigate("/", { replace: true });
       };
     
 
     return (
         <div className='AsideNav'>
-            <div>
-                <ul>
+            {/* <div> */}
+                {/* <ul> */}
                     <li>
                         <NavLink style={getActiveStyle}
                             to={ROUTES.ROUTE_PATH_HOMEPAGE}>
@@ -54,7 +57,7 @@ const AsideNavBar = () => {
                     </li>
                     <li>
                         <NavLink style={getActiveStyle}
-                            to={ROUTES.ROUTE_PATH_ProfilePage}>
+                            to={`/profile/${userState.user.userId}`}>
                             <IconsProfile height="1.5em" width="1.5em" />
                             <p className="title-hide-responsive">Profile</p>
                         </NavLink>
@@ -63,9 +66,8 @@ const AsideNavBar = () => {
                         
                         {!userState.token ? (
                             <NavLink style={getActiveStyle}
-                            to={ROUTES.ROUTE_PATH_LoginPage}>
-                            <IconsProfile height="1.5em" width="1.5em" />
-                            <p className="title-hide-responsive">Login</p>
+                            to={userData.userId.length ? `/profile/${userData.userId}` : "/login"}>
+                            <button className="primary-outline-btn-md btn">Login</button>
                         </NavLink>
                             ) : (
                             <button
@@ -76,7 +78,28 @@ const AsideNavBar = () => {
                             </button>
                             )}
                     </li>
-                    {/* {
+                   
+                {/* </ul> */}
+            {/* </div> */}
+            {/* {
+                auth.user ?
+                    <>
+                        <hr/>
+                        <div className='aside-nav-logout'>
+                            <p className="title-hide-responsive">{`@${auth.userState?.firstName}${auth.userState?.lastName}`} </p>
+                            <span className='logout-btn'
+                                onClick={
+                                    () => {
+                                        auth.logoutUser(() => {
+                                            navigate("/");
+                                        })
+                                    }}>
+                                <BiBoxArrowRight height="1.5em" width="1.5em" />
+                            </span>
+                        </div>
+                    </>
+                    : ""} */}
+            {/* {
                         !auth.user ?
 
                             <span onClick={
@@ -96,26 +119,6 @@ const AsideNavBar = () => {
                                 </NavLink>
                             </li>
                     } */}
-                </ul>
-            </div>
-            {/* {
-                auth.user ?
-                    <>
-                        <hr/>
-                        <div className='aside-nav-logout'>
-                            <p className="title-hide-responsive">{`@${auth.userState?.firstName}${auth.userState?.lastName}`} </p>
-                            <span className='logout-btn'
-                                onClick={
-                                    () => {
-                                        auth.logoutUser(() => {
-                                            navigate("/");
-                                        })
-                                    }}>
-                                <BiBoxArrowRight height="1.5em" width="1.5em" />
-                            </span>
-                        </div>
-                    </>
-                    : ""} */}
         </div>
     )
 }

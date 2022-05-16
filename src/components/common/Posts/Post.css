@@ -1,12 +1,8 @@
-
-
-
-
-
 .post-data-action-container{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: start;
     align-items: center;
+    gap: 4em;
     padding: 5px 0 0;
     width: 100%;
 }
@@ -22,5 +18,8 @@
 }
 
 .post-data-content-container{
-    padding: 5px 0;
+    padding: 10px 5px;
+    color: black;
+    white-space: pre-wrap;
+    text-align: justify;
 }
