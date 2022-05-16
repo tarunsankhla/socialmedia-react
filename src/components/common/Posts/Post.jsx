@@ -207,7 +207,7 @@ const Post = ({props}) => {
                     props.content
                 } </div>
                 <div className='post-data-action-container'>
-                    <span>
+                    <span className='hover flex flex-center lg-txt'>
                         {props.likes.likedBy.includes(userState.user.userId) ?
                             <span className='hover' onClick={RemoveLikeOnPost}>
                                 <IconHeartFill />

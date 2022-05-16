@@ -30,8 +30,8 @@ const AsideNavBar = () => {
 
     return (
         <div className='AsideNav'>
-            <div>
-                <ul>
+            {/* <div> */}
+                {/* <ul> */}
                     <li>
                         <NavLink style={getActiveStyle}
                             to={ROUTES.ROUTE_PATH_HOMEPAGE}>
@@ -65,7 +65,7 @@ const AsideNavBar = () => {
                             <NavLink style={getActiveStyle}
                             to={ROUTES.ROUTE_PATH_LoginPage}>
                             <IconsProfile height="1.5em" width="1.5em" />
-                            <p className="title-hide-responsive">Login</p>
+                            <p className="title-hide-responsive btn">Login</p>
                         </NavLink>
                             ) : (
                             <button
@@ -76,7 +76,28 @@ const AsideNavBar = () => {
                             </button>
                             )}
                     </li>
-                    {/* {
+                   
+                {/* </ul> */}
+            {/* </div> */}
+            {/* {
+                auth.user ?
+                    <>
+                        <hr/>
+                        <div className='aside-nav-logout'>
+                            <p className="title-hide-responsive">{`@${auth.userState?.firstName}${auth.userState?.lastName}`} </p>
+                            <span className='logout-btn'
+                                onClick={
+                                    () => {
+                                        auth.logoutUser(() => {
+                                            navigate("/");
+                                        })
+                                    }}>
+                                <BiBoxArrowRight height="1.5em" width="1.5em" />
+                            </span>
+                        </div>
+                    </>
+                    : ""} */}
+            {/* {
                         !auth.user ?
 
                             <span onClick={
@@ -96,26 +117,6 @@ const AsideNavBar = () => {
                                 </NavLink>
                             </li>
                     } */}
-                </ul>
-            </div>
-            {/* {
-                auth.user ?
-                    <>
-                        <hr/>
-                        <div className='aside-nav-logout'>
-                            <p className="title-hide-responsive">{`@${auth.userState?.firstName}${auth.userState?.lastName}`} </p>
-                            <span className='logout-btn'
-                                onClick={
-                                    () => {
-                                        auth.logoutUser(() => {
-                                            navigate("/");
-                                        })
-                                    }}>
-                                <BiBoxArrowRight height="1.5em" width="1.5em" />
-                            </span>
-                        </div>
-                    </>
-                    : ""} */}
         </div>
     )
 }

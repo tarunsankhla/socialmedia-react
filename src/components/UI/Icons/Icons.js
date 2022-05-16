@@ -82,31 +82,39 @@ function IconHeartFill(props) {
 
 function IconPlus(props) {
     return (
-      <svg width="1em" height="1em" cursor="pointer" fontSize="1.2em" viewBox="0 0 16 16" {...props}><path fill="currentColor" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path></svg>
+        <svg width="1em" height="1em" cursor="pointer" fontSize="1.2em" viewBox="0 0 16 16" {...props}><path fill="currentColor" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path></svg>
     )
 }
-  
+
 
 function IconThreeDots(props) {
     return (
-      <svg width="1em" height="1em" cursor="pointer" viewBox="0 0 16 16" {...props}><path fill="currentColor" d="M3 9.5a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3z"></path></svg>
+        <svg width="1em" height="1em" cursor="pointer" viewBox="0 0 16 16" {...props}><path fill="currentColor" d="M3 9.5a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3z"></path></svg>
     )
 }
-  
+
 
 function IconArrowBack(props) {
     return (
-      <svg width="1.5em" height="1.5em" cursor="pointer" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="m12 20l-8-8l8-8l1.425 1.4l-5.6 5.6H20v2H7.825l5.6 5.6Z"></path></svg>
+        <svg width="1.5em" height="1.5em" cursor="pointer" viewBox="0 0 24 24" {...props}><path fill="currentColor" d="m12 20l-8-8l8-8l1.425 1.4l-5.6 5.6H20v2H7.825l5.6 5.6Z"></path></svg>
     )
 }
-  
+
 
 
 function IconClose(props) {
     return (
-      <svg width="1em" height="1em" cursor="pointer" viewBox="0 0 16 16" {...props}><g fill="currentColor"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8L4.646 5.354a.5.5 0 0 1 0-.708z"></path></g></svg>
+        <svg width="1em" height="1em" cursor="pointer" viewBox="0 0 16 16" {...props}><g fill="currentColor"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8L4.646 5.354a.5.5 0 0 1 0-.708z"></path></g></svg>
     )
-  }
+}
+
+
+
+function IconCalendar(props) {
+    return (
+        <svg width="1em" height="1em" cursor="pointer" viewBox="0 0 16 16" {...props}><g fill="currentColor"><path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"></path><path d="M12 7a1 1 0 1 0 0-2a1 1 0 0 0 0 2zm-5 3a1 1 0 1 0 0-2a1 1 0 0 0 0 2zm2-3a1 1 0 1 0 0-2a1 1 0 0 0 0 2zm-5 3a1 1 0 1 0 0-2a1 1 0 0 0 0 2z"></path></g></svg>
+    )
+}
 
 export {
     IconsHomeNavbar,
@@ -124,5 +132,6 @@ export {
     IconPlus,
     IconThreeDots,
     IconArrowBack,
-    IconClose
+    IconClose,
+    IconCalendar
 }
