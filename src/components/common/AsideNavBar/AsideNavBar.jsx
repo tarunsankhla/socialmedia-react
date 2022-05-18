@@ -71,7 +71,7 @@ const AsideNavBar = () => {
                         </NavLink>
                             ) : (
                             <button
-                                className="btn primary-outline-btn-md hover-btn"
+                                className="btn logout-btn hover-btn"
                                 onClick={LogoutHandler}
                             >
                                 Logout

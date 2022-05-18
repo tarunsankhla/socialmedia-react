@@ -394,10 +394,10 @@ span {
 
 @media screen and (max-width:1060px) {
 	.outlet-body {
-		width: 60vw;
+		width: 65vw;
 	}
 	.AsideNav {
-		width: 40vw;
+		width: 35vw;
 	}
 }
 

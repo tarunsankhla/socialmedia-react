@@ -1,6 +1,7 @@
 import Post from 'components/common/Posts/Post';
 import { NormalButton } from 'components/UI/Buttons/buttons';
 import { IconClose } from 'components/UI/Icons/Icons';
+import Loader from 'components/UI/Loader/Loader';
 import {firestore} from 'firebase.config';
 import {collection, onSnapshot, query, where} from 'firebase/firestore';
 import React, {useState, useEffect} from 'react';
@@ -81,13 +82,13 @@ const ExplorePage = () => {
                 
                 <div className='explore-filter-tag'>
                     <NormalButton name="Trending" txtcolor={`${fitlertype === "Trending" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn"
-                        click={() => setFilterType("Trending")} borderBottom={`${fitlertype === "Trending"  && "rgb(0 151 167)"}`} />
+                        click={() => setFilterType("Trending")} borderBottom={`${fitlertype === "Trending"  ? " 2px solid rgb(0 151 167)" : ""}`} />
                     <NormalButton name="Recent" txtcolor={`${fitlertype === "Recent" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn"
-                        click={() => setFilterType("Recent")}  borderBottom={`${fitlertype === "Recent"  && "rgb(0 151 167)"}`}/>
+                        click={() => setFilterType("Recent")}  borderBottom={`${fitlertype === "Recent"  ? "2px solid rgb(0 151 167)" : ""}`}/>
                     <NormalButton name="Sort by Latest" txtcolor={`${fitlertype === "Latest" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn"
-                        click={() => setFilterType("Latest")}  borderBottom={`${fitlertype === "Latest"  && "rgb(0 151 167)"}`}/>
+                        click={() => setFilterType("Latest")}  borderBottom={`${fitlertype === "Latest"  ? "2px solid rgb(0 151 167)" :  "" }`}/>
                     <NormalButton name="Sort by Oldest" txtcolor={`${fitlertype === "Oldest" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn"
-                            click={() => setFilterType("Oldest")}  borderBottom={`${fitlertype === "Oldest"  && "rgb(0 151 167)"}`}/>
+                            click={() => setFilterType("Oldest")}  borderBottom={`${fitlertype === "Oldest" ? "2px solid rgb(0 151 167)" : "" }`}/>
                 </div>
                 
                 
@@ -106,6 +107,7 @@ const ExplorePage = () => {
 
                 ))
                 : 
+                // <Loader/>
                 <p className='page-title'>No Post</p>
             } </div>
         </div>

@@ -11,6 +11,7 @@ import Navbar from "components/common/Navbar/Navbar";
 import NotFoundPage from "pages/NotFoundPage/NotFoundPage";
 import LandingPage from "pages/LandingPage/LandingPage";
 import { ToastContainer } from "react-toastify";
+import Loader from "components/UI/Loader/Loader";
 
 
 const PostPage = react.lazy(() => import("pages/PostPage/PostPage"));
@@ -33,41 +34,41 @@ function App() {
             <Main />
           </RequiredAuth>}>
           <Route path={ROUTES.ROUTE_PATH_HOMEPAGE} element={
-            <Suspense fallback={"..loading"}>
+            <Suspense fallback={<Loader />}>
               <HomePage />
             </Suspense>}
           />
           <Route path={ROUTES.ROUTE_PATH_EXPLOREPAGE} element={
-              <Suspense fallback={"..loading"}>
+              <Suspense fallback={<Loader/>}>
                 <ExplorePage />
               </Suspense>}
           />
           <Route path={ROUTES.ROUTE_PATH_BOOKMARKPAGE} element={
-              <Suspense fallback={"..loading"}>
+              <Suspense fallback={<Loader />}>
                 <BookmarkPage />
               </Suspense>
           }/>
         
           <Route path={ROUTES.ROUTE_PATH_ProfilePage} element={
-            <Suspense fallback="Loading">
+            <Suspense fallback={<Loader />}>
               <ProfilePage />
             </Suspense>
           }/>
 
           <Route path={ROUTES.ROUTE_PATH_POSTPAGE} element={
-              <Suspense fallback={"..loading"}>
+              <Suspense fallback={<Loader />}>
                 <PostPage />
             </Suspense>
           } />
         </Route>
         <Route
             path={ROUTES.ROUTE_PATH_LoginPage} element={
-              <Suspense fallback={"..loading"}>
+              <Suspense fallback={<Loader />}>
                 <LoginPage />
               </Suspense>}
           />
           <Route path={ROUTES.ROUTE_PATH_SignupPage} element={
-            <Suspense fallback={"..loading"}>
+            <Suspense fallback={<Loader />}>
               <SignUpPage />
             </Suspense>}
         />

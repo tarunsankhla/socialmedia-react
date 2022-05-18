@@ -20,5 +20,5 @@
 .normal-btn:hover{
     transform: scale(1.03);
     /* display: none; */
-    background-color: aquamarine;
+    /* background-color: aquamarine; */
 }

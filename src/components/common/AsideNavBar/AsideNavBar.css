@@ -34,7 +34,9 @@
 
 .logout-btn {
 	cursor: pointer;
-	font-size: 1.3em;
+	/* font-size: 1.3em; */
+	width: fit-content;
+    padding: 7px 2em;
 }
 
 .logout-btn:hover {
