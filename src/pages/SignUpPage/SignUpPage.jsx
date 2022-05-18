@@ -7,6 +7,7 @@ import { useNavigate as Navigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { LoginWIthGoogleAuth, SignupWithEmail } from 'utils/authService';
 import "./SignUpPage.css";
+import "../LoginPage/LoginPage.css";
 
 const SignUpPage = () => {
   const [data, setData] = useState({ email: "", password: "", name:"" });
