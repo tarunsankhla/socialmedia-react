@@ -6,7 +6,7 @@ function NormalButton(props) {
             backgroundColor: `${props.color}` || "red", padding: `${props.padding}` || "3px",
             color: `${props.txtcolor}` || "white", borderBottom: `${props.borderBottom}`
         }}
-        onClick={props.click}>
+        onClick={props.click} type={`${props.type}` || ""}>
         {props.name}{props.icon}
     </button>
 }

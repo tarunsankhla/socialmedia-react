@@ -10,7 +10,7 @@ const LandingPage = () => {
   const { userState } = useAuth();
   return (
       <main className='main-landing-page'>
-      <secion className="landing-page-container">
+      <section className="landing-page-container">
         <p className='page-title'>
           SPACE VERSE
         </p>
@@ -28,7 +28,7 @@ const LandingPage = () => {
           :
           <NormalButton name="EXPLORE" color="red" class="landing-btn hover-btn" click={() => navigate("/home")}  />
           }
-      </secion>
+      </section>
       <img src={ IMAGES.LandingPage} className="landing-page-img"/>
       </main>
   )

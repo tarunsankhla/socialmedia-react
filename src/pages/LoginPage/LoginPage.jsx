@@ -64,7 +64,7 @@ const LoginPage = () => {
                   placeholder="Email Address - xyz@gmail.com"
                   name="email"
                   type="email"
-                  required="required"
+                  required
                   value={data.email}
                   onChange={inputHandler}
                 />
@@ -87,8 +87,9 @@ const LoginPage = () => {
               >
                 Forgot your password?
               </div>
+              <button type="submit" className="btn-login-signup btn-submit">Login</button>
               <div className='flex-center pd-10' style={{gap:"2em",flexWrap:"wrap"}}>
-                <NormalButton name="Login" color="red" click={loginClickHandler} class="btn-login-signup" />
+                {/* <NormalButton name="Login" color="red" click={loginClickHandler} class="btn-login-signup" type="submit" /> */}
                 <NormalButton name=" Google" color="red" click={(e) => { e.preventDefault();
                   LoginWIthGoogleAuth(userDispatch, setUserData, navigate);
                 }} icon={<IconGoogle />} class="btn-login-signup" />

@@ -21,12 +21,13 @@ const SignUpPage = () => {
     }));
   };
 
-  const signupSubmitHandler = () => {
+  const signupSubmitHandler = (e) => {
+    e.preventDefault();
     if (data.email.trim() === "" || data.password.trim() === "") {
       // Alert("error", "Input cannot be blank");
       alert("Input cannot be blank")
     } else {
-      console.log(setUserData, userData);
+      console.log(setUserData, userData,data);
       SignupWithEmail(userDispatch, data, setUserData, navigate);
     }
     
@@ -48,42 +49,53 @@ const SignUpPage = () => {
         
         <div className="title-header">
           <p className='xxlg-txt page-title'>Create your Account</p>
-          <input type="email"
-            placeholder="Email Address - xyz@gmail.com"
-            name="email"
-            value={data.email}
-            onChange={inputHandler}
-          />
-          <input
-            type="password"
-            onChange={inputHandler}
-            name="password"
-            value={data.password}
-            placeholder="Password"
-            id=""
-            />
-          <input
-            type="text"
-            onChange={inputHandler}
-            name="name"
-            value={data.name}
-            placeholder="Name"
-            id=""
-          />
+          <form onSubmit={(e) => signupSubmitHandler(e)}>
+          <div className="login-credential-container">
+            <input type="email"
+              placeholder="Email Address - xyz@gmail.com"
+              name="email"
+              value={data.email}
+                onChange={inputHandler}
+                required
+              />
+            </div>
+            <div className="login-credential-container">
+            <input
+              type="password"
+              onChange={inputHandler}
+                name="password"
+                required
+              value={data.password}
+              placeholder="Password"
+              id=""
+              /></div>
+            <div className="login-credential-container">
+            <input
+              type="text"
+              onChange={inputHandler}
+              name="name"
+              value={data.name}
+              placeholder="Name"
+                id=""
+                required
+            /></div>
+
+          <button type="submit" className="btn-login-signup btn-submit">Sign Up</button>
           <div className='flex-center space-btwn pd-10 fn-wg-700 '  style={{gap:"3em"}}>
-            <NormalButton
+            {/* <NormalButton
               // class="btn primary-btn-md"
               click={signupSubmitHandler} name="Sign Up" color="red" class="btn-login-signup"
             />
-              
+               */}
             {/* </Norm> */}
             <NormalButton
               // className="btn secondary-outline-btn-md"
               click={signupWithGoogleHandler} name=" Google" color="red" class="btn-login-signup" icon={<IconGoogle />}
             />
-              
+          
             {/* </NormalButton> */}
-          </div>
+            </div>
+          </form>
           <Link className="flex-row-center text-dark" to="/login">
             <h2 className="cursive underline">Account Already Exist ?</h2>
             {/* <span>

@@ -101,11 +101,12 @@ const SignupWithEmail = async (userDispatch, data,setUserData, navigate) => {
     const response = await createUserWithEmailAndPassword(
       firebaseAuth,
       data.email,
-      data.password
+      data.password,
+      data.name
     );
-    console.log(response);
+    console.log(response,data);
     let obj = {
-      name: response?.user?.displayName ?? "",
+      name: data.name,
       emailId: response?.user?.email ?? "",
       userId: response?.user?.uid ?? "",
       photo: response.user.photoURL ?? "",
@@ -114,7 +115,7 @@ const SignupWithEmail = async (userDispatch, data,setUserData, navigate) => {
     userDispatch({
       type: "userauth",
       token: response?.user?.accessToken ?? "",
-      name: response?.user?.displayName ?? "",
+      name: data.name,
       emailId: response?.user?.email ?? "",
       userId: response?.user?.uid ?? "",
       photo: response.user.photoURL ?? "",
