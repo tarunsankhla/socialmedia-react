@@ -35,8 +35,11 @@
 }
 
 .landing-btn{
-    width: 80%;
+    width: 50%;
+    padding: 1em 2em;
 }
+
+
 
 @media screen and (max-width:770px) {
     .landing-page-img{

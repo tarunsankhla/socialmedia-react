@@ -12,3 +12,13 @@
     align-items: center;
     gap :5px;
 }
+
+.normal-btn{
+    transition: background-color 2s ease;
+}
+
+.normal-btn:hover{
+    transform: scale(1.03);
+    /* display: none; */
+    background-color: aquamarine;
+}

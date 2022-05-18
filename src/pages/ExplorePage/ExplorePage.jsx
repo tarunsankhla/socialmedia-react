@@ -78,23 +78,26 @@ const ExplorePage = () => {
     return (
         <div>
             <div className='explore-fitler-tab'>
-                <NormalButton class="clear-btn" color="red" name="clear" click={() => setFilterType("")} />
+                
                 <div className='explore-filter-tag'>
-                    
-                    <NormalButton name="Trending" txtcolor={`${fitlertype === "Trending" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn" click={() =>
-                        setFilterType("Trending") } />
+                    <NormalButton name="Trending" txtcolor={`${fitlertype === "Trending" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn"
+                        click={() => setFilterType("Trending")} borderBottom={`${fitlertype === "Trending"  && "rgb(0 151 167)"}`} />
                     <NormalButton name="Recent" txtcolor={`${fitlertype === "Recent" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn"
-                        click={() => setFilterType("Recent")} />
+                        click={() => setFilterType("Recent")}  borderBottom={`${fitlertype === "Recent"  && "rgb(0 151 167)"}`}/>
                     <NormalButton name="Sort by Latest" txtcolor={`${fitlertype === "Latest" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn"
-                        click={() => setFilterType("Latest")} />
+                        click={() => setFilterType("Latest")}  borderBottom={`${fitlertype === "Latest"  && "rgb(0 151 167)"}`}/>
                     <NormalButton name="Sort by Oldest" txtcolor={`${fitlertype === "Oldest" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn"
-                            click={() => setFilterType("Oldest")} />
+                            click={() => setFilterType("Oldest")}  borderBottom={`${fitlertype === "Oldest"  && "rgb(0 151 167)"}`}/>
                 </div>
                 
                 
             </div>
-            {!!fitlertype.length && <p className='gray-txt fn-wg-700'>Search Result: {allDataArray.length}</p>}
-            <div> {
+            {!!fitlertype.length && 
+            <div>
+            <p className='gray-txt fn-wg-700'>Search Result: {allDataArray.length}</p>
+            <NormalButton class="clear-btn" color="red" name="clear" click={() => setFilterType("")} />
+            </div>}
+            <div> {allDataArray.length ?
                 allDataArray.map(i => (
                     <Post props={i}
                         key={
@@ -102,6 +105,8 @@ const ExplorePage = () => {
                         }/>
 
                 ))
+                : 
+                <p className='page-title'>No Post</p>
             } </div>
         </div>
     )

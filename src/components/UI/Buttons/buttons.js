@@ -1,12 +1,16 @@
 import "./buttons.css";
 
-function NormalButton(props) { 
+function NormalButton(props) {
     return <button className={`normal-btn ${props.class}`}
-        style={{ backgroundColor: `${props.color}` || "red", padding: `${props.padding}` || "3px",color: `${props.txtcolor}` || "white"  }}
+        style={{
+            backgroundColor: `${props.color}` || "red", padding: `${props.padding}` || "3px",
+            color: `${props.txtcolor}` || "white", borderBottom: `${props.borderBottom}`
+        }}
         onClick={props.click}>
-        {props.name}{props.icon}</button>
+        {props.name}{props.icon}
+    </button>
 }
 
-export { 
+export {
     NormalButton
 }

@@ -48,7 +48,7 @@ const SignUpPage = () => {
         
         <div className="title-header">
           <p className='xxlg-txt page-title'>Create your Account</p>
-          <input
+          <input type="email"
             placeholder="Email Address - xyz@gmail.com"
             name="email"
             value={data.email}

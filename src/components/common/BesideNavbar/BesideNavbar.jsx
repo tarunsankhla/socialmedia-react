@@ -37,7 +37,7 @@ const BesideNavbar = () => {
                                 <span className='user-data-beside-section-name beside-action fn-wg-700 hover gray-txt lg-txt' >
                                     following
                                 </span>
-                                : <span className='user-data-beside-section-name beside-action fn-wg-700  hover red-txt lg-txt'
+                                : <span className='user-data-beside-section-name beside-action fn-wg-700  hover lg-txt'
                                 >
                                     follow <IconPlus />
                                 </span>)}</span>

@@ -196,10 +196,10 @@ const Post = ({props}) => {
                     <span className='fn-wg-700'>{props.user.name || "dummy name"}</span>
                         {props.user.userId !== userData.userId &&
                             (userData.following.some(user => user.userId === props.user.userId ) ?
-                            <span className='post-data-follow-container hover gray-txt lg-txt' onClick={RemoveUserFromFollowersHandler}>
+                            <span className='post-data-follow-container hover gray-txt lg-txt fn-wg-700 ' onClick={RemoveUserFromFollowersHandler}>
                                 following
                             </span>
-                            : <span className=' post-data-follow-container hover gray-txt lg-txt'
+                            : <span className=' post-data-follow-container hover gray-txt lg-txt fn-wg-700 '
                                 onClick={AddUserAsFollowersHandler}>
                                 follow <IconPlus />
                                 </span>)}

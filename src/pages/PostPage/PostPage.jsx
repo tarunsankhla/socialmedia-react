@@ -164,9 +164,10 @@ const PostPage = () => {
                                 {userData?.name ? userData?.name[0].toUpperCase() : "D"}
                                 </span>
                     }
-                    <input type="text" value={comment} onChange={ (e)=>setComment(e.target.value)} placeholder='Comment your reply' className='full-input'/>
+                    <input type="text" value={comment} onChange={ (e)=>setComment(e.target.value)} 
+                            placeholder='Comment your reply' className='full-input'/>
                     <span onClick={AddCommentToPost}>
-                        <NormalButton name="Post" color="red" />
+                        <NormalButton name="Comment" color="red" class="comment-btn" />
                     </span>
                 </div>
             }

@@ -255,10 +255,11 @@ span {
 	display: flex;
     padding: 0 1em;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: baseline;
     width: 100%;
     min-height: 5em;
+	gap: 1em;
 }
 
 .post-data-content-header {
@@ -266,6 +267,16 @@ span {
 	align-items: self-end;
 	gap: 1em;
 	width: 100%;
+}
+
+.hover-btn{
+    transition:background-color 2s ease;
+}
+
+.hover-btn:hover{
+    transform: scale(1.03);
+    /* display: none; */
+    background-color: var(--primary-color) !important;
 }
 
 .btn {
