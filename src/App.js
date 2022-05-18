@@ -10,6 +10,7 @@ import react from "react";
 import Navbar from "components/common/Navbar/Navbar";
 import NotFoundPage from "pages/NotFoundPage/NotFoundPage";
 import LandingPage from "pages/LandingPage/LandingPage";
+import { ToastContainer } from "react-toastify";
 
 
 const PostPage = react.lazy(() => import("pages/PostPage/PostPage"));
@@ -74,6 +75,7 @@ function App() {
         <Route path={ROUTES.ROUTE_PATH_LANDINGPAGE} element={<LandingPage />} />
 				<Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

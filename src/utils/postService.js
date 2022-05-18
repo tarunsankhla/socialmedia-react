@@ -1,4 +1,5 @@
 import { async } from "@firebase/util";
+import { Toast } from "components/UI/Toast/Toast";
 import {
     firestore,
     firebaseAuth,
@@ -86,10 +87,12 @@ const AddLikeOnPost = (postData, userID,postID) => {
               likeCount: postData.likes.likeCount + 1
           }
       }});
-      console.log(response);
+    console.log(response);
+    Toast("info","Liked a Post")
   }
   catch(error) { 
-      console.log("error");
+    console.log("error");
+    Toast("error", "Failed" + error.message);
   }
 }
 
@@ -104,10 +107,11 @@ const RemoveLikeOnPost = (postData, userId,postID) => {
           }}
       });
       console.log(response);
-      
+    Toast("info", "Disliked a Post");
   }
   catch(error) { 
-      console.log("error");
+    console.log("error");
+    Toast("error", "Failed" + error.message)
   }
 }
 
@@ -121,11 +125,13 @@ const AddPostInBookmarkHandler = async (userData,postData,setUserData,postID,use
               ...userData,
               ["bookmarks"]: [ ...userData.bookmarks,postID ]}
       });
-      console.log(response);
+    console.log(response);
+    Toast("info", "Bookmark Added");
       GetIndividualUserData(userID, setUserData);
   }
   catch(error) { 
-      console.log("error");
+    console.log("error");
+    Toast("error", "Failed" + error.message);
   }
 }
 
@@ -138,11 +144,13 @@ const RemovePostFromBookmarkHandler = (userData,setUserData,postID,userID) => {
               ...userData,
               ["bookmarks"]: [...userData.bookmarks.filter(post => post !== postID ) ]}
       });
-      console.log(response);
+    console.log(response);
+    Toast("info", "Bookmark Removed");
       GetIndividualUserData(userID, setUserData);
   }
   catch(error) { 
-      console.log("error");
+    console.log("error");
+    Toast("error", "Failed" + error.message);
   }
 }
 
@@ -154,10 +162,10 @@ const deletePost = async (postID) => {
       await updateDoc(doctoupdate, {
         [postID]: deleteField(),
       });
-    //   Alert("info", "Project Deleted!!");
+      Toast("info", "Post Deleted!!");
     } catch (err) {
         console.log(err);
-    //   Alert("error", err.message);
+      Toast("error", err.message);
     }
   };
 

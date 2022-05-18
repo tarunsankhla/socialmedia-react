@@ -1,6 +1,7 @@
 import Post from 'components/common/Posts/Post';
 import {NormalButton} from 'components/UI/Buttons/buttons';
 import {IconCalendar, IconClose, IconShare} from 'components/UI/Icons/Icons';
+import { Toast } from 'components/UI/Toast/Toast';
 import { useAuth } from 'context/AuthContext';
 import {firestore} from 'firebase.config';
 import {doc, getDoc, updateDoc} from 'firebase/firestore';
@@ -93,10 +94,12 @@ const ProfilePage = () => {
             const userRef = doc(firestore, `users/${userID}`);
 
             let response1 = await getDoc(userRef);
-            console.log(response1.data()[userID]);
+          console.log(response1.data()[userID]);
+          Toast("info", "Profile");
             setUserData(response1.data()[userID]);
         } catch (error) {
-            console.log("error");
+          console.log("error");
+          Toast("error", "Failed" + error.message);
         }
   }
   

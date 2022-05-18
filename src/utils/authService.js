@@ -1,3 +1,4 @@
+import { Toast } from "components/UI/Toast/Toast";
 import {
   firestore,
   firebaseAuth,
@@ -49,10 +50,10 @@ const LoginInWithEmail = async (data, userDispatch, setUserData, navigate) => {
     GetIndividualUserData(response.user.uid,setUserData);
 
     navigate("/home", { replace: true });
-    // Alert("success", "SignIn Successfully!!");
+    Toast("success", "SignIn Successfully!!");
   } catch (err) {
     console.log(err);
-    // Alert("error", err.message);
+    Toast("error", err.message);
   }
 }
 
@@ -88,10 +89,10 @@ const LoginWIthGoogleAuth = async (userDispatch, setUserData, navigate) => {
     console.log(response.user.uid,setUserData)
     GetIndividualUserData(response.user.uid,setUserData);
     navigate("/home", { replace: true });
-    // Alert("success", "Logged In Successfully!");
+    Toast("success", "Logged In Successfully!");
   } catch (err) {
     console.log(err);
-    // Alert("error", err.message);
+    Toast("error", err.message);
   }
 }
 
@@ -124,10 +125,11 @@ const SignupWithEmail = async (userDispatch, data,setUserData, navigate) => {
     console.log(response.user.uid,setUserData)
     GetIndividualUserData(response.user.uid,setUserData);
     navigate("/home", { replace: true });
-    // Alert("success", "SignUp Successfully!!");
+    
+    Toast("success", "SignUp Successfully!!");
   } catch (err) {
     console.log(err);
-    // Alert("error", err.message);
+    Toast("error", err.message);
   }
 }
 
@@ -153,10 +155,10 @@ const CreateUser = async (obj) => {
       [obj.userId]: userObject
     });
     console.log(response);
-    // Alert("success", "Nkew Project Added!!");
+    Toast("success", "Profile Created!!");
   } catch (err) {
     console.log(err.message)
-    // Alert("info", err.message);
+    Toast("info", err.message);
   }
 }
 

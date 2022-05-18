@@ -15,6 +15,7 @@ import {doc, getDoc, updateDoc} from 'firebase/firestore';
 import { useUserData } from 'context/UserContext';
 import { GetIndividualUserData } from 'utils/authService';
 import { Link, NavLink } from 'react-router-dom';
+import { Toast } from 'components/UI/Toast/Toast';
 
 const Post = ({props}) => {
     const { userState, userDispatch } = useAuth();
@@ -42,9 +43,11 @@ const Post = ({props}) => {
                 }
             }});
             console.log(response);
+            Toast("info","Liked a Post")
         }
         catch(error) { 
             console.log("error");
+            Toast("error", "Failed" + error.message);
         }
     }
 
@@ -59,10 +62,11 @@ const Post = ({props}) => {
                 }}
             });
             console.log(response);
-            
+            Toast("info", "Disliked a Post");
         }
         catch(error) { 
             console.log("error");
+            Toast("error", "Failed" + error.message);
         }
     }
 
@@ -81,11 +85,13 @@ const Post = ({props}) => {
                     ...userData,
                     ["bookmarks"]: [ ...userData.bookmarks,props.postid ]}
             });
-            console.log(response,props);
+            console.log(response, props);
+            Toast("info", "Bookmark Added");
             GetIndividualUserData(userState.user.userId, setUserData);
         }
         catch(error) { 
             console.log("error");
+            Toast("error", "Failed" + error.message);
         }
     }
 
@@ -99,10 +105,12 @@ const Post = ({props}) => {
                     ["bookmarks"]: [...userData.bookmarks.filter(post => post !== props.postid ) ]}
             });
             console.log(response);
+            Toast("info", "Bookmark Removed");
             GetIndividualUserData(userState.user.userId, setUserData);
         }
         catch(error) { 
             console.log("error");
+            Toast("error", "Failed" + error.message);
         }
     }
 
@@ -138,10 +146,12 @@ const Post = ({props}) => {
                 }
             });
             console.log(response2);
+            Toast("info","Followed!")
             await GetIndividualUserData(userState.user.userId, setUserData);
         }
         catch(error) { 
             console.log("error");
+            Toast("error", "Failed" + error.message);
         }
     }
 
@@ -172,10 +182,12 @@ const Post = ({props}) => {
                 }
             });
             console.log(response2);
+            Toast("info","UnFollowed")
             await GetIndividualUserData(userState.user.userId, setUserData);
         }
         catch(error) { 
             console.log("error");
+            Toast("error", "Failed" + error.message);
         }
     }
 
