@@ -8,12 +8,14 @@ import { Link } from 'react-router-dom';
 import { LoginWIthGoogleAuth, SignupWithEmail } from 'utils/authService';
 import "./SignUpPage.css";
 import "../LoginPage/LoginPage.css";
+import { useDispatch } from 'react-redux';
 
 const SignUpPage = () => {
   const [data, setData] = useState({ email: "", password: "", name:"" });
   const { userState, userDispatch } = useAuth();
   const { userData, setUserData } = useUserData();
   const navigate = Navigate();
+  const dispatch = useDispatch();
 
   const inputHandler = (e) => {
     setData((data) => ({
@@ -29,7 +31,7 @@ const SignUpPage = () => {
       alert("Input cannot be blank")
     } else {
       console.log(setUserData, userData,data);
-      SignupWithEmail(userDispatch, data, setUserData, navigate);
+      SignupWithEmail(userDispatch, data, setUserData, navigate,dispatch);
     }
     
   };
@@ -40,7 +42,7 @@ const SignUpPage = () => {
   }, []);
 
   const signupWithGoogleHandler = () => {
-    LoginWIthGoogleAuth(userDispatch, setUserData, navigate);
+    LoginWIthGoogleAuth(userDispatch, setUserData, navigate,dispatch);
   };
   return (
     <div className='no-one-container'>

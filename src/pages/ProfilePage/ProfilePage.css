@@ -106,6 +106,12 @@
 .profile-btn{
     border-radius: 3em;
 }
+.user-img{
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 50%;
+    object-fit: cover;
+}
 @media screen and (max-width: 720px) {
 	.post-page-edit-modal {
 		min-width: 80%;

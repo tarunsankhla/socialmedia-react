@@ -7,6 +7,9 @@ import { LoginInWithEmail, LoginWIthGoogleAuth } from 'utils/authService';
 import { NormalButton } from 'components/UI/Buttons/buttons';
 import { useUserData } from 'context/UserContext';
 import { IconGoogle } from 'components/UI/Icons/Icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { userAuthReset } from 'reduxStore/reducers/authSlice';
+import { resetUserHandler } from 'reduxStore/reducers/userSlice';
 
 const LoginPage = () => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -14,7 +17,9 @@ const LoginPage = () => {
   const { userData, setUserData } = useUserData();
   const { userState, userDispatch } = useAuth();
   const navigate = Navigate();
-  console.log("login ")
+  const selector = useSelector((state) => state);
+  const dispatch = useDispatch();
+  console.log(selector,dispatch);
 
   const loginClickHandler = (e) => {
     e.preventDefault();
@@ -23,7 +28,7 @@ const LoginPage = () => {
       alert("Input cannot be blank")
     } else {
       console.log(setUserData,userData);
-      LoginInWithEmail(data, userDispatch, setUserData, navigate);
+      LoginInWithEmail(data, userDispatch, setUserData, navigate, dispatch);
     }
   };
 
@@ -41,19 +46,26 @@ const LoginPage = () => {
     LoginInWithEmail({
       email: "adarshbalika@gmail.com",
       password: "adarshBalika123"
-    }, userDispatch, setUserData, navigate);
+    }, userDispatch, setUserData, navigate, dispatch);
   }
 
-  useEffect(() => {
-    if (!!userState?.token.length) {
-      navigate("/", { replace: true });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!!userState?.token?.length) {
+  //     navigate("/", { replace: true });
+  //   }
+  // }, []);
   return (
     <div className='no-one-container'>
       {/* {showResetPassword && (
         <ResetPassword setShowResetPassword={setShowResetPassword} />
       )} */}
+      {/* {selector.authUserCredential.user.name || "ongoing"}
+      {selector.userDataCredential.user.bio || "bi"}
+      <button onClick={() => {
+        dispatch(userAuthReset());
+        dispatch(resetUserHandler());
+      }
+      }>logout</button> */}
       <div className="login-body-container">
         <div className="login-container">
           <div className="title-header">
@@ -91,7 +103,7 @@ const LoginPage = () => {
               <div className='flex-center pd-10' style={{gap:"2em",flexWrap:"wrap"}}>
                 {/* <NormalButton name="Login" color="red" click={loginClickHandler} class="btn-login-signup" type="submit" /> */}
                 <NormalButton name=" Google" color="red" click={(e) => { e.preventDefault();
-                  LoginWIthGoogleAuth(userDispatch, setUserData, navigate);
+                  LoginWIthGoogleAuth(userDispatch, setUserData, navigate,dispatch);
                 }} icon={<IconGoogle />} class="btn-login-signup" />
                 <NormalButton name="Guest Login" color="red" click={GuestLoginHandler} class="btn-login-signup" />
               </div>

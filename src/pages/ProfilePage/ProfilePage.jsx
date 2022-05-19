@@ -3,10 +3,13 @@ import {NormalButton} from 'components/UI/Buttons/buttons';
 import {IconCalendar, IconClose, IconShare} from 'components/UI/Icons/Icons';
 import { Toast } from 'components/UI/Toast/Toast';
 import { useAuth } from 'context/AuthContext';
-import {firestore} from 'firebase.config';
+import {firebaseStorage, firestore} from 'firebase.config';
 import {doc, getDoc, updateDoc} from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import React, {useEffect, useState, useReducer} from 'react';
+import { useDispatch } from 'react-redux';
 import {useParams} from 'react-router';
+import { signUpUser } from 'reduxStore/reducers/userSlice';
 import {getAllPost} from 'utils/postService';
 import "./ProfilePage.css";
 
@@ -24,6 +27,12 @@ const profileReducerHandler = (state, action) => {
             bio: action.bio
         }
     }
+    if (action.type === "photo") {
+      return {
+          ...state,
+          photo: action.photo
+      }
+    }
     return {
         ...state
     }
@@ -36,9 +45,11 @@ const ProfilePage = () => {
     const [editToggle, setEditToggle] = useState(false);
     const [profilestate, profiledispatch] = useReducer(profileReducerHandler, {
         name: "",
-        bio: ""
+        bio: "",
+        photo:  ""
     });
-    const [showCopied, setShowCopied] = useState(false);
+  const [showCopied, setShowCopied] = useState(false);
+  const dispatch = useDispatch()
     console.log(userID);
 
     useEffect(() => {
@@ -79,28 +90,53 @@ const ProfilePage = () => {
   };
   
     const UpdateProfile = async () => {
-        try {
-            const userToUpdate = doc(firestore, `users/${userID}`);
-            console.log(userToUpdate, userData, profilestate);
-            let response = await updateDoc(userToUpdate, {
-                [userID]: {
-                    ...userData,
-                    ["bio"]: profilestate.bio,
-                    ["name"]: profilestate.name
-                }
-            });
-            console.log(response);
-            setEditToggle(false);
-            const userRef = doc(firestore, `users/${userID}`);
+      try {
+          const userToUpdate = doc(firestore, `users/${userID}`);
+          console.log(userToUpdate, userData, profilestate);
+          let response = await updateDoc(userToUpdate, {
+              [userID]: {
+                  ...userData,
+                  ["bio"]: profilestate.bio,
+                  ["name"]: profilestate.name,
+                  ["photo"] : profilestate.photo
+              }
+          });
+          console.log(response);
+          setEditToggle(false);
+          const userRef = doc(firestore, `users/${userID}`);
 
-            let response1 = await getDoc(userRef);
+          let response1 = await getDoc(userRef);
           console.log(response1.data()[userID]);
           Toast("info", "Profile");
-            setUserData(response1.data()[userID]);
+          setUserData(response1.data()[userID]);
+          dispatch(signUpUser(userID));
         } catch (error) {
           console.log("error");
           Toast("error", "Failed" + error.message);
         }
+  }
+
+  const UploadFile = (data) => { 
+    console.log(data);
+    const storageRef = ref(firebaseStorage, `profileImages/${data.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, data);
+    uploadTask.on('state_changed', (snapshot) => { 
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+    }, 
+      (error) => {
+        console.log(error);
+      // Handle unsuccessful uploads
+      },
+      () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log('File available at', downloadURL);
+            profiledispatch({
+              type: "photo",
+              photo: downloadURL
+            })
+        });
+      });
   }
   
     return (
@@ -133,6 +169,10 @@ const ProfilePage = () => {
                     profiledispatch({
                         type: "bio",
                         bio: userData?.bio
+                    })
+                    profiledispatch({
+                      type: "photo",
+                      photo: userData?.photo
                     })
                 }}>
                   <NormalButton name="Edit Profile" color="#8d9bdb" padding="7px 1em" class="profile-btn" />
@@ -206,7 +246,9 @@ const ProfilePage = () => {
                             e.target.style.height = "inherit";
                             e.target.style.height = `${e.target.scrollHeight}px`;
                             profiledispatch({type: "bio", bio: e.target.value});
-                        }}/>
+                }} />
+                <input type="file" accept='.png, .jpg, .jpeg' onChange={(event)=>UploadFile(event.target.files[0])}/>
+              
               <span onClick={UpdateProfile}>
                 <NormalButton name="Save Post" color="red" />
               </span>

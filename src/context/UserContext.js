@@ -34,7 +34,9 @@ const UserDataProvider = ({ children }) => {
     const [userData, setUserData] = useReducer(UserDataReducer, initialStateUserData);
     
     useEffect(() => {
-        GetIndividualUserData(JSON.parse(localStorage.getItem(ROUTES.VAR_ENCODE_TOKEN)).user.userId, setUserData)
+        if (!!JSON.parse(localStorage.getItem(ROUTES.VAR_ENCODE_TOKEN))?.user?.userId) { 
+            GetIndividualUserData(JSON.parse(localStorage.getItem(ROUTES.VAR_ENCODE_TOKEN))?.user?.userId, setUserData)
+        }
     }, []);
     return <UserDataContext.Provider value={{ userData, setUserData }}>
         {children}

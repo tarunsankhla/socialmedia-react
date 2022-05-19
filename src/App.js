@@ -5,13 +5,16 @@ import { Route, Routes } from "react-router";
 import Main from "Main";
 import RequiredAuth from "components/common/PrivatedRoutes/RequiredRoutes";
 import { ROUTES } from "utils/routes";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import react from "react";
 import Navbar from "components/common/Navbar/Navbar";
 import NotFoundPage from "pages/NotFoundPage/NotFoundPage";
 import LandingPage from "pages/LandingPage/LandingPage";
 import { ToastContainer } from "react-toastify";
 import Loader from "components/UI/Loader/Loader";
+import { GetIndividualUserData } from "utils/authService";
+import { getUserDataHandler, signUpUser } from "reduxStore/reducers/userSlice";
+import { useDispatch } from "react-redux";
 
 
 const PostPage = react.lazy(() => import("pages/PostPage/PostPage"));
@@ -25,6 +28,15 @@ const BookmarkPage = react.lazy(() => import("pages/BookmarkPage/BookmarkPage"))
 
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log("hit");
+    console.log(JSON.parse(localStorage.getItem(ROUTES.VAR_ENCODE_TOKEN))?.user?.userId);
+    if (!!JSON.parse(localStorage.getItem(ROUTES.VAR_ENCODE_TOKEN))?.user?.userId) {
+     
+      dispatch(signUpUser(JSON.parse(localStorage.getItem(ROUTES.VAR_ENCODE_TOKEN))?.user?.userId));
+    }
+  },[])
   return (
     <div className="App">
       <Navbar/>

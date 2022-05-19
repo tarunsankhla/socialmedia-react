@@ -18,9 +18,11 @@ import {
   collection,
   getDocs,
 } from "firebase/firestore";
+import { userAuthCredentialHandler } from "reduxStore/reducers/authSlice";
+import { getUserDataHandler, signUpUser } from "reduxStore/reducers/userSlice";
 
 
-const LoginInWithEmail = async (data, userDispatch, setUserData, navigate) => {
+const LoginInWithEmail = async (data, userDispatch, setUserData, navigate, dispatch) => {
   try {
     console.log(firebaseAuth, data)
     const response = await signInWithEmailAndPassword(
@@ -35,8 +37,20 @@ const LoginInWithEmail = async (data, userDispatch, setUserData, navigate) => {
     console.log(responseOfDOC.data(), responseOfDOC.id, setUserData, response.user.uid);
     console.log(responseOfDOC.data()[response.user.uid]);
 
+    // const dispatch = useDispatch();
+    let obj = {
+      token: response?.user?.accessToken ?? "1",
+      name: response?.user?.displayName ?? "dummy",
+      emailId: response?.user?.email ?? "3",
+      userId: response?.user?.uid ?? "4",
+      photo: response.user.photoURL ?? "5",
+    }
 
-    
+    //redux handler
+    dispatch(userAuthCredentialHandler(obj));
+    dispatch(signUpUser(response?.user?.uid));
+    // dispatch(getUserDataHandler(response?.user?.uid));
+
     userDispatch({
       type: "userauth",
       token: response?.user?.accessToken ?? "",
@@ -58,7 +72,7 @@ const LoginInWithEmail = async (data, userDispatch, setUserData, navigate) => {
 }
 
 
-const LoginWIthGoogleAuth = async (userDispatch, setUserData, navigate) => {
+const LoginWIthGoogleAuth = async (userDispatch, setUserData, navigate, dispatch) => {
   try {
     console.log(firebaseAuth, googleAuthProvider)
     const response = await signInWithPopup(firebaseAuth, googleAuthProvider);
@@ -73,10 +87,15 @@ const LoginWIthGoogleAuth = async (userDispatch, setUserData, navigate) => {
     if (!doesUserAlreadyExist) { 
       await CreateUser(obj);
     }
-    const userRef = doc(firestore, `users/${response.user.uid}`);
-      const responseOfDOC = await getDoc(userRef);
-      console.log(responseOfDOC.data(), responseOfDOC.id, setUserData, response.user.uid);
-      console.log(responseOfDOC.data()[response.user.uid]);
+    // const userRef = doc(firestore, `users/${response.user.uid}`);
+    // const responseOfDOC = await getDoc(userRef);
+    // console.log(responseOfDOC.data(), responseOfDOC.id, setUserData, response.user.uid);
+    // console.log(responseOfDOC.data()[response.user.uid]);
+    
+    //redux handler
+    dispatch(userAuthCredentialHandler(obj));
+    dispatch(signUpUser(response?.user?.uid));
+
     userDispatch({
       type: "userauth",
       token: response?.user?.accessToken ?? "",
@@ -96,7 +115,7 @@ const LoginWIthGoogleAuth = async (userDispatch, setUserData, navigate) => {
   }
 }
 
-const SignupWithEmail = async (userDispatch, data,setUserData, navigate) => {
+const SignupWithEmail = async (userDispatch, data,setUserData, navigate, dispatch) => {
   try {
     console.log(firebaseAuth);
     const response = await createUserWithEmailAndPassword(
@@ -113,6 +132,11 @@ const SignupWithEmail = async (userDispatch, data,setUserData, navigate) => {
       photo: response.user.photoURL ?? "",
     }
     CreateUser(obj);
+
+    //redux handler
+    dispatch(userAuthCredentialHandler(obj));
+    dispatch(signUpUser(response?.user?.uid));
+
     userDispatch({
       type: "userauth",
       token: response?.user?.accessToken ?? "",
