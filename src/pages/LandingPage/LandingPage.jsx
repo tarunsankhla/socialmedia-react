@@ -10,7 +10,7 @@ const LandingPage = () => {
   const { userState } = useAuth();
   return (
       <main className='main-landing-page'>
-      <secion className="landing-page-container">
+      <section className="landing-page-container">
         <p className='page-title'>
           SPACE VERSE
         </p>
@@ -22,14 +22,13 @@ const LandingPage = () => {
           <div className='md-txt'>
             <span className='gray-txt fn-wg-700 big-txt'>SHARE</span> WHAT YOU THINKING</div>
         </section>
-        {/* <section> */}
+        
         {!userState.token.length ?
-          <NormalButton name="JOIN NOW" color="red" class="landing-btn" click={() => navigate("/login")} />
+          <NormalButton name="JOIN NOW" color="red" class="landing-btn hover-btn" click={() => navigate("/login")} />
           :
-          <NormalButton name="EXPLORE" color="red" class="landing-btn" click={() => navigate("/home")}  />
+          <NormalButton name="EXPLORE" color="red" class="landing-btn hover-btn" click={() => navigate("/home")}  />
           }
-        {/* </section> */}
-      </secion>
+      </section>
       <img src={ IMAGES.LandingPage} className="landing-page-img"/>
       </main>
   )

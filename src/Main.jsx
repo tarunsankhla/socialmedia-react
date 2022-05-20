@@ -15,6 +15,7 @@ const Main = () => {
                         <Outlet/>
                     </span>
                     <BesideNavbar />
+                    
                 </div>
 
             </div>

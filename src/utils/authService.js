@@ -1,3 +1,4 @@
+import { Toast } from "components/UI/Toast/Toast";
 import {
   firestore,
   firebaseAuth,
@@ -17,9 +18,11 @@ import {
   collection,
   getDocs,
 } from "firebase/firestore";
+import { userAuthCredentialHandler } from "reduxStore/reducers/authSlice";
+import { getUserDataHandler, signUpUser } from "reduxStore/reducers/userSlice";
 
 
-const LoginInWithEmail = async (data, userDispatch, setUserData, navigate) => {
+const LoginInWithEmail = async (data, userDispatch, setUserData, navigate, dispatch) => {
   try {
     console.log(firebaseAuth, data)
     const response = await signInWithEmailAndPassword(
@@ -34,8 +37,20 @@ const LoginInWithEmail = async (data, userDispatch, setUserData, navigate) => {
     console.log(responseOfDOC.data(), responseOfDOC.id, setUserData, response.user.uid);
     console.log(responseOfDOC.data()[response.user.uid]);
 
+    // const dispatch = useDispatch();
+    let obj = {
+      token: response?.user?.accessToken ?? "1",
+      name: response?.user?.displayName ?? "dummy",
+      emailId: response?.user?.email ?? "3",
+      userId: response?.user?.uid ?? "4",
+      photo: response.user.photoURL ?? "5",
+    }
 
-    
+    //redux handler
+    dispatch(userAuthCredentialHandler(obj));
+    dispatch(signUpUser(response?.user?.uid));
+    // dispatch(getUserDataHandler(response?.user?.uid));
+
     userDispatch({
       type: "userauth",
       token: response?.user?.accessToken ?? "",
@@ -49,15 +64,15 @@ const LoginInWithEmail = async (data, userDispatch, setUserData, navigate) => {
     GetIndividualUserData(response.user.uid,setUserData);
 
     navigate("/home", { replace: true });
-    // Alert("success", "SignIn Successfully!!");
+    Toast("success", "SignIn Successfully!!");
   } catch (err) {
     console.log(err);
-    // Alert("error", err.message);
+    Toast("error", err.message);
   }
 }
 
 
-const LoginWIthGoogleAuth = async (userDispatch, setUserData, navigate) => {
+const LoginWIthGoogleAuth = async (userDispatch, setUserData, navigate, dispatch) => {
   try {
     console.log(firebaseAuth, googleAuthProvider)
     const response = await signInWithPopup(firebaseAuth, googleAuthProvider);
@@ -72,10 +87,15 @@ const LoginWIthGoogleAuth = async (userDispatch, setUserData, navigate) => {
     if (!doesUserAlreadyExist) { 
       await CreateUser(obj);
     }
-    const userRef = doc(firestore, `users/${response.user.uid}`);
-      const responseOfDOC = await getDoc(userRef);
-      console.log(responseOfDOC.data(), responseOfDOC.id, setUserData, response.user.uid);
-      console.log(responseOfDOC.data()[response.user.uid]);
+    // const userRef = doc(firestore, `users/${response.user.uid}`);
+    // const responseOfDOC = await getDoc(userRef);
+    // console.log(responseOfDOC.data(), responseOfDOC.id, setUserData, response.user.uid);
+    // console.log(responseOfDOC.data()[response.user.uid]);
+    
+    //redux handler
+    dispatch(userAuthCredentialHandler(obj));
+    dispatch(signUpUser(response?.user?.uid));
+
     userDispatch({
       type: "userauth",
       token: response?.user?.accessToken ?? "",
@@ -88,33 +108,39 @@ const LoginWIthGoogleAuth = async (userDispatch, setUserData, navigate) => {
     console.log(response.user.uid,setUserData)
     GetIndividualUserData(response.user.uid,setUserData);
     navigate("/home", { replace: true });
-    // Alert("success", "Logged In Successfully!");
+    Toast("success", "Logged In Successfully!");
   } catch (err) {
     console.log(err);
-    // Alert("error", err.message);
+    Toast("error", err.message);
   }
 }
 
-const SignupWithEmail = async (userDispatch, data,setUserData, navigate) => {
+const SignupWithEmail = async (userDispatch, data,setUserData, navigate, dispatch) => {
   try {
     console.log(firebaseAuth);
     const response = await createUserWithEmailAndPassword(
       firebaseAuth,
       data.email,
-      data.password
+      data.password,
+      data.name
     );
-    console.log(response);
+    console.log(response,data);
     let obj = {
-      name: response?.user?.displayName ?? "",
+      name: data.name,
       emailId: response?.user?.email ?? "",
       userId: response?.user?.uid ?? "",
       photo: response.user.photoURL ?? "",
     }
     CreateUser(obj);
+
+    //redux handler
+    dispatch(userAuthCredentialHandler(obj));
+    dispatch(signUpUser(response?.user?.uid));
+
     userDispatch({
       type: "userauth",
       token: response?.user?.accessToken ?? "",
-      name: response?.user?.displayName ?? "",
+      name: data.name,
       emailId: response?.user?.email ?? "",
       userId: response?.user?.uid ?? "",
       photo: response.user.photoURL ?? "",
@@ -123,10 +149,11 @@ const SignupWithEmail = async (userDispatch, data,setUserData, navigate) => {
     console.log(response.user.uid,setUserData)
     GetIndividualUserData(response.user.uid,setUserData);
     navigate("/home", { replace: true });
-    // Alert("success", "SignUp Successfully!!");
+    
+    Toast("success", "SignUp Successfully!!");
   } catch (err) {
     console.log(err);
-    // Alert("error", err.message);
+    Toast("error", err.message);
   }
 }
 
@@ -152,10 +179,10 @@ const CreateUser = async (obj) => {
       [obj.userId]: userObject
     });
     console.log(response);
-    // Alert("success", "Nkew Project Added!!");
+    Toast("success", "Profile Created!!");
   } catch (err) {
     console.log(err.message)
-    // Alert("info", err.message);
+    Toast("info", err.message);
   }
 }
 
@@ -197,9 +224,9 @@ const getAllUser = async (setData) => {
   try {
     var result = await getDocs(collectionRef);
     // console.log(result.docs);
-    setData(result.docs.map(i => {
+    setData([...result.docs.map(i => {
         return { ...(i.data()[i.id]) }
-      }));
+      })]);
   } catch (err) { 
     console.log(err);
     return false;

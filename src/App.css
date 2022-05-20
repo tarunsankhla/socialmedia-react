@@ -8,6 +8,7 @@
 
 :root {
 	--primary-color: #9675b4;
+	--primary-main-color:rgb(141, 155, 219);
 	--primary-shade-color: #ddd2f0;
 	--primary-dark-shade-color: #220a38;
 	--secondary-color: #dedede;
@@ -16,6 +17,20 @@
 	--icon-color :black;
 	--black-hl-p5: rgba(0, 0, 0, 0.05);
 	--white-hl-p3: rgba(255, 255, 255, 0.3);
+}
+
+
+body::-webkit-scrollbar {
+	width: 1rem;
+}
+
+body::-webkit-scrollbar-track {
+	background-color: white;
+}
+body::-webkit-scrollbar-thumb {
+	background-color:var(--primary-main-color);
+	border-radius: 1rem;
+	border: 3px solid white;
 }
 .App {
 	text-align: center;
@@ -255,10 +270,10 @@ span {
 	display: flex;
     padding: 0 1em;
     flex-direction: column;
-    justify-content: space-between;
     align-items: baseline;
     width: 100%;
     min-height: 5em;
+	gap: 1em;
 }
 
 .post-data-content-header {
@@ -266,6 +281,15 @@ span {
 	align-items: self-end;
 	gap: 1em;
 	width: 100%;
+}
+
+.hover-btn{
+    transition:background-color 2s ease;
+}
+
+.hover-btn:hover{
+    transform: scale(1.03);
+    background-color: var(--primary-color) !important;
 }
 
 .btn {
@@ -295,6 +319,22 @@ span {
 	transform: scale(1.02);
 	transition: height 1s;
 }
+
+.btn-submit{
+	border: none;
+    outline: none;
+    color: white;
+    font-weight: 600;
+    padding: 5px 10px;
+    min-width: 30%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap :5px;
+	margin: auto;
+}
+
 .copied-clipboard {
 	position: absolute;
 	bottom: 1em;
@@ -367,10 +407,10 @@ span {
 
 @media screen and (max-width:1060px) {
 	.outlet-body {
-		width: 60vw;
+		width: 65vw;
 	}
 	.AsideNav {
-		width: 40vw;
+		width: 35vw;
 	}
 }
 

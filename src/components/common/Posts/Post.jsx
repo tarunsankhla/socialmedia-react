@@ -15,6 +15,8 @@ import {doc, getDoc, updateDoc} from 'firebase/firestore';
 import { useUserData } from 'context/UserContext';
 import { GetIndividualUserData } from 'utils/authService';
 import { Link, NavLink } from 'react-router-dom';
+import { Toast } from 'components/UI/Toast/Toast';
+import { async } from '@firebase/util';
 
 const Post = ({props}) => {
     const { userState, userDispatch } = useAuth();
@@ -31,38 +33,35 @@ const Post = ({props}) => {
         }, 2000);
     };
     
-    const AddLikeOnPost = () => {
+    const AddLikeOnPost = async () => {
         try{
             const postToUpdate = doc(firestore, `posts/${props.postid}`);
-            console.log(postToUpdate);
-            let response = updateDoc(postToUpdate, { [props.postid] : {
+            await updateDoc(postToUpdate, { [props.postid] : {
                 ...props,
                 ["likes"]: {...props.likes,likedBy: [...props.likes.likedBy, userState.user.userId],
                     likeCount: props.likes.likeCount + 1
                 }
             }});
-            console.log(response);
+            Toast("info","Liked a Post")
         }
         catch(error) { 
-            console.log("error");
+            Toast("error", "Failed" + error.message);
         }
     }
 
-    const RemoveLikeOnPost = () => { 
+    const RemoveLikeOnPost = async () => { 
         try{
             const postToUpdate = doc(firestore, `posts/${props.postid}`);
-            console.log(postToUpdate);
-            let response = updateDoc(postToUpdate, { [props.postid] : {...props,
+            await updateDoc(postToUpdate, { [props.postid] : {...props,
                 ["likes"]: {...props.likes,
                     likedBy: [...props.likes.likedBy.filter(userID=> userID !== userState.user.userId)],
                     likeCount: props.likes.likeCount - 1
                 }}
             });
-            console.log(response);
-            
+            Toast("info", "Disliked a Post");
         }
         catch(error) { 
-            console.log("error");
+            Toast("error", "Failed" + error.message);
         }
     }
 
@@ -70,39 +69,32 @@ const Post = ({props}) => {
         
         try {
             const userToUpdate = doc(firestore, `users/${userState.user.userId}`);
-            console.log(userToUpdate,userData);
-            // let response = await updateDoc(userToUpdate, {
-            //     [userState.user.userId]: {
-            //         ...userData,
-            //         ["bookmarks"]: [ ...userData.bookmarks,{...props} ]}
-            // });
-            let response = await updateDoc(userToUpdate, {
+            await updateDoc(userToUpdate, {
                 [userState.user.userId]: {
                     ...userData,
                     ["bookmarks"]: [ ...userData.bookmarks,props.postid ]}
             });
-            console.log(response,props);
+            Toast("info", "Bookmark Added");
             GetIndividualUserData(userState.user.userId, setUserData);
         }
         catch(error) { 
-            console.log("error");
+            Toast("error", "Failed" + error.message);
         }
     }
 
-    const RemovePostFromBookmarkHandler = () => { 
+    const RemovePostFromBookmarkHandler = async () => { 
         try {
             const userToUpdate = doc(firestore, `users/${userState.user.userId}`);
-            console.log(userToUpdate,userData);
-            let response = updateDoc(userToUpdate, {
+            await updateDoc(userToUpdate, {
                 [userState.user.userId]: {
                     ...userData,
                     ["bookmarks"]: [...userData.bookmarks.filter(post => post !== props.postid ) ]}
             });
-            console.log(response);
+            Toast("info", "Bookmark Removed");
             GetIndividualUserData(userState.user.userId, setUserData);
         }
         catch(error) { 
-            console.log("error");
+            Toast("error", "Failed" + error.message);
         }
     }
 
@@ -110,21 +102,14 @@ const Post = ({props}) => {
  
         try {
             const userToUpdate = doc(firestore, `users/${userState.user.userId}`);
-            console.log(userToUpdate,userData,userState.user.userId);
             let response = await updateDoc(userToUpdate, {
                 [userState.user.userId]: {
                     ...userData,
                     ["following"]: [ ...userData.following,{...props.user} ]}
             });
-            console.log(response);
 
             const followingUserToUpdate = doc(firestore, `users/${props.user.userId}`);
-            console.log(followingUserToUpdate, userData, props.user.userId);
-
             let response1 = await getDoc(followingUserToUpdate);
-            console.log(response1.data(), response1.id);
-            console.log(response1.data()[props.user.userId]);
-
             var otherUserData = response1.data()[props.user.userId];
             let response2 = updateDoc(followingUserToUpdate, {
                 [props.user.userId]: {
@@ -137,11 +122,12 @@ const Post = ({props}) => {
                         }]
                 }
             });
-            console.log(response2);
+
+            Toast("info","Followed!")
             await GetIndividualUserData(userState.user.userId, setUserData);
         }
         catch(error) { 
-            console.log("error");
+            Toast("error", "Failed" + error.message);
         }
     }
 
@@ -149,21 +135,16 @@ const Post = ({props}) => {
 
         try {
             const userToUpdate = doc(firestore, `users/${userState.user.userId}`);
-            console.log(userToUpdate,userData,userState.user.userId);
             let response = await updateDoc(userToUpdate, {
                 [userState.user.userId]: {
                     ...userData,
                     ["following"]: [ ...userData.following.filter(user=> user.userId !==props.user.userId) ]}
             });
-            console.log(response);
+
 
             const followingUserToUpdate = doc(firestore, `users/${props.user.userId}`);
-            console.log(followingUserToUpdate, userData, props.user.userId);
 
             let response1 = await getDoc(followingUserToUpdate);
-            console.log(response1.data(), response1.id);
-            console.log(response1.data()[props.user.userId]);
-
             var otherUserData = response1.data()[props.user.userId];
             let response2 = updateDoc(followingUserToUpdate, {
                 [props.user.userId]: {
@@ -171,35 +152,35 @@ const Post = ({props}) => {
                     ["followers"]: [...otherUserData.followers.filter(user=> user.userId !== userState.user.userId)]
                 }
             });
-            console.log(response2);
+            Toast("info","UnFollowed")
             await GetIndividualUserData(userState.user.userId, setUserData);
         }
         catch(error) { 
-            console.log("error");
+            Toast("error", "Failed" + error.message);
         }
     }
 
     return (
         <div className='post-data-container relative'>
             <div>
-            <Link to={`/profile/${props.user.userId}`}>{
-                props.user?.photo.length ?
-                    <img src={props.user.photo} className='handle-img-np' />
+            <Link to={`/profile/${props?.user?.userId}`}>{
+                props?.user?.photo.length ?
+                    <img src={props?.user?.photo} className='handle-img-np' />
                     : <span className='handle-img-np handle-img-ph'>
-                        {  props.user.name ? props.user.name[0].toUpperCase() : "D"   }
+                        {  props?.user?.name ? props?.user?.name[0].toUpperCase() : "D"   }
                     </span>
             }</Link>
             </div>
             <div className='post-data-show-container'>
                 <div className='flex post-data-content-header'>
                     <p>
-                    <span className='fn-wg-700'>{props.user.name || "dummy name"}</span>
-                        {props.user.userId !== userData.userId &&
+                    <span className='fn-wg-700'>{props?.user?.name || "dummy name"}</span>
+                        {props?.user?.userId !== userData?.userId &&
                             (userData.following.some(user => user.userId === props.user.userId ) ?
-                            <span className='post-data-follow-container hover gray-txt lg-txt' onClick={RemoveUserFromFollowersHandler}>
+                            <span className='post-data-follow-container hover gray-txt lg-txt fn-wg-700 ' onClick={RemoveUserFromFollowersHandler}>
                                 following
                             </span>
-                            : <span className=' post-data-follow-container hover gray-txt lg-txt'
+                            : <span className=' post-data-follow-container hover gray-txt lg-txt fn-wg-700 '
                                 onClick={AddUserAsFollowersHandler}>
                                 follow <IconPlus />
                                 </span>)}
@@ -219,20 +200,20 @@ const Post = ({props}) => {
                 </Link>
                 <div className='post-data-action-container'>
                     <span className='hover flex flex-center lg-txt'>
-                        {props.likes.likedBy.includes(userState.user.userId) ?
+                        {props?.likes?.likedBy?.includes(userState.user.userId) ?
                             <span className='hover' onClick={RemoveLikeOnPost}>
                                 <IconHeartFill />
                             </span>
                             : <span className='hover' onClick={AddLikeOnPost}>
                                 <IconHeart />
                             </span>}
-                        {props.likes.likedBy.length}
+                        {props?.likes?.likedBy?.length}
                     </span>
                     <span className='hover'>
                         <Link to={ `/post/${props.user.userId}/${props.postid}`}><IconComment /></Link></span>
                     <span className='hover' onClick={urlClickHandler}><IconShare /></span>
                     {
-                        userData.bookmarks.some(post => post === props.postid)
+                        userData.bookmarks.some(post => post === props?.postid)
                             ? <span className='hover' onClick={RemovePostFromBookmarkHandler}><IconsBookmarkFill /></span>
                             : <span className='hover'  onClick={ AddPostInBookmarkHandler}><IconsBookmark /></span>
                     }

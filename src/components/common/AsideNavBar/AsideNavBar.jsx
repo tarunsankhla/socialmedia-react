@@ -2,8 +2,11 @@ import { IconsBookmark, IconsExploreNavbar, IconsHomeNavbar, IconsProfile } from
 import { useAuth } from 'context/AuthContext';
 import {useUserData} from 'context/UserContext'
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
+import { userAuthReset } from 'reduxStore/reducers/authSlice';
+import { resetUserHandler } from 'reduxStore/reducers/userSlice';
 import { ROUTES } from 'utils/routes';
 import "./AsideNavBar.css";
 
@@ -23,10 +26,14 @@ const AsideNavBar = () => {
     const { userState, userDispatch } = useAuth();
     let navigate = useNavigate();
     const { userData, setUserData } = useUserData();
+    const dispatch = useDispatch();
+
     // const { modalToggle, setmodalToggle } = useModal();
     const LogoutHandler = () => {
         userDispatch({ type: "reset" });
         setUserData({ type: "reset" });
+        dispatch(userAuthReset());
+        dispatch(resetUserHandler());
         navigate("/", { replace: true });
       };
     
@@ -71,7 +78,7 @@ const AsideNavBar = () => {
                         </NavLink>
                             ) : (
                             <button
-                                className="btn primary-outline-btn-md"
+                                className="btn logout-btn hover-btn"
                                 onClick={LogoutHandler}
                             >
                                 Logout

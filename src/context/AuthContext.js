@@ -24,6 +24,7 @@ const UserAuthReducer = (state, action) => {
     localStorage.setItem(ROUTES.VAR_ENCODE_TOKEN, JSON.stringify({ token: action.token, user: user }))
     return { token: action.token, user: user };
   } else if (action.type === "reset") {
+    console.log("Reset")
     localStorage.removeItem(ROUTES.VAR_ENCODE_TOKEN);
     return intitailState;
   }
@@ -37,7 +38,7 @@ const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem(ROUTES.VAR_ENCODE_TOKEN)) ?? intitailState
   );
 
-  localStorage.setItem(ROUTES.VAR_ENCODE_TOKEN, JSON.stringify(userState));
+  // localStorage.setItem(ROUTES.VAR_ENCODE_TOKEN, JSON.stringify(userState));
 
   return (
     <AuthContext.Provider value={{ userState, userDispatch }}>

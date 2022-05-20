@@ -58,7 +58,7 @@ console.log(process.env.REACT_APP_FIREBASE_API_KEY, process.env.REACT_APP_FIREBA
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const storage = getStorage(app);
+const firebaseStorage = getStorage(app);
 const firestore = getFirestore(app);
 const firebaseAuth = getAuth(app);
 const googleAuthProvider = new GoogleAuthProvider();
@@ -67,7 +67,7 @@ console.log(app, firebaseAuth, googleAuthProvider);
 export {
     app,
     analytics,
-    storage,
+    firebaseStorage,
     firestore,
     firebaseAuth,
     googleAuthProvider,

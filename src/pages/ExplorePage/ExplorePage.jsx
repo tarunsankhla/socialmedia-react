@@ -1,6 +1,7 @@
 import Post from 'components/common/Posts/Post';
 import { NormalButton } from 'components/UI/Buttons/buttons';
 import { IconClose } from 'components/UI/Icons/Icons';
+import Loader from 'components/UI/Loader/Loader';
 import {firestore} from 'firebase.config';
 import {collection, onSnapshot, query, where} from 'firebase/firestore';
 import React, {useState, useEffect} from 'react';
@@ -78,23 +79,26 @@ const ExplorePage = () => {
     return (
         <div>
             <div className='explore-fitler-tab'>
-                <NormalButton class="clear-btn" color="red" name="clear" click={() => setFilterType("")} />
+                
                 <div className='explore-filter-tag'>
-                    
-                    <NormalButton name="Trending" txtcolor={`${fitlertype === "Trending" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn" click={() =>
-                        setFilterType("Trending") } />
+                    <NormalButton name="Trending" txtcolor={`${fitlertype === "Trending" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn"
+                        click={() => setFilterType("Trending")} borderBottom={`${fitlertype === "Trending"  ? " 2px solid rgb(0 151 167)" : ""}`} />
                     <NormalButton name="Recent" txtcolor={`${fitlertype === "Recent" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn"
-                        click={() => setFilterType("Recent")} />
+                        click={() => setFilterType("Recent")}  borderBottom={`${fitlertype === "Recent"  ? "2px solid rgb(0 151 167)" : ""}`}/>
                     <NormalButton name="Sort by Latest" txtcolor={`${fitlertype === "Latest" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn"
-                        click={() => setFilterType("Latest")} />
+                        click={() => setFilterType("Latest")}  borderBottom={`${fitlertype === "Latest"  ? "2px solid rgb(0 151 167)" :  "" }`}/>
                     <NormalButton name="Sort by Oldest" txtcolor={`${fitlertype === "Oldest" ? "rgb(0 151 167)" : "#9675b4"}`} class="explore-fitler-btn"
-                            click={() => setFilterType("Oldest")} />
+                            click={() => setFilterType("Oldest")}  borderBottom={`${fitlertype === "Oldest" ? "2px solid rgb(0 151 167)" : "" }`}/>
                 </div>
                 
                 
             </div>
-            {!!fitlertype.length && <p className='gray-txt fn-wg-700'>Search Result: {allDataArray.length}</p>}
-            <div> {
+            {!!fitlertype.length && 
+            <div>
+            <p className='gray-txt fn-wg-700'>Search Result: {allDataArray.length}</p>
+            <NormalButton class="clear-btn" color="red" name="clear" click={() => setFilterType("")} />
+            </div>}
+            <div> {allDataArray.length ?
                 allDataArray.map(i => (
                     <Post props={i}
                         key={
@@ -102,6 +106,9 @@ const ExplorePage = () => {
                         }/>
 
                 ))
+                : 
+                // <Loader/>
+                <p className='page-title'>No Post</p>
             } </div>
         </div>
     )

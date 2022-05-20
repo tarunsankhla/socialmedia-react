@@ -1,6 +1,6 @@
 .post-data-action-container{
     display: flex;
-    justify-content: start;
+    justify-content: space-evenly;
     align-items: center;
     gap: 4em;
     padding: 5px 0 0;
@@ -12,9 +12,10 @@
 .post-data-follow-container{
     display: inline-flex;
     padding: 0 10px;
-    border: 2px solid;
+    /* border: 2px solid; */
     border-radius: 5px;
     margin-left: 5px;
+    background-color: gainsboro;
 }
 
 .post-data-content-container{
