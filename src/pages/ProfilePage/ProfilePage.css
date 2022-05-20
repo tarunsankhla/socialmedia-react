@@ -106,11 +106,19 @@
 .profile-btn{
     border-radius: 3em;
 }
+
 .user-img{
     height: 2.5em;
     width: 2.5em;
     border-radius: 50%;
     object-fit: cover;
+}
+
+.follow-btn{
+	height: fit-content;
+    background-color: #8d9bdb;
+    color: white;
+	padding: 5px;
 }
 @media screen and (max-width: 720px) {
 	.post-page-edit-modal {

@@ -26,7 +26,7 @@ const PostPage = () => {
         GetIndividualPostData(postID,setPostData)
     }, []);
 
-    const AddCommentToPost = () => { 
+    const AddCommentToPost = async () => { 
         try{
             const postToUpdate = doc(firestore, `posts/${postID}`);
             console.log(postToUpdate);
@@ -42,14 +42,12 @@ const PostPage = () => {
                     emailId: userData.emailId
                 }
             }
-            console.log(newComment);
-            let response = updateDoc(postToUpdate, { [postID] : {
+            await updateDoc(postToUpdate, { [postID] : {
                 ...postData,
                 ["comments"]: [...postData.comments, { ...newComment }],
                 postid:postID
             }});
-            console.log(response);
-            GetIndividualPostData(postID, setPostData);
+            await GetIndividualPostData(postID, setPostData);
             setComment("");
         }
         catch(error) { 
@@ -58,18 +56,17 @@ const PostPage = () => {
         }
     }
 
-    const UpdatePost = () => { 
+    const UpdatePost = async () => { 
         try{
             const postToUpdate = doc(firestore, `posts/${postID}`);
             console.log(postToUpdate);
             
-            let response = updateDoc(postToUpdate, { [postID] : {
+            await updateDoc(postToUpdate, { [postID] : {
                 ...postData,
                 ["content"]: postContent,
                 postid:postID
             }});
-            console.log(response);
-            GetIndividualPostData(postID, setPostData);
+            await GetIndividualPostData(postID, setPostData);
             settoggleAction(false);
             settoggleEdit(false);
         }
@@ -127,16 +124,16 @@ const PostPage = () => {
             <div className="post-page-action-container">
                 
                 <span>
-                        {postData?.likes?.likedBy?.includes(userID) ?
-                        <span className='hover' onClick={() => {
-                            RemoveLikeOnPost(postData, userID,postID);
-                            GetIndividualPostData(postID, setPostData);
+                        {postData?.likes?.likedBy?.includes(userData.userId) ?
+                        <span className='hover' onClick={async () => {
+                            await RemoveLikeOnPost(postData, userData?.userId,postID);
+                            await GetIndividualPostData(postID, setPostData);
                         }}>
                                 <IconHeartFill />
                             </span>
-                        : <span className='hover' onClick={() => {
-                            AddLikeOnPost(postData, userID,postID);
-                            GetIndividualPostData(postID, setPostData);
+                        : <span className='hover' onClick={async() => {
+                            await AddLikeOnPost(postData, userData.userId,postID);
+                            await GetIndividualPostData(postID, setPostData);
                         }}>
                                 <IconHeart />
                             </span>}
@@ -144,14 +141,14 @@ const PostPage = () => {
                 <span onClick={()=>setToggleComment(prev=>!prev)}><IconComment /></span>
                 {
                         userData.bookmarks.some(post => post === postID)
-                        ? <span className='hover' onClick={() => {
-                            RemovePostFromBookmarkHandler(userData, setUserData, postID, userID);
-                            GetIndividualPostData(postID, setPostData);
+                        ? <span className='hover' onClick={async () => {
+                            await RemovePostFromBookmarkHandler(userData, setUserData, postID, userID);
+                            await GetIndividualPostData(postID, setPostData);
                         }
                         }><IconsBookmarkFill /></span>
-                        : <span className='hover' onClick={() => {
-                            AddPostInBookmarkHandler(userData, postData, setUserData,postID, userID);
-                            GetIndividualPostData(postID, setPostData);
+                        : <span className='hover' onClick={async () => {
+                            await AddPostInBookmarkHandler(userData, postData, setUserData,postID, userID);
+                            await GetIndividualPostData(postID, setPostData);
                         }}><IconsBookmark /></span>
                     }
             </div>

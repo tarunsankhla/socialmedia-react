@@ -6,7 +6,7 @@ import "./Navbar.css";
 
 const Navbar = () => {
   const { userData } = useUserData();
-  const userDataCredential = useSelector(state => state.userDataCredential)
+  const authUserCredential = useSelector(state => state.authUserCredential)
   const navigate = Navigate();
   return (
     <div className='Navbar'>
@@ -15,7 +15,7 @@ const Navbar = () => {
           style={{cursor:"pointer"}}>
         SpaceVerse</p>
       {/* <p>{userData?.emailId ? "@" + userData?.emailId?.split("@")[0] : ""}</p> */}
-      <p>{userDataCredential?.user?.emailId ? "@" +userDataCredential?.user?.emailId.split("@")[0] : ""}</p>
+      <p>{authUserCredential?.user?.emailId ? "@" +authUserCredential?.user?.emailId.split("@")[0] : ""}</p>
   
     </div>
   )

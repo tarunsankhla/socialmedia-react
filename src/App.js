@@ -6,7 +6,7 @@ import Main from "Main";
 import RequiredAuth from "components/common/PrivatedRoutes/RequiredRoutes";
 import { ROUTES } from "utils/routes";
 import { Suspense, useEffect } from "react";
-import react from "react";
+import react, {lazy} from "react";
 import Navbar from "components/common/Navbar/Navbar";
 import NotFoundPage from "pages/NotFoundPage/NotFoundPage";
 import LandingPage from "pages/LandingPage/LandingPage";
@@ -15,16 +15,17 @@ import Loader from "components/UI/Loader/Loader";
 import { GetIndividualUserData } from "utils/authService";
 import { getUserDataHandler, signUpUser } from "reduxStore/reducers/userSlice";
 import { useDispatch } from "react-redux";
+// import ProfilePage  from './pages/ProfilePage/ProfilePage';
 
 
-const PostPage = react.lazy(() => import("pages/PostPage/PostPage"));
-const ProfilePage = react.lazy(() => import('./pages/ProfilePage/ProfilePage'));
-const HomePage = react.lazy(() => import("pages/HomePage/HomePage"));
-const ExplorePage  = react.lazy(() => import("pages/ExplorePage/ExplorePage"));
-const LoginPage    = react.lazy(() => import("pages/LoginPage/LoginPage"));
-const SignUpPage   = react.lazy(() => import("pages/SignUpPage/SignUpPage"));
-const BookmarkPage = react.lazy(() => import("pages/BookmarkPage/BookmarkPage"));
-// const NotFoundPage = react.lazy(() => import("pages/NotFoundPage/NotFoundPage"));
+const PostPage = lazy(() => import("pages/PostPage/PostPage"));
+const ProfilePage = lazy(() => import('pages/ProfilePage/ProfilePage'));
+const HomePage = lazy(() => import("pages/HomePage/HomePage"));
+const ExplorePage  = lazy(() => import("pages/ExplorePage/ExplorePage"));
+const LoginPage    = lazy(() => import("pages/LoginPage/LoginPage"));
+const SignUpPage   = lazy(() => import("pages/SignUpPage/SignUpPage"));
+const BookmarkPage = lazy(() => import("pages/BookmarkPage/BookmarkPage"));
+// const NotFoundPagect.lazy(() => import("pages/NotFoundPage/NotFoundPage"));
 
 
 function App() {
@@ -64,7 +65,7 @@ function App() {
           <Route path={ROUTES.ROUTE_PATH_ProfilePage} element={
             <Suspense fallback={<Loader />}>
               <ProfilePage />
-            </Suspense>
+           </Suspense>
           }/>
 
           <Route path={ROUTES.ROUTE_PATH_POSTPAGE} element={

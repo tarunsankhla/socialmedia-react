@@ -224,9 +224,9 @@ const getAllUser = async (setData) => {
   try {
     var result = await getDocs(collectionRef);
     // console.log(result.docs);
-    setData(result.docs.map(i => {
+    setData([...result.docs.map(i => {
         return { ...(i.data()[i.id]) }
-      }));
+      })]);
   } catch (err) { 
     console.log(err);
     return false;

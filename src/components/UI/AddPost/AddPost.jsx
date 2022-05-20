@@ -9,6 +9,7 @@ import {doc, setDoc} from "firebase/firestore";
 import {useState} from 'react';
 import {useAuth} from 'context/AuthContext';
 import { useUserData } from 'context/UserContext';
+import { useSelector } from 'react-redux';
 
 const img = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToLFJbTrVFnOBgjYC_-vGIIM4aQwuYco1Xww&usqp=CAU";
 
@@ -32,7 +33,8 @@ const AddPost = () => {
 
     const [Post, setPost] = useState(initialPostObject);
     const { userState, userDispatch } = useAuth();
-    const { userData,setUserData} = useUserData()
+    const { userData, setUserData } = useUserData()
+    const selector = useSelector((state) => state);
 
     const AddPostHandler = async () => {
         
@@ -80,8 +82,8 @@ const AddPost = () => {
                 {/* <img src={userState.user.photo}
                     className=''
                     alt='user-img' /> */}
-                {  userState.user?.photo.length ?
-                    <img src={userState.user.photo} className='handle-img-np user-img' />
+                { userState?.user?.photo?.length ?
+                    <img src={userState?.user?.photo} className='handle-img-np user-img' />
                     : <span className='handle-img-np handle-img-ph'>
                         {  userState.user.name ? userState.user.name[0].toUpperCase() : "D"   }
                     </span>}

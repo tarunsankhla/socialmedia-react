@@ -123,7 +123,7 @@ function IconGoogle(props) {
     )
   }
 
-export {
+export  {
     IconsHomeNavbar,
     IconsExploreNavbar,
     IconsBookmark,
