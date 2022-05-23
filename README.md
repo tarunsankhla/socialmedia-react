@@ -86,13 +86,31 @@ Responsive Site (Both Desktop and Mobile Responsive)
        - Can sort the posts by the date Sort by oldest and latest
 
 6. Bookmark Page
-7. Profile Page
-8. Filter and Sort
-9. Share Profile
+  - Can see Bookmark post on the post by clicking on icon and remove it by again clicking on icon
+  - All current bookmark of the page
+ 
+8. Profile Page
+ - Edit a profile name, bio, image
+ - See count of follower and following user and all post by that user
+ - share profile
+
+9. Share Profile or post
+   - share a profile by going on profile page and clicking on share profile button 
+   - share a post by clicking on share icon on post
+ 
 10. Login Page
+   - Can Login using Email and password
+   - can login using guest login and also by gmail login
+   
 11. SignUp Page
-12. Landing Page
-13. Loader and React Toasitfy
+  - Create a Account by using Email, password and name
+  - Can also Sign Up using Google auth
+  
+13. Loader and React Toasitfy 
+ - Integrated React Toastify
+ - added loader on React Lazy
+ 
+14, Lazy Loading
 
 
 <hr/>
