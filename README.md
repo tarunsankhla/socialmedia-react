@@ -110,7 +110,7 @@ Responsive Site (Both Desktop and Mobile Responsive)
  - Integrated React Toastify
  - added loader on React Lazy
  
-14, Lazy Loading
+14. Landing Page
 
 
 <hr/>
