@@ -44,7 +44,7 @@ const BesideNavbar = () => {
                 </div>
                 <hr/>
                 <div className='beside-user-data-container'>
-                    {userFollowArray.map(user => (
+                    {userFollowArray.slice(0,7).map(user => (
                         <div className='user-data-beside-section' key={user?.userId + user?.updatedAt   }>
                             <Link to={`/profile/${user.userId}`}>
                                 <div className='user-data-beside-section-name'>
@@ -62,7 +62,7 @@ const BesideNavbar = () => {
                                 </div>
                             </Link>
                             <span>  { userData.userId !== user.userId &&
-                                (userData.following.some(i => i.userId === user.userId) ?
+                                (userData?.following?.some(i => i.userId === user.userId) ?
                                 <span className='user-data-beside-section-name beside-action fn-wg-700 hover gray-txt lg-txt'
                                    onClick={()=>UnFollowUser(user)}>
                                     following

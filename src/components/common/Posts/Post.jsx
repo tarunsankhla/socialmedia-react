@@ -17,12 +17,13 @@ import { GetIndividualUserData } from 'utils/authService';
 import { Link, NavLink } from 'react-router-dom';
 import { Toast } from 'components/UI/Toast/Toast';
 import { async } from '@firebase/util';
+import { useNavigate } from 'react-router';
 
 const Post = ({props}) => {
     const { userState, userDispatch } = useAuth();
     const { userData, setUserData } = useUserData();
     const [showCopied, setShowCopied] = useState(false);
-
+    const navigate = useNavigate();
     const urlClickHandler = () => {
         navigator.clipboard.writeText(
             `https://spaceverse.netlify.app/post/${props.user.userId}/${props.postid}`
@@ -78,6 +79,7 @@ const Post = ({props}) => {
             GetIndividualUserData(userState.user.userId, setUserData);
         }
         catch(error) { 
+            console.log(error)
             Toast("error", "Failed" + error.message);
         }
     }
@@ -176,7 +178,7 @@ const Post = ({props}) => {
                     <p>
                     <span className='fn-wg-700'>{props?.user?.name || "dummy name"}</span>
                         {props?.user?.userId !== userData?.userId &&
-                            (userData.following.some(user => user.userId === props.user.userId ) ?
+                            (userData?.following?.some(user => user.userId === props.user.userId ) ?
                             <span className='post-data-follow-container hover gray-txt lg-txt fn-wg-700 ' onClick={RemoveUserFromFollowersHandler}>
                                 following
                             </span>
@@ -191,13 +193,13 @@ const Post = ({props}) => {
                         props.createdAt
                     }</span>
                 </div>
-                <Link to={`/post/${props.user.userId}/${props.postid}`}>
-                    <div className='post-data-content-container'>
+                {/* <Link to={`/post/${props.user.userId}/${props.postid}`}> */}
+                    <div className='post-data-content-container' onClick={()=> navigate(`/post/${props.user.userId}/${props.postid}`)}>
                         {
                             props.content
                         }
                     </div>
-                </Link>
+                {/* </Link> */}
                 <div className='post-data-action-container'>
                     <span className='hover flex flex-center lg-txt'>
                         {props?.likes?.likedBy?.includes(userState.user.userId) ?
@@ -213,7 +215,7 @@ const Post = ({props}) => {
                         <Link to={ `/post/${props.user.userId}/${props.postid}`}><IconComment /></Link></span>
                     <span className='hover' onClick={urlClickHandler}><IconShare /></span>
                     {
-                        userData.bookmarks.some(post => post === props?.postid)
+                        userData?.bookmarks?.some(post => post === props?.postid)
                             ? <span className='hover' onClick={RemovePostFromBookmarkHandler}><IconsBookmarkFill /></span>
                             : <span className='hover'  onClick={ AddPostInBookmarkHandler}><IconsBookmark /></span>
                     }

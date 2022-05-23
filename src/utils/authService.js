@@ -169,7 +169,8 @@ const CreateUser = async (obj) => {
     following: [],
     bookmarks: [],
     bio: "",
-    headerImg: ""
+    headerImg: "",
+    profileUrl:""
   }
   console.log("create user", obj);
   const userRef = doc(firestore, `users/${obj.userId}`);

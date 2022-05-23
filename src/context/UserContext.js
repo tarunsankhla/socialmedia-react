@@ -16,7 +16,8 @@ let initialStateUserData = {
     name: "",
     photo: "",
     updatedAt: "",
-    userId: ""
+    userId: "",
+    profileUrl:""
 }
 const UserDataReducer = (state, action) => {
     console.log(state, action);

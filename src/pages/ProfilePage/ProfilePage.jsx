@@ -40,6 +40,10 @@ const profileReducerHandler = (state, action) => {
             photo: action.photo
         }
     }
+    if (action.type === "profileUrl") { 
+        return {...state,
+            profileUrl : action.profileUrl}
+    }
     return {
         ...state
     }
@@ -54,7 +58,8 @@ const ProfilePage = () => {
     const [profilestate, profiledispatch] = useReducer(profileReducerHandler, {
         name: "",
         bio: "",
-        photo: ""
+        photo: "",
+        profileUrl : ""
     });
     const [showCopied, setShowCopied] = useState(false);
     const dispatch = useDispatch()
@@ -91,19 +96,22 @@ const ProfilePage = () => {
 
     const UpdateProfile = async () => {
         try {
+            console.log(profilestate);
             const userToUpdate = doc(firestore, `users/${userID}`);
             await updateDoc(userToUpdate, {
                 [userID]: {
                     ...userProfileData,
-                    ["bio"]: profilestate.bio,
-                    ["name"]: profilestate.name,
-                    ["photo"]: profilestate.photo
+                    ["bio"]: profilestate.bio || "",
+                    ["name"]: profilestate.name || "",
+                    ["photo"]: profilestate.photo || "",
+                    ["profileUrl"] : profilestate?.profileUrl || "",
                 }
             });
             setEditToggle(false);
             await getUpdatedUserData();
             Toast("info", "Profile");
         } catch (error) {
+            console.log(error);
             Toast("error", "Failed" + error.message);
         }
     }
@@ -205,6 +213,10 @@ const ProfilePage = () => {
                                 type: "photo",
                                 photo: userProfileData?.photo
                             })
+                            profiledispatch({
+                                type: "profileUrl",
+                                profileUrl : userProfileData?.profileUrl
+                            })
                         }
                     }>
                         <NormalButton name="Edit Profile" color="#8d9bdb" padding="7px 1em" class="profile-btn"/>
@@ -223,7 +235,8 @@ const ProfilePage = () => {
                     <p className='fn-wg-600 '>
                         Bio : {
                         userProfileData?.bio || 'No Bio'
-                    } </p>
+                        } </p>
+                    <p>{ userProfileData?.profileUrl}</p>
                     <div className='flex space-btwn full-width'>
                         <span className='lg-txt gray-txt flex-center'>
                             <IconCalendar/>Joined {
@@ -276,7 +289,7 @@ const ProfilePage = () => {
             {
             editToggle && <div className='fixed post-page-edit-modal'>
                 <span className='edit-post-header fn-wg-700 flex align-center full-width space-btwn pd-5'>
-                    <h1>Edit Post</h1>
+                    <h1>Edit Profile</h1>
                     <span onClick={
                         () => setEditToggle(prev => !prev)
                     }>
@@ -311,14 +324,21 @@ const ProfilePage = () => {
                                 }px`;
                                 profiledispatch({type: "bio", bio: e.target.value});
                             }
-                        }/>
+                        } />
+                        <input value={profilestate?.profileUrl}
+                            className="post-page-edit-input pd-5 bg-gray"
+                            placeholder='Porfolio URl'
+                            onChange={(e) => { 
+                                profiledispatch({ type: "profileUrl", profileUrl: e.target.value });
+                            }}
+                        />
                     <input type="file" accept='.png, .jpg, .jpeg'
                         onChange={
                             (event) => UploadFile(event.target.files[0])
                         }/>
 
                     <span onClick={UpdateProfile}>
-                        <NormalButton name="Save Post" color="red"/>
+                        <NormalButton name="Save Profile" color="red"/>
                     </span>
                 </div>
             </div>
