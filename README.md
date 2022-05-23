@@ -113,7 +113,7 @@ Responsive Site (Both Desktop and Mobile Responsive)
 14. Landing Page
 15. Follow / Unfolow User 
   - by Side navbar on Desktop screen or by post
-
+16. Logout
 <hr/>
 
 
