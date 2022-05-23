@@ -34,11 +34,19 @@ You can check the Website on  [Space Verse](https://spaceverse.netlify.app/)
 
 ---
 
+
 # About
 
 Social Media Application to follow, connect and share.
 
 ![image](https://user-images.githubusercontent.com/47709623/168696775-9497c80b-4ab9-4c5e-8160-8485a65c1e4d.png)
+
+Tech Stack used:
+React,Firebase, Javascript, CSS,  React Toastify, Mockapi
+
+#Extra Features Added
+Responsive Site (Both Desktop and Mobile Responsive)
+
 
 
 # Feature:
@@ -55,17 +63,47 @@ Social Media Application to follow, connect and share.
 ###Google Sign up,
 ###Landing Page
 
+1. Home Page  [HomePage](https://spaceverse.netlify.app/home).
+  - post managements -> create post, update and delete post
+  - Follow user with post on Home page
+  - Click on the post content to go on the post page
+  - Can like, bookmark a post and also share the link on copy on clipboard
+  - can comment via post page
+
+2. Post Page 
+  - Can edit your post or delete post but only yours
+  - Add comment 
+  - Like post , bookmark and share post
+ 
+3. Explore Page
+  - Can scroll through list of user posts.
+  - Follow user and like their post
+  - Sort & Filter by Date, Trending
+     - Filter by Trending
+       - Can filter posts by clicking on the "Trending" button which will show all the posts with the most likes.
+       - can see recent post of last few days
+     - Sort by Date
+       - Can sort the posts by the date Sort by oldest and latest
+
+6. Bookmark Page
+7. Profile Page
+8. Filter and Sort
+9. Share Profile
+10. Login Page
+11. SignUp Page
+12. Landing Page
+13. Loader and React Toasitfy
+
 
 <hr/>
-Tech Stack involved:
-React, Firebase, Javascript, CSS
 
 
 
-![image](https://user-images.githubusercontent.com/47709623/168696775-9497c80b-4ab9-4c5e-8160-8485a65c1e4d.png)
 
+# Demo
 
-<hr/>
+<hr />
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
