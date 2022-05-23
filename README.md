@@ -1,13 +1,47 @@
-SPACE VERSE
+# SPACE VERSE
 
 FOLLOW PEOPLE AROUND THE GLOBE
+
 CONNECT WITH YOUR FRIENDS
+
 SHARE WHAT YOU THINKING
 
 
-[Live DEMO](https://spaceverse.netlify.app/)
+You can check the Website on  [Space Verse](https://spaceverse.netlify.app/)
 
-Feature:
+
+
+<hr />
+
+![Issues](https://img.shields.io/github/issues/tarunsankhla/socialmedia-react)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![Forks](https://img.shields.io/github/forks/tarunsankhla/socialmedia-react)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![Stars](https://img.shields.io/github/stars/tarunsankhla/socialmedia-react)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![License](https://img.shields.io/github/license/tarunsankhla/socialmedia-react)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![Twitter](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Ftarunsankhla%2Fsocialmedia-react)&nbsp;&nbsp;&nbsp;
+
+
+
+ ---
+
+## 📕 Table of Contents
+
+
+- [About](#About)
+- [Features It has](#Feature)
+- [Demo](#Demo)
+- [Getting Started](#Getting-Started-with-Create-React-App)
+- [Connect with me](#Connect-with-me)
+
+---
+
+# About
+
+Social Media Application to follow, connect and share.
+
+![image](https://user-images.githubusercontent.com/47709623/168696775-9497c80b-4ab9-4c5e-8160-8485a65c1e4d.png)
+
+
+# Feature:
 ###Post managment (create , update, delete).
 ###Like Post, Share a post, Comment Post
 ###Bookmark Page,
@@ -102,3 +136,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+ ## Connect with me
+<p align="center">
+<a href="https://twitter.com/tarunsankhla21" target="blank"><img align="center" src="https://img.icons8.com/fluency/2x/twitter-circled.png" alt="tarunsankhla21" height="50" width="50" /></a> &nbsp;&nbsp;&nbsp;
+<a href="https://www.linkedin.com/in/tarun-sankhla/" target="blank"><img align="center" src="https://img.icons8.com/color/2x/linkedin.png" alt="tarun sankhla" height="50" width="50" /></a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://instagram.com/tarun_sankhla_" target="blank"><img align="center" src="https://img.icons8.com/plasticine/2x/instagram.png" alt="tarun_sankhla_" height="50" width="50" /></a> &nbsp;&nbsp;&nbsp;
+<a href="https://linktr.ee/tarunsank" target="blank"><img align="center" src="https://img.icons8.com/color/2x/linktree.png" alt="tarunsank" height="50" width="50" />
+</a> &nbsp;&nbsp;&nbsp;
+<a href="https://tarunsankhla.hashnode.dev/" target="blank"><img align="center" src="https://img.icons8.com/plasticine/2x/blog.png" alt="tarunsank" height="50" width="50" />
+</a> &nbsp;&nbsp;&nbsp;
+  
