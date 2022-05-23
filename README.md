@@ -111,7 +111,8 @@ Responsive Site (Both Desktop and Mobile Responsive)
  - added loader on React Lazy
  
 14. Landing Page
-
+15. Follow / Unfolow User 
+  - by Side navbar on Desktop screen or by post
 
 <hr/>
 
