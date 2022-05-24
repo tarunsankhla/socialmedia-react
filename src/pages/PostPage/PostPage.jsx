@@ -5,6 +5,7 @@ import { firestore } from 'firebase.config';
 import { doc, updateDoc } from 'firebase/firestore';
 import React, { useState,useEffect } from 'react';
 import {useNavigate, useParams} from 'react-router';
+import { GetIndividualUserData } from 'utils/authService';
 import { AddLikeOnPost, AddPostInBookmarkHandler, deletePost, GetIndividualPostData, RemoveLikeOnPost, RemovePostFromBookmarkHandler } from 'utils/postService';
 import {v4 as uuid} from "uuid";
 import "./PostPage.css";
@@ -121,7 +122,6 @@ const PostPage = () => {
             </span>
             <hr />
             <div className="post-page-action-container">
-                
                 <span>
                         {postData?.likes?.likedBy?.includes(userData.userId) ?
                         <span className='hover' onClick={async () => {
@@ -139,14 +139,16 @@ const PostPage = () => {
                     </span>
                 <span onClick={()=>setToggleComment(prev=>!prev)}><IconComment /></span>
                 {
-                        userData.bookmarks.some(post => post === postID)
+                        userData?.bookmarks?.some(post => post === postID)
                         ? <span className='hover' onClick={async () => {
-                            await RemovePostFromBookmarkHandler(userData, setUserData, postID, userID);
+                            await RemovePostFromBookmarkHandler(userData, setUserData, postID, userData.userId);
+                            await GetIndividualUserData(userID, setUserData);
                             await GetIndividualPostData(postID, setPostData);
                         }
                         }><IconsBookmarkFill /></span>
                         : <span className='hover' onClick={async () => {
-                            await AddPostInBookmarkHandler(userData, postData, setUserData,postID, userID);
+                            await AddPostInBookmarkHandler(userData, postData, setUserData, postID, userData.userId);
+                            await GetIndividualUserData(userID, setUserData);
                             await GetIndividualPostData(postID, setPostData);
                         }}><IconsBookmark /></span>
                     }

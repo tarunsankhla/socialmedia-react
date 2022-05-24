@@ -110,6 +110,7 @@ const RemoveLikeOnPost = async (postData, userId, postID) => {
 const AddPostInBookmarkHandler = async (userData, postData, setUserData, postID, userID) => {
   try {
     const userToUpdate = doc(firestore, `users/${userData.userId}`);
+    console.log(userData, postData, setUserData, postID, userID);
     await updateDoc(userToUpdate, {
       [userData.userId]: {
         ...userData,
@@ -120,7 +121,7 @@ const AddPostInBookmarkHandler = async (userData, postData, setUserData, postID,
     await GetIndividualUserData(userID, setUserData);
   }
   catch (error) {
-    console.log("error");
+    console.log(error);
     Toast("error", "Failed" + error.message);
   }
 }
@@ -128,6 +129,7 @@ const AddPostInBookmarkHandler = async (userData, postData, setUserData, postID,
 const RemovePostFromBookmarkHandler = async (userData, setUserData, postID, userID) => {
   try {
     const userToUpdate = doc(firestore, `users/${userID}`);
+    console.log(userData, setUserData, postID, userID);
     await updateDoc(userToUpdate, {
       [userID]: {
         ...userData,
