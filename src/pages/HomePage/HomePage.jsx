@@ -26,7 +26,7 @@ const HomePage = () => {
                     ...(i.data()[i.id]),
                     postid: i.id
                 }
-            }).filter(i => Object.keys(i).length > 2)])
+            }).filter(i => Object.keys(i).length > 2).sort((a,b)=> b.createdTime - a.createdTime )])
     }), []);
    
     return (
