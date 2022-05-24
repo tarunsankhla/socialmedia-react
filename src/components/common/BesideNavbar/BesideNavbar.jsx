@@ -32,9 +32,11 @@ const BesideNavbar = () => {
         });
         getAllUser(setUserFollowArray);
     }
+
     useEffect(() => {
         getAllUser(setUserFollowArray);
-    },[])
+    }, []);
+    
     return (
         <div className="BesideNavbar">
             <div className='beside-navbar-container'>

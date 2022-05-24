@@ -27,7 +27,6 @@ const SignUpPage = () => {
   const signupSubmitHandler = (e) => {
     e.preventDefault();
     if (data.email.trim() === "" || data.password.trim() === "") {
-      // Alert("error", "Input cannot be blank");
       alert("Input cannot be blank")
     } else {
       console.log(setUserData, userData,data);
@@ -35,6 +34,7 @@ const SignUpPage = () => {
     }
     
   };
+
   useEffect(() => {
     if (!!userState?.token.length) {
       navigate("/", { replace: true });
@@ -46,10 +46,7 @@ const SignUpPage = () => {
   };
   return (
     <div className='no-one-container'>
-      <div className="signup-body-container">
-      {/* <img src={Login} className="signup-image" alt="login-logo" /> */}
-        {/* <div className="signup-container"> */}
-        
+      <div className="signup-body-container">        
         <div className="title-header">
           <p className='xxlg-txt page-title'>Create your Account</p>
           <form onSubmit={(e) => signupSubmitHandler(e)}>
@@ -85,29 +82,16 @@ const SignUpPage = () => {
 
           <button type="submit" className="btn-login-signup btn-submit">Sign Up</button>
           <div className='flex-center space-btwn pd-10 fn-wg-700 '  style={{gap:"3em"}}>
-            {/* <NormalButton
-              // class="btn primary-btn-md"
-              click={signupSubmitHandler} name="Sign Up" color="red" class="btn-login-signup"
-            />
-               */}
-            {/* </Norm> */}
             <NormalButton
-              // className="btn secondary-outline-btn-md"
               click={signupWithGoogleHandler} name=" Google" color="red" class="btn-login-signup" icon={<IconGoogle />}
             />
-          
-            {/* </NormalButton> */}
             </div>
           </form>
           <Link className="flex-row-center text-dark" to="/login">
             <h2 className="cursive underline">Account Already Exist ?</h2>
-            {/* <span>
-              <h2 className="title-md-wt-5">Sign In</h2>
-            </span> */}
           </Link>
         </div>
-      {/* </div> */}
-        </div>
+      </div>
     </div>
   )
 }

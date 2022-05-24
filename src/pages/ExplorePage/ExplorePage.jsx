@@ -49,7 +49,6 @@ const ExplorePage = () => {
 
     useEffect(()=>{ 
         FilterHandler();
-        
     }, [fitlertype])
     
     const FilterHandler = () => { 
@@ -104,10 +103,8 @@ const ExplorePage = () => {
                         key={
                             i.postid + i.createdTime
                         }/>
-
                 ))
                 : 
-                // <Loader/>
                 <p className='page-title'>No Post</p>
             } </div>
         </div>

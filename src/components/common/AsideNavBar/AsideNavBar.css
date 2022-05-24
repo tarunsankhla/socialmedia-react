@@ -1,5 +1,3 @@
-
-
 .AsideNav li {
 	list-style: none;
 	font-weight: 700;
@@ -20,7 +18,6 @@
 .AsideNav {
 	height: 100vh;
 	padding-bottom: 3em;
-	/* width: 27vw; */
 }
 
 .aside-nav-logout {
@@ -29,46 +26,44 @@
 	align-items: center;
 	gap: 0.5em;
 	font-size: 1.1em;
-	border-top: 2PX SOLID #9675b4;;
+	border-top: 2px SOLID #9675b4;
 }
 
 .logout-btn {
 	cursor: pointer;
-	/* font-size: 1.3em; */
 	width: fit-content;
-    padding: 7px 2em;
+	padding: 7px 2em;
 }
 
 .logout-btn:hover {
 	transform: scale(1.1);
 }
-.title-hide-responsive{
+.title-hide-responsive {
 	display: flex;
 }
 
-@media screen and (max-width:720px) {
-	.title-hide-responsive{
+@media screen and (max-width: 720px) {
+	.title-hide-responsive {
 		display: none;
 	}
-	.AsideNav{
+	.AsideNav {
 		position: fixed;
 		flex-direction: row;
 		width: 100vw;
 		height: 3em;
 		background-color: red;
 		z-index: 999;
-    	/* background-color: rgba(255,255,255,0.7); */
 		background-color: white;
 		justify-content: space-around;
 		align-items: baseline;
-		padding: 0 1em 0 0;;
+		padding: 0 1em 0 0;
 		bottom: 0;
-    	top: inherit;
+		top: inherit;
 	}
-	.AsideNav li{
+	.AsideNav li {
 		display: inline-block;
 	}
-	.aside-nav-logout{
+	.aside-nav-logout {
 		align-items: baseline;
 	}
 }

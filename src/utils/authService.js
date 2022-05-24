@@ -212,10 +212,8 @@ const GetIndividualUserData = async (userID,setUserData) => {
     console.log(response.data(), response.id, setUserData, userID);
     console.log(response.data()[userID]);
     setUserData({ type: "getuserdata", payload: response.data()[userID] });
-    // setData(res1.data() ?? {});
   } catch (err) {
     console.log(err.message)
-    // alert("error", err.message);
   }
 }
 
@@ -224,7 +222,7 @@ const getAllUser = async (setData) => {
   const collectionRef = collection(firestore, "users")
   try {
     var result = await getDocs(collectionRef);
-    // console.log(result.docs);
+
     setData([...result.docs.map(i => {
         return { ...(i.data()[i.id]) }
       })]);

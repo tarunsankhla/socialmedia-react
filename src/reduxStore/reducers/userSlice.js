@@ -30,9 +30,7 @@ export const signUpUser = createAsyncThunk(
         try {
             console.log("userID ", userID);
             const userRef = doc(firestore, `users/${userID}`);
-
             const response = await getDoc(userRef);
-            // console.log(response.data(), response.id, setUserData, userID);
             console.log(response.data()[userID]);
             return response.data()[userID];
 
@@ -84,13 +82,7 @@ export const userSlice = createSlice({
             })
             .addCase(signUpUser.fulfilled, (state, action) => {
                 console.log(action);
-                // state = action.payload;
                 state.user = action.payload
-                //   "buzzgram-user",
-                //   JSON.stringify(action.payload.createdUser)
-                // );
-                // localStorage.setItem(ROUTES.VAR_ENCODE_TOKEN, action.payload.encodedToken);
-                // Toast.success("User creater successfully");
             })
             .addCase(signUpUser.rejected, (state, action) => {
                 state.loading = false;

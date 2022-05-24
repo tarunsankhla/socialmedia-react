@@ -74,17 +74,16 @@
 
 .profile-page-header-photo {
 	background: rgb(255, 255, 255);
-	/* background: linear-gradient(354deg, rgba(255,255,255,1) 50%, rgba(133,153,222,1) 51%, rgba(255,182,182,1) 100%); */
 	background: linear-gradient(
 		354deg,
 		rgba(255, 255, 255, 0.01) 39%,
 		rgba(133, 153, 222, 1) 46%,
 		rgba(255, 182, 182, 1) 100%
 	);
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 1em;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	padding: 1em;
 }
 
 .profile-page-header-user-detail {
@@ -94,7 +93,7 @@
 	padding: 1em;
 }
 
-.profile-page-header-user-bio{
+.profile-page-header-user-bio {
 	display: flex;
 	justify-content: space-around;
 	align-items: flex-start;
@@ -103,21 +102,21 @@
 	width: 100%;
 }
 
-.profile-btn{
-    border-radius: 3em;
+.profile-btn {
+	border-radius: 3em;
 }
 
-.user-img{
-    height: 2.5em;
-    width: 2.5em;
-    border-radius: 50%;
-    object-fit: cover;
+.user-img {
+	height: 2.5em;
+	width: 2.5em;
+	border-radius: 50%;
+	object-fit: cover;
 }
 
-.follow-btn{
+.follow-btn {
 	height: fit-content;
-    background-color: #8d9bdb;
-    color: white;
+	background-color: #8d9bdb;
+	color: white;
 	padding: 5px;
 }
 @media screen and (max-width: 720px) {

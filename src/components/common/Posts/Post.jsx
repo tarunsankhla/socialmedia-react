@@ -193,13 +193,11 @@ const Post = ({props}) => {
                         props.createdAt
                     }</span>
                 </div>
-                {/* <Link to={`/post/${props.user.userId}/${props.postid}`}> */}
                     <div className='post-data-content-container' onClick={()=> navigate(`/post/${props.user.userId}/${props.postid}`)}>
                         {
                             props.content
                         }
                     </div>
-                {/* </Link> */}
                 <div className='post-data-action-container'>
                     <span className='hover flex flex-center lg-txt'>
                         {props?.likes?.likedBy?.includes(userState.user.userId) ?

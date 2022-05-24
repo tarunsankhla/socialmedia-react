@@ -1,26 +1,23 @@
-.loading-body{
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    background: rgba(255,255,255,0.8);
-    height: 100vh;
-    z-index: 9999;
+.loading-body {
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	background: rgba(255, 255, 255, 0.8);
+	height: 100vh;
+	z-index: 9999;
 }
 .loading {
 	display: inline-block;
 	position: relative;
 	width: 10em;
 	height: 10em;
-   
 }
 .loading div {
 	position: absolute;
 	background: rgb(212, 86, 86);
 	opacity: 1;
-    /* top: 10em; */
-    /* left: 10em; */
 	border-radius: 50%;
 	animation: loading 4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }

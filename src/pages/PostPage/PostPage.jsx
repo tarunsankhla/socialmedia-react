@@ -71,7 +71,6 @@ const PostPage = () => {
             settoggleEdit(false);
         }
         catch(error) { 
-            
             console.log("error");
         }
 

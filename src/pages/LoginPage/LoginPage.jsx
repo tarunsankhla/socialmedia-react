@@ -49,11 +49,11 @@ const LoginPage = () => {
     }, userDispatch, setUserData, navigate, dispatch);
   }
 
-  // useEffect(() => {
-  //   if (!!userState?.token?.length) {
-  //     navigate("/", { replace: true });
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!!userState?.token?.length) {
+      navigate("/", { replace: true });
+    }
+  }, []);
   return (
     <div className='no-one-container'>
       {/* {showResetPassword && (

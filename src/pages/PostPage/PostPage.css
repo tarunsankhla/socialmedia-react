@@ -35,20 +35,20 @@
 
 .post-page-edit-container {
 	display: flex;
-    flex-wrap: wrap;
-    z-index: 1;
-    background-color: #f2f2f2;
-    bottom: -5em;
-    right: 1em;
-    padding: 1em 10px;
-    margin: 1em;
-    border-radius: 10px;
-    gap: 1em;
-    min-width: 15em;
-    border: 2px solid #97bdde
+	flex-wrap: wrap;
+	z-index: 1;
+	background-color: #f2f2f2;
+	bottom: -5em;
+	right: 1em;
+	padding: 1em 10px;
+	margin: 1em;
+	border-radius: 10px;
+	gap: 1em;
+	min-width: 15em;
+	border: 2px solid #97bdde;
 }
 
-.post-page-editor-btn{
+.post-page-editor-btn {
 	width: fit-content;
 	border-radius: 5px;
 }
@@ -59,8 +59,7 @@
 	padding: 1em 0;
 }
 
-
-.post-page-edit-modal{
+.post-page-edit-modal {
 	background-color: white;
 	top: 45%;
 	/* left: 25%; */
@@ -68,7 +67,7 @@
 	min-width: 50%;
 }
 
-.post-page-edit-input{
+.post-page-edit-input {
 	resize: none;
 	outline: none;
 	border: none;
@@ -76,20 +75,20 @@
 	height: 5em;
 }
 
-.post-page-edit-modal-container{
+.post-page-edit-modal-container {
 	border: 2px solid #97bdde;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 1em 10px 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 1em 10px 10px;
 }
 
-.edit-post-header{
+.edit-post-header {
 	background-color: #999fd6 !important;
 	color: white;
 }
 
-.comment-btn{
+.comment-btn {
 	/* width: 6em; */
 }
 

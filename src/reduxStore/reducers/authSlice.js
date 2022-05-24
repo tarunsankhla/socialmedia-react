@@ -31,8 +31,6 @@ export const authSlice = createSlice({
         userAuthReset: (state) => {
             console.log(state, initialState);
             localStorage.removeItem(ROUTES.VAR_ENCODE_TOKEN);
-            // state.token = initialState?.token;
-            // state.user = initialState.user;
             state.token = "";
             state.user = {
                     name: "",

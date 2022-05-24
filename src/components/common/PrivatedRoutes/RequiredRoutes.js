@@ -5,12 +5,11 @@ import { Navigate, useLocation } from 'react-router'
 
 function RequiredAuth({children}) {
     let location = useLocation();
-    const {userState, userDispatch } = useAuth();
-    // console.log(userState.token)
+    const { userState, userDispatch } = useAuth();
+    
     if (!userState.token.length) { 
         return <Navigate to="/login" replace />
     }
-        // return <Navigate to="/login" state={{from :location  }} replace/>    }
     return children;
 }
 

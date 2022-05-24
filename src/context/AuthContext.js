@@ -38,8 +38,6 @@ const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem(ROUTES.VAR_ENCODE_TOKEN)) ?? intitailState
   );
 
-  // localStorage.setItem(ROUTES.VAR_ENCODE_TOKEN, JSON.stringify(userState));
-
   return (
     <AuthContext.Provider value={{ userState, userDispatch }}>
       {children}

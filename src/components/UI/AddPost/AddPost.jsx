@@ -39,7 +39,6 @@ const AddPost = () => {
     const AddPostHandler = async () => {
         
         if (Post.content.trim() === "") {
-            // Alert("error", "Input cannot be blank");
             alert("Input cannot be blank")
         } else {
             setPost((boardObj) => ({
@@ -57,16 +56,12 @@ const AddPost = () => {
             const userRef = doc(firestore, `posts/${postId}`);
             console.log(Post)
             try {
-                await setDoc(userRef, { // ...dashboard,
+                await setDoc(userRef, { 
                     [postId]: Post
                 });
-           
-                // Alert("success", "Nkew Project Added!!");
             } catch (err) {
-                console.log(err.message)
-                // Alert("info", err.message);
+                console.log(err.message);
             }
-            
         }
     }
 
@@ -79,9 +74,6 @@ const AddPost = () => {
     return (
         <div className='create-buzz-container'>
             <div className='buzz-img-create'>
-                {/* <img src={userState.user.photo}
-                    className=''
-                    alt='user-img' /> */}
                 { userState?.user?.photo?.length ?
                     <img src={userState?.user?.photo} className='handle-img-np user-img' />
                     : <span className='handle-img-np handle-img-ph'>

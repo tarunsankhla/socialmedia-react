@@ -8,17 +8,16 @@
 
 :root {
 	--primary-color: #9675b4;
-	--primary-main-color:rgb(141, 155, 219);
+	--primary-main-color: rgb(141, 155, 219);
 	--primary-shade-color: #ddd2f0;
 	--primary-dark-shade-color: #220a38;
 	--secondary-color: #dedede;
 	--note-date-color: #751414;
 	--hover-color: #539987;
-	--icon-color :black;
+	--icon-color: black;
 	--black-hl-p5: rgba(0, 0, 0, 0.05);
 	--white-hl-p3: rgba(255, 255, 255, 0.3);
 }
-
 
 body::-webkit-scrollbar {
 	width: 1rem;
@@ -28,7 +27,7 @@ body::-webkit-scrollbar-track {
 	background-color: white;
 }
 body::-webkit-scrollbar-thumb {
-	background-color:var(--primary-main-color);
+	background-color: var(--primary-main-color);
 	border-radius: 1rem;
 	border: 3px solid white;
 }
@@ -100,7 +99,7 @@ body::-webkit-scrollbar-thumb {
 .xxlg-txt {
 	font-size: 1.3em;
 }
-.big-txt{
+.big-txt {
 	font-size: 3em;
 }
 
@@ -190,10 +189,10 @@ span {
 	background-color: grey !important;
 }
 
-.cursive{
+.cursive {
 	font-family: cursive;
 }
-.underline{
+.underline {
 	text-decoration: underline;
 }
 .handle-img-np {
@@ -208,14 +207,14 @@ span {
 	align-items: center;
 }
 
-.flex-center{
+.flex-center {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	gap: 3px;
 }
 
-.flex-cln{
+.flex-cln {
 	display: flex;
 	flex-direction: column;
 }
@@ -268,11 +267,11 @@ span {
 
 .post-data-show-container {
 	display: flex;
-    padding: 0 1em;
-    flex-direction: column;
-    align-items: baseline;
-    width: 100%;
-    min-height: 5em;
+	padding: 0 1em;
+	flex-direction: column;
+	align-items: baseline;
+	width: 100%;
+	min-height: 5em;
 	gap: 1em;
 }
 
@@ -283,13 +282,13 @@ span {
 	width: 100%;
 }
 
-.hover-btn{
-    transition:background-color 2s ease;
+.hover-btn {
+	transition: background-color 2s ease;
 }
 
-.hover-btn:hover{
-    transform: scale(1.03);
-    background-color: var(--primary-color) !important;
+.hover-btn:hover {
+	transform: scale(1.03);
+	background-color: var(--primary-color) !important;
 }
 
 .btn {
@@ -307,31 +306,30 @@ span {
 	transform: scale(1.05);
 }
 
-
-.btn-login-signup{
+.btn-login-signup {
 	/* border-radius: 1em; */
 	width: 40%;
-    padding: 10px 1.2em !important;
+	padding: 10px 1.2em !important;
 	background-color: var(--primary-color) !important;
 }
 
-.btn-login-signup:hover{
+.btn-login-signup:hover {
 	transform: scale(1.02);
 	transition: height 1s;
 }
 
-.btn-submit{
+.btn-submit {
 	border: none;
-    outline: none;
-    color: white;
-    font-weight: 600;
-    padding: 5px 10px;
-    min-width: 30%;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap :5px;
+	outline: none;
+	color: white;
+	font-weight: 600;
+	padding: 5px 10px;
+	min-width: 30%;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
 	margin: auto;
 }
 
@@ -347,16 +345,13 @@ span {
 	z-index: 2;
 }
 
-
-.no-one-container{
+.no-one-container {
 	display: flex;
 	justify-content: center;
 	min-height: 100vh;
-	background-color: rgba(0,0,0,0.05);
+	background-color: rgba(0, 0, 0, 0.05);
 }
 /* responsive layout */
-
-
 
 /* MAin */
 .main-container {
@@ -377,7 +372,6 @@ span {
 	background-color: var(--black-hl-p5);
 }
 
-
 .BesideNavbar {
 	width: 30vw;
 	display: flex;
@@ -390,22 +384,22 @@ span {
 
 .AsideNav {
 	display: flex;
-    /* justify-content: space-between; */
-    flex-direction: column;
-    /* align-items: center; */
-    position: sticky;
-    min-width: 10em;
-    width: 25vw;
-    height: 80vh;
-    top: 0;
-    font-size: 1.2em;
-    font-weight: 600;
-    background-color: var(--black-hl-p5);
-    padding-top: 1em;
-    padding: 1em 3em 1em 5em;
+	/* justify-content: space-between; */
+	flex-direction: column;
+	/* align-items: center; */
+	position: sticky;
+	min-width: 10em;
+	width: 25vw;
+	height: 80vh;
+	top: 0;
+	font-size: 1.2em;
+	font-weight: 600;
+	background-color: var(--black-hl-p5);
+	padding-top: 1em;
+	padding: 1em 3em 1em 5em;
 }
 
-@media screen and (max-width:1060px) {
+@media screen and (max-width: 1060px) {
 	.outlet-body {
 		width: 65vw;
 	}
@@ -414,7 +408,7 @@ span {
 	}
 }
 
-@media screen and (max-width:720px) {
+@media screen and (max-width: 720px) {
 	.outlet-body {
 		width: 100vw;
 	}

@@ -10,11 +10,9 @@ const Navbar = () => {
   const navigate = Navigate();
   return (
     <div className='Navbar'>
-      {/* <img src={LogoWEBP1} loading="lazy" alt='logo' className='logo-navbar' /> */}
       <p className='xlg-txt' onClick={() => navigate("/")}
           style={{cursor:"pointer"}}>
         SpaceVerse</p>
-      {/* <p>{userData?.emailId ? "@" + userData?.emailId?.split("@")[0] : ""}</p> */}
       <p>{authUserCredential?.user?.emailId ? "@" +authUserCredential?.user?.emailId.split("@")[0] : ""}</p>
   
     </div>

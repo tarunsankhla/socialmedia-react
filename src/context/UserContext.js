@@ -1,9 +1,8 @@
-import React, { createContext, useContext, useReducer,useEffect } from "react";
+import React, { createContext, useContext, useReducer, useEffect } from "react";
 import { GetIndividualUserData } from "utils/authService";
 import { ROUTES } from "utils/routes";
 
 const UserDataContext = createContext({});
-
 
 let initialStateUserData = {
     bio: "",
@@ -17,25 +16,27 @@ let initialStateUserData = {
     photo: "",
     updatedAt: "",
     userId: "",
-    profileUrl:""
+    profileUrl: ""
 }
+
 const UserDataReducer = (state, action) => {
     console.log(state, action);
     switch (action.type) {
         case "getuserdata":
             return { ...action.payload }
         case "reset":
-            return {...initialStateUserData}
+            return { ...initialStateUserData }
         default:
-            return { ...state}
+            return { ...state }
     }
-        // GetIndividualUserData();
-    }
+    // GetIndividualUserData();
+}
+
 const UserDataProvider = ({ children }) => {
     const [userData, setUserData] = useReducer(UserDataReducer, initialStateUserData);
-    
+
     useEffect(() => {
-        if (!!JSON.parse(localStorage.getItem(ROUTES.VAR_ENCODE_TOKEN))?.user?.userId) { 
+        if (!!JSON.parse(localStorage.getItem(ROUTES.VAR_ENCODE_TOKEN))?.user?.userId) {
             GetIndividualUserData(JSON.parse(localStorage.getItem(ROUTES.VAR_ENCODE_TOKEN))?.user?.userId, setUserData)
         }
     }, []);

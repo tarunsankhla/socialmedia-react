@@ -15,7 +15,6 @@ const HomePage = () => {
 
     useEffect(() => onSnapshot(
         collection(firestore, "posts"), (doc) => {
-            // console.log(doc.docs)
             console.log(doc.docs.map(i => {
                 return {
                     ...(i.data()[i.id]),
